@@ -106,7 +106,7 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
       <div class="who" id="who"></div>
     </div>
     <h1>La ligne <span>de la nuit</span></h1>
-    <p class="lede">Trois lignes de stats brutes, trois joueurs à trouver. Autant d'essais que tu veux : seuls les indices ouverts coûtent des points.</p>
+    <p class="lede">Quatre lignes de stats brutes, quatre joueurs à trouver. Autant d'essais que tu veux : seuls les indices ouverts coûtent des points.</p>
   </header>
 
   <div id="banner"></div>
@@ -258,7 +258,7 @@ function renderRiddle(r, i) {
   const used = st && st.win ? st.win.hints_used : Math.max(usedLocal, ...(st ? st.a.map(g => g.hints_used) : [0]));
   const card = el("article", { class: "riddle", id: "r-" + i });
   card.append(el("div", { class: "r-head" },
-    el("div", {}, el("span", { class: "num" }, "0" + (i + 1) + " / 03"), el("h2", {}, r.cat)), el("p", {}, r.desc)));
+    el("div", {}, el("span", { class: "num" }, "0" + (i + 1) + " / 0" + day.riddles.length), el("h2", {}, r.cat)), el("p", {}, r.desc)));
   const cells = el("div", { class: "cells" }, ...r.line.map(([lab, v]) => el("div", { class: "cell" }, el("b", {}, v), el("small", {}, lab))));
   card.append(el("div", { class: "board", "aria-label": "Ligne de stats" }, cells,
     el("div", { class: "result" }, "Résultat de son équipe : ", el("em", {}, r.result))));

@@ -8,7 +8,7 @@ Usage : python3 scripts/make_day.py brut.json
 Format du fichier brut :
 {
   "id": "2026-11-12", "label": "Nuit du 11 au 12 novembre 2026", "games": 10,
-  "riddles": [   # exactement 3, dans l'ordre MVP, Frenchie, Révélation
+  "riddles": [   # 4, dans l'ordre MVP, Frenchie, Révélation, Rookie
     {"cat": "MVP de la nuit", "desc": "...",
      "line": [["PTS","32"], ["TIR","13/18"], ...], "result": "Victoire",
      "answer": "Victor Wembanyama", "team": "San Antonio Spurs",
@@ -39,7 +39,7 @@ def hide(obj) -> str:
 
 def main(path):
     raw = json.loads(Path(path).read_text())
-    assert len(raw["riddles"]) == 3, "il faut 3 devinettes"
+    assert len(raw["riddles"]) in (3, 4), "il faut 4 devinettes (3 pour les anciens jours)"
     out = {k: raw[k] for k in ("id", "label", "games")}
     out["notes"] = raw.get("notes", [])
     out["riddles"] = []

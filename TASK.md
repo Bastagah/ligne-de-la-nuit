@@ -8,17 +8,20 @@ Ce fichier est le mode d'emploi de la tâche programmée qui tourne chaque matin
 - S'il n'y a eu aucun match : ne rien publier, le dire dans le résumé.
 - Enregistrer **toutes** les lignes joueurs dans `data/lines/<date>.json` : une liste de `{player, team, opp, home, result, score, pos, stats}`, `stats` étant l'objet renvoyé tel quel. Ces archives serviront à calculer les moyennes nous-mêmes.
 
-## 2. Choisir les 3 devinettes (un joueur ne peut apparaître qu'une fois)
+## 2. Choisir les 4 devinettes (un joueur ne peut apparaître qu'une fois)
+Ordre de sélection : MVP, Frenchie, Rookie, puis Révélation. Ordre d'affichage dans le fichier : MVP, Frenchie, Révélation, Rookie.
 1. **MVP de la nuit** : le plus haut `efficiency_game_score` parmi les joueurs des équipes gagnantes.
 2. **Frenchie de la nuit** : le plus haut `efficiency_game_score` parmi les joueurs de `data/french.json`, hors MVP. Si aucun Français n'a joué, remplacer par **Défenseur de la nuit** (plus haut total interceptions + contres, départage au game score).
-3. **Révélation de la nuit** : parmi les 12 meilleurs game scores restants ayant marqué au moins 15 points, celui dont l'écart « points de la nuit − moyenne de points de la saison » est le plus grand.
+3. **Révélation de la nuit** (hors MVP, Frenchie et Rookie) : parmi les 12 meilleurs game scores restants ayant marqué au moins 15 points, celui dont l'écart « points de la nuit − moyenne de points de la saison » est le plus grand.
    - Moyenne : chercher la moyenne de la saison en cours. Si moins de 5 matchs joués, ou si deux sources se contredisent de plus de 2 points, prendre la saison précédente et l'écrire dans `why` et dans `notes`.
    - Quand `data/lines/` contient au moins 15 jours, calculer la moyenne à partir des archives si le joueur y a au moins 8 matchs, et préférer ce chiffre.
+4. **Rookie de la nuit** : le plus haut `efficiency_game_score` parmi les joueurs de `data/rookies.json`, hors MVP et Frenchie. Si aucun rookie n'a joué, remplacer par **Le perdant magnifique** : le meilleur game score parmi les joueurs des équipes perdantes, hors joueurs déjà choisis.
 
 ## 3. Écrire la ligne et les indices
 - `line` : PTS, TIR (`fgm/fga`), 3 PTS, LF, REB, PD, INT, CTR, BP, +/- (les zéros s'écrivent `0`, le signe moins est `−`). `result` : `Victoire` ou `Défaite`.
 - Indice 1 : minutes jouées (`34 min`), trouvées par recherche web dans un box score de la nuit. Si introuvables : `Minutes indisponibles ce matin · Xe saison NBA`.
 - Indice 2 : poste et conférence (`Pivot · Conférence Ouest`).
+- Pour le rookie, si les minutes manquent, l'indice 1 de secours est son université ou son club d'avant la NBA (au lieu du nombre de saisons, toujours 1).
 - Indice 3 : contexte du match (`Victoire 124-119 à l'extérieur, à Chicago`), plus un détail de carrière vérifié si utile (rang de draft).
 - `why` : une ou deux phrases qui justifient le choix avec les chiffres (game score, écart à la moyenne et sa source).
 - `accepts` : surnoms courants seulement ; le nom complet et le nom de famille sont ajoutés automatiquement.
@@ -30,9 +33,9 @@ Ce fichier est le mode d'emploi de la tâche programmée qui tourne chaque matin
 3. Vérifier que `data/days/<date>.json` ne contient pas les noms des joueurs en clair (`grep`).
 4. `git add data && git commit -m "Devinettes du <date>" && git push`.
 
-## 5. Liste des Français (`data/french.json`)
-- Une fois par semaine (le lundi), vérifier la liste par recherche web (effectifs NBA, liste des joueurs internationaux de NBA.com).
+## 5. Listes des Français et des rookies (`data/french.json`, `data/rookies.json`)
+- Une fois par semaine (le lundi), vérifier les deux listes par recherche web (effectifs NBA, joueurs internationaux de NBA.com, draft 2026 et rookies non draftés).
 - Ne pas modifier la liste sans prévenir : signaler les ajouts/retraits proposés dans le résumé de la tâche, et ne les appliquer que s'ils sont confirmés par deux sources.
 
 ## 6. Résumé de fin de tâche
-Trois lignes : date et nombre de matchs, les 3 catégories publiées (sans les noms des joueurs), et tout ce qui a manqué ou a été remplacé (minutes, moyenne, Frenchie, source des données).
+Trois lignes : date et nombre de matchs, les 4 catégories publiées (sans les noms des joueurs), et tout ce qui a manqué ou a été remplacé (minutes, moyenne, Frenchie, source des données).

@@ -4,7 +4,8 @@
  "games": 10,
  "notes": [
   "Stats : box scores officiels des matchs de la nuit (fournisseur SportRadar).",
-  "Moyenne de la révélation : saison 2025-26, Land of Basketball."
+  "Moyenne de la révélation : saison 2025-26, Land of Basketball.",
+  "Rookies : draft 2026 (NBC Sports)."
  ],
  "riddles": [
   {
@@ -165,6 +166,58 @@
     "6627835f988e2c5e50533d491163072d3f4f41f5c8b04630150debb3722ca2dd"
    ],
    "secret": "==QfdJCa0lWbzJCIsICa0lWbzBiblxWYqJCIsICa0lWbzBiaisFI6Iyc0BXZjNWYiACLi4SKsxWYiRXZrNXYCBiZvBCZuFGToASZyh6wp5mclRGIu92cpF2cgEGbgg2Y0FWbgIXYwByc05WavBHIywCMxACoDDCdpFmbyV3b0BSa1FHIyVXZ19mag4WdgIXdvBHIsMHdwByMgA6wgUzL1ACdu9GZgkzL4ACoDDyc05WavBHIzIjIgojI5h2diACLdJCMyAjMgQnZhJHZgEGbgUGZggXavh2YgUGMxAytCDybp52b05WQg4WYTBSZyRnbvNGIlxWajlWbvRGIgOMI0ITMtkTMxASZ0lWYml6wEJCIsICdzVEIlNmblJXqDbmbvNEI3KMIyVXZpJXqDTnbJJCIsISQC5EIu92cpF2cgU2Ngcrwg4Wa0FWbgU2YgMXZsJWau9GczlGZulGIzVGd15WaNJyWgojIzRnbphmIgwiIzxGb1JEIvdWYjlGaDJCI6ISbhVGdiACLigGdp12Ug4WZsFmSiAiOiIXZ3NnbhJye"
+  },
+  {
+   "cat": "Rookie de la nuit",
+   "desc": "La meilleure ligne d'un joueur dans sa première saison NBA.",
+   "line": [
+    [
+     "PTS",
+     "25"
+    ],
+    [
+     "TIR",
+     "9/19"
+    ],
+    [
+     "3 PTS",
+     "2/7"
+    ],
+    [
+     "LF",
+     "5/8"
+    ],
+    [
+     "REB",
+     "10"
+    ],
+    [
+     "PD",
+     "0"
+    ],
+    [
+     "INT",
+     "2"
+    ],
+    [
+     "CTR",
+     "0"
+    ],
+    [
+     "BP",
+     "2"
+    ],
+    [
+     "+/-",
+     "−15"
+    ]
+   ],
+   "result": "Défaite",
+   "check": [
+    "56fb648c7e57ddf0fd2004bb8a2985b66423072e2e8c59fbde5be3de666f1e0c",
+    "7e7cf482e504b1a972ed54da2673aeede581916295740be6bc4a3a3496d1dcd6"
+   ],
+   "secret": "=0XXicmcvJWZk5WZsBCblhXY5JCIsIyZy9mYlRmblxmIbBiOiMHdwV2YjFmIgwiIuMHZu9mYlJHIwEDI0VGIzRnbp9GcgUjMgoDIlxmY19GZtUGbiV3bEBiLpUDL2EDKg42bzJXZ0VGUg4WeyJXYEBCduFmdlRGIlR3c1pGIskSMscTMoACdpVnbgUGd0V2YgMXZpt2bvJHIzVGZgUmcvN2cgUWbhdGIyVXZsxWal1kIgojI5h2diACLdJiNyAjMgQnZhJHZgEGbgUGZggXavh2YgUWMxAytCDibvR3c19GSgA6wgwic1VWayl6w0hXZnwGIgOMI1ETMtgDMxASZ0lWYml6wEJCIsICdzVWdPBSZj5WZyl6wm52bDBytCDicllGbpFkIgwiIuF2Zph2Yp1EI1RGIpOMdpNnclZXauV3JsBichBHIpO8czFGUgcrwg4Wa0FWbgU2YgMXZsJWau9GczlGZulGIzVGd15WaNJyWgojIzRnbphmIgwiIzJ3bpJnchdFIlRXY0NFIuVGZs92RiAiOi0WYlRnIgwiInJ3biVGZuVGTgwWZ4FWWiAiOiIXZ3NnbhJye"
   }
  ]
 }
