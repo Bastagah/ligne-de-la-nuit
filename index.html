@@ -38,7 +38,7 @@ select { font-family: var(--display); font-weight: 700; letter-spacing: .08em; t
 .login { background: var(--card); border: 1px solid var(--rule); border-left: 4px solid var(--led); border-radius: 6px; padding: 16px 18px; display: grid; gap: 10px; }
 .login h2 { margin: 0; font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: 26px; }
 .login form { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
-.login input { width: 9ch; letter-spacing: .3em; }
+.login input { width: 14ch; letter-spacing: .15em; }
 .err { color: var(--bad); font-size: 14px; margin: 0; }
 
 .riddles { display: grid; gap: 22px; }
@@ -209,14 +209,14 @@ function renderWho() {
 }
 function loginCard() {
   const sel = el("select", { id: "login-name" }, ...PLAYERS.map(p => el("option", { value: p }, p)));
-  const pin = el("input", { type: "password", id: "login-pin", inputmode: "numeric", maxlength: "4", placeholder: "••••", autocomplete: "off", "aria-label": "Code à 4 chiffres" });
+  const pin = el("input", { type: "password", id: "login-pin", inputmode: "numeric", maxlength: "12", placeholder: "Ton code", autocomplete: "off", "aria-label": "Ton code perso" });
   const err = el("p", { class: "err", "aria-live": "polite" });
   const form = el("form", { onsubmit: async e => {
     e.preventDefault(); err.textContent = "";
     try {
       const rows = await sb("players?select=name,pin_hash&name=eq." + encodeURIComponent(sel.value));
       const ok = rows.length && rows[0].pin_hash === await sha(sel.value + ":" + pin.value);
-      if (!ok) { err.textContent = "Code incorrect. Vérifie tes 4 chiffres."; return; }
+      if (!ok) { err.textContent = "Code incorrect. Vérifie ton code."; return; }
       me = sel.value; store.set("me", me); render();
     } catch (x) { err.textContent = "La base ne répond pas. Réessaie dans un moment."; }
   } }, el("label", { for: "login-name" }, "Je suis"), sel, el("label", { for: "login-pin" }, "Code"), pin, el("button", { type: "submit" }, "Jouer"));
