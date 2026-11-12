@@ -1,0 +1,170 @@
+{
+ "id": "2026-11-12",
+ "label": "Nuit du 11 au 12 novembre 2026",
+ "games": 10,
+ "notes": [
+  "Stats : box scores officiels des matchs de la nuit (fournisseur SportRadar).",
+  "Moyenne de la révélation : saison 2025-26, Land of Basketball."
+ ],
+ "riddles": [
+  {
+   "cat": "MVP de la nuit",
+   "desc": "La meilleure ligne d'un joueur dont l'équipe a gagné.",
+   "line": [
+    [
+     "PTS",
+     "32"
+    ],
+    [
+     "TIR",
+     "13/18"
+    ],
+    [
+     "3 PTS",
+     "2/6"
+    ],
+    [
+     "LF",
+     "4/5"
+    ],
+    [
+     "REB",
+     "9"
+    ],
+    [
+     "PD",
+     "1"
+    ],
+    [
+     "INT",
+     "2"
+    ],
+    [
+     "CTR",
+     "5"
+    ],
+    [
+     "BP",
+     "1"
+    ],
+    [
+     "+/-",
+     "+29"
+    ]
+   ],
+   "result": "Victoire",
+   "check": [
+    "33a536d4ca841ed40db25e180c4352a9ca6e4db8628b66cb907473c23c315603",
+    "74678981e89619a52fc94bffef66df0b26b4908dd5ddb9cdf22e0bdc2cf9a843",
+    "a81752c857bb96fa09903f91577069ffd6fa21c62141d807bce6e012c5b91a44",
+    "d47d4d7b56649da4212b7268e8227f98abe40ad2084583df4abbc11484e7f0d6"
+   ],
+   "secret": "9JiL05WY2lWdzBSdhBSZzNXYwBSZph2YuVmcGBSZsBCLzlWYnOsbhJnRgIXdlxGbpVWbgUGbgk2czVXYgQ3clBCbpBSZt12bDBiLpADL4IDKg4WZkJXYIBycl1WYKBCduFmdlRGIskyMsEzMoAycyVXZ1FnbpFmdgMXZsBielh2YgQXa15GIhxGIlRGIlJ3bjNHIl1WYnBic1VGbslWZNJCI6ISeodnIgwSXi82ZhNWaoNEIgOMIsIXdllmcpOMd4V2JsBCoDDSOxETL0ITMgUmcp9GdjlmViACLiQ3clV3TgU2YuVmcpOsZu92QgcrwgQ3b2lGUiACLiEkQOBibvNXahNHIlRDI3KMIulGdh1GIlNGIzVGbilmbvB3cpRmbpByclRXdulWTisFI6Iyc05WaoJCIsIycyVHcTBybp52b05WQg4WYTJCI6ISbhVGdiACLiEWbhlnbhJWbldFIy9GdjlmViAiOiIXZ3NnbhJye"
+  },
+  {
+   "cat": "Frenchie de la nuit",
+   "desc": "La meilleure ligne d'un joueur français (hors MVP).",
+   "line": [
+    [
+     "PTS",
+     "19"
+    ],
+    [
+     "TIR",
+     "6/9"
+    ],
+    [
+     "3 PTS",
+     "4/7"
+    ],
+    [
+     "LF",
+     "3/4"
+    ],
+    [
+     "REB",
+     "2"
+    ],
+    [
+     "PD",
+     "0"
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "CTR",
+     "0"
+    ],
+    [
+     "BP",
+     "2"
+    ],
+    [
+     "+/-",
+     "−11"
+    ]
+   ],
+   "result": "Victoire",
+   "check": [
+    "0b179c9bf0ea4c2c09b1bc1f43308eb95a77f73fde25df0844da0c21ebb8ea55",
+    "baf8249665522ea0ef08bbc13e0cb7fbfff43c7f58241ad3051e4bdba2ffd4f4"
+   ],
+   "secret": "=0nIukSNoASesFmYpxWdvNEIsFGbpJEIskCOoASZ1dmblN3cFBSYv5EIskyc0BHI5gCIn5WZpREIl5WYtNXdPBiOgUmcoOcayJXZEBiLh1WY55WYi1WZXBycoOscwFGI0lWduBSZ0RXZjByc1xGcgU3bgMHdul2bwBCMxACoDDycpF2pD7WYyZEIsVXZTJCI6ISeodnIgwSXikHdpNEIh12boFGbr9EIlJHdu92YgUGbpNWat9GZgA6wggDMx0COxEDIlJXavR3YpZlIgwiI0NXZ19EIlNmblJXqDbmbvNEI3KMIyVWaslWQiACLiMjMwIDIuVGIBJkTg4WZgk6w2lmcyFEI3KMIulGdh1GIlNGIzVGbilmbvB3cpRmbpByclRXdulWTisFI6Iyc05WaoJCIsIycyVmehxmQgwWahJHVgQmbhxGdy9GUiAiOi0WYlRnIgwiIvt2bzNXaDBSekl2UiAiOiIXZ3NnbhJye"
+  },
+  {
+   "cat": "Révélation de la nuit",
+   "desc": "Le joueur qui a le plus dépassé ce qu'on attend de lui.",
+   "line": [
+    [
+     "PTS",
+     "23"
+    ],
+    [
+     "TIR",
+     "8/9"
+    ],
+    [
+     "3 PTS",
+     "5/5"
+    ],
+    [
+     "LF",
+     "2/2"
+    ],
+    [
+     "REB",
+     "4"
+    ],
+    [
+     "PD",
+     "3"
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "CTR",
+     "0"
+    ],
+    [
+     "BP",
+     "0"
+    ],
+    [
+     "+/-",
+     "−31"
+    ]
+   ],
+   "result": "Défaite",
+   "check": [
+    "3483bf224e2c9ec21d76ab2b4f971f1dfe1dc8eef572d839fdbd611ec978963b",
+    "3b269d218a11c13cf834a29cf8b0d4008d519493c250c02cf24dc80c5b8d2b70",
+    "6627835f988e2c5e50533d491163072d3f4f41f5c8b04630150debb3722ca2dd"
+   ],
+   "secret": "==Qfi4SKsxWYiRXZrNXYCBiZvBCZuFGToASZyh6wp5mclRGIu92cpF2cgEGbgg2Y0FWbgIXYwByc05WavBHIywCMxACoDDCdpFmbyV3b0BSa1FHIyVXZ19mag4WdgIXdvBHIsMHdwByMgA6wgUzL1ACdu9GZgkzL4ACoDDyc05WavBHIzIjIgojI5h2diACLdJCMyAjMgQnZhJHZgEGbgUGZggXavh2YgUGMxAytCDybp52b05WQg4WYTBSZyRnbvNGIlxWajlWbvRGIgOMI0ITMtkTMxASZ0lWYml6wEJCIsICdzVEIlNmblJXqDbmbvNEI3KMIyVXZpJXqDTnbJJCIsISQC5EIu92cpF2cgU2Ngcrwg4Wa0FWbgU2YgMXZsJWau9GczlGZulGIzVGd15WaNJyWgojIzRnbphmIgwiIzxGb1JEIvdWYjlGaDJCI6ISbhVGdiACLigGdp12Ug4WZsFmSiAiOiIXZ3NnbhJye"
+  }
+ ]
+}

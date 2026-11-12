@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>La Ligne de la Nuit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;900&family=Libre+Franklin:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout : une feuille de match imprimée ; chaque devinette est un panneau de tableau d'affichage allumé */
+:root {
+  --paper: #eef0f2; --ink: #16191d; --muted: #5a626b; --rule: #cfd4da;
+  --board: #17191c; --led: #ffb21a; --good: #1f8a4c; --bad: #c0392b; --card: #ffffff;
+  --display: "Big Shoulders Display", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --body: "Libre Franklin", "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --paper: #101215; --ink: #e9ecef; --muted: #9aa3ad; --rule: #2a2f35;
+    --board: #07080a; --good: #43c07a; --bad: #ff6b5b; --card: #181b1f; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; }
+.wrap { max-width: 980px; margin: 0 auto; padding: 24px 20px 60px; display: grid; gap: 32px; }
+
+header { display: grid; gap: 8px; border-bottom: 3px solid var(--ink); padding-bottom: 14px; }
+.topbar { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; align-items: center; }
+.kicker { font-family: var(--display); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 15px; color: var(--muted); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+h1 { font-family: var(--display); font-weight: 900; font-size: clamp(44px, 9vw, 92px); line-height: .9; margin: 0; text-transform: uppercase; text-wrap: balance; }
+h1 span { color: var(--led); }
+.lede { margin: 0; max-width: 62ch; color: var(--muted); }
+select, input[type=text], input[type=password] { font: inherit; background: var(--card); color: var(--ink); border: 1px solid var(--rule); border-radius: 4px; padding: 6px 10px; }
+select { font-family: var(--display); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.who { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; font-size: 14px; }
+.who strong { font-family: var(--display); font-size: 20px; letter-spacing: .04em; }
+.login { background: var(--card); border: 1px solid var(--rule); border-left: 4px solid var(--led); border-radius: 6px; padding: 16px 18px; display: grid; gap: 10px; }
+.login h2 { margin: 0; font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: 26px; }
+.login form { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.login input { width: 9ch; letter-spacing: .3em; }
+.err { color: var(--bad); font-size: 14px; margin: 0; }
+
+.riddles { display: grid; gap: 22px; }
+.riddle { background: var(--card); border: 1px solid var(--rule); border-radius: 6px; overflow: hidden; display: grid; }
+.r-head { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; padding: 14px 18px 10px; }
+.r-head h2 { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: 30px; line-height: 1; margin: 0; }
+.r-head p { margin: 0; color: var(--muted); font-size: 14px; }
+.num { font-family: var(--display); font-weight: 700; color: var(--muted); font-size: 15px; letter-spacing: .1em; }
+.board { background: var(--board); padding: 16px 18px 18px; display: grid; gap: 10px;
+  background-image: radial-gradient(rgba(255,255,255,.045) 1px, transparent 1.2px); background-size: 6px 6px; }
+.cells { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.cell { border: 1px solid #2a2d31; border-radius: 3px; padding: 6px 6px 4px; text-align: center; background: rgba(0,0,0,.35); }
+.cell b { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(20px, 5vw, 34px); line-height: 1; color: var(--led); white-space: nowrap;
+  text-shadow: 0 0 6px rgba(255,178,26,.55), 0 0 16px rgba(255,178,26,.25); font-variant-numeric: tabular-nums; }
+.cell small { display: block; font-family: var(--display); font-weight: 700; letter-spacing: .14em; font-size: 12px; color: #8c8f94; margin-top: 3px; }
+.result { font-family: var(--display); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; font-size: 13px; color: #8c8f94; }
+.result em { font-style: normal; color: var(--led); }
+.r-body { padding: 14px 18px 18px; display: grid; gap: 12px; }
+.controls { display: flex; flex-wrap: wrap; gap: 8px; }
+button { font: inherit; font-weight: 600; font-size: 14px; padding: 8px 14px; border-radius: 4px; border: 1px solid var(--ink); background: transparent; color: var(--ink); cursor: pointer; }
+button:hover:not(:disabled) { background: var(--ink); color: var(--paper); }
+button:disabled { opacity: .4; cursor: default; }
+button.ghost { border-color: var(--muted); color: var(--muted); }
+button.link { border: 0; padding: 0; text-decoration: underline; color: var(--muted); font-weight: 500; }
+button:focus-visible, input:focus-visible, select:focus-visible { outline: 3px solid var(--led); outline-offset: 2px; }
+.hints { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.hints li { border-left: 3px solid var(--led); padding: 2px 10px; font-size: 15px; }
+.hints li span { font-family: var(--display); font-weight: 700; letter-spacing: .1em; color: var(--muted); margin-right: 8px; font-size: 13px; }
+.guess { display: flex; gap: 8px; flex-wrap: wrap; }
+.guess input { flex: 1 1 200px; min-width: 0; background: var(--paper); }
+.feedback { font-size: 15px; }
+.feedback.ok { color: var(--good); font-weight: 600; }
+.feedback.ko { color: var(--bad); }
+.answer { border-top: 1px dashed var(--rule); padding-top: 12px; display: grid; gap: 4px; }
+.answer strong { font-family: var(--display); font-weight: 900; font-size: 32px; text-transform: uppercase; line-height: 1; }
+.answer p { margin: 0; color: var(--muted); font-size: 15px; max-width: 65ch; }
+.others { display: flex; gap: 14px; flex-wrap: wrap; font-size: 14px; color: var(--muted); }
+.others b { color: var(--ink); font-weight: 600; }
+.potential { font-size: 13px; color: var(--muted); }
+
+section h2.sec { font-family: var(--display); font-weight: 900; text-transform: uppercase; font-size: 30px; margin: 0 0 10px; border-bottom: 1px solid var(--rule); padding-bottom: 6px; }
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+@media (max-width: 720px) { .cols { grid-template-columns: 1fr; } }
+table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+th, td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--rule); }
+th { font-family: var(--display); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; color: var(--muted); }
+td.pts, th.pts { text-align: right; }
+td.pts { font-family: var(--display); font-weight: 700; font-size: 22px; }
+td.sub { color: var(--muted); font-size: 14px; text-align: right; }
+.rank { font-family: var(--display); font-weight: 900; color: var(--muted); width: 2.2em; }
+.note { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
+.banner { background: var(--card); border: 1px solid var(--bad); color: var(--bad); border-radius: 6px; padding: 10px 14px; font-size: 14px; }
+footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 4px; }
+@media (prefers-reduced-motion: no-preference) {
+  .answer, .hints li { animation: flick .35s ease-out; }
+  @keyframes flick { 0% { opacity: .2 } 40% { opacity: 1 } 60% { opacity: .6 } 100% { opacity: 1 } }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="topbar">
+      <div class="kicker"><span>Devinettes NBA</span><label for="day">Jour :</label><select id="day"></select><span id="games"></span></div>
+      <div class="who" id="who"></div>
+    </div>
+    <h1>La ligne <span>de la nuit</span></h1>
+    <p class="lede">Trois lignes de stats brutes, trois joueurs à trouver. Une seule réponse par devinette. Chaque indice ouvert coûte un point.</p>
+  </header>
+
+  <div id="banner"></div>
+  <div id="main"></div>
+
+  <section class="cols">
+    <div>
+      <h2 class="sec">Classement général</h2>
+      <table>
+        <thead><tr><th>#</th><th>Joueur</th><th class="pts">Trouvées</th><th class="pts">Pts</th></tr></thead>
+        <tbody id="scores"><tr><td colspan="4" class="note">Chargement…</td></tr></tbody>
+      </table>
+    </div>
+    <div>
+      <h2 class="sec">Règles</h2>
+      <table>
+        <tbody>
+          <tr><td>Bonne réponse sans indice</td><td class="pts">4</td></tr>
+          <tr><td>Avec 1 indice (minutes jouées)</td><td class="pts">3</td></tr>
+          <tr><td>Avec 2 indices (+ poste et conférence)</td><td class="pts">2</td></tr>
+          <tr><td>Avec 3 indices (+ contexte du match)</td><td class="pts">1</td></tr>
+          <tr><td>Mauvaise réponse ou abandon</td><td class="pts">0</td></tr>
+        </tbody>
+      </table>
+      <p class="note">Le nom de famille suffit, accents et majuscules sans importance. Une réponse envoyée est définitive.</p>
+    </div>
+  </section>
+
+  <footer id="footer"></footer>
+</div>
+
+<script>
+const SB_URL = "https://waucnburxcgkwisuwvon.supabase.co";
+const SB_KEY = "sb_publishable_J2P1OiiA-KGD4V5uhvhTeA_WgQgNTpL";
+const PLAYERS = ["Bastien", "Alex", "Guillaume"];
+
+/* ---------- utilitaires ---------- */
+const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z ]/g, " ").replace(/\s+/g, " ").trim();
+async function sha(s) {
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
+  return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+const unhide = s => JSON.parse(decodeURIComponent(escape(atob([...s].reverse().join("")))));
+function el(tag, attrs, ...kids) {
+  const n = document.createElement(tag);
+  for (const [k, v] of Object.entries(attrs || {})) {
+    if (v == null || v === false) continue;
+    if (k === "class") n.className = v; else if (k.startsWith("on")) n.addEventListener(k.slice(2), v); else n.setAttribute(k, v === true ? "" : v);
+  }
+  for (const c of kids) if (c != null) n.append(c);
+  return n;
+}
+const store = {
+  get(k, d) { try { const v = localStorage.getItem("lln:" + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set(k, v) { try { localStorage.setItem("lln:" + k, JSON.stringify(v)); } catch (e) {} },
+  del(k) { try { localStorage.removeItem("lln:" + k); } catch (e) {} }
+};
+
+/* ---------- Supabase (API REST) ---------- */
+async function sb(path, opts = {}) {
+  const res = await fetch(SB_URL + "/rest/v1/" + path, {
+    ...opts,
+    headers: { apikey: SB_KEY, "Content-Type": "application/json", ...(opts.headers || {}) }
+  });
+  if (!res.ok) { const t = await res.text(); const e = new Error(t || res.statusText); e.status = res.status; throw e; }
+  const text = await res.text();
+  return text ? JSON.parse(text) : null;
+}
+
+/* ---------- état ---------- */
+let me = store.get("me", null);
+let days = [], day = null, guesses = [], board = [];
+
+function banner(msg) { document.getElementById("banner").replaceChildren(msg ? el("div", { class: "banner" }, msg) : ""); }
+
+async function loadDay(id) {
+  day = await (await fetch("data/days/" + id + ".json", { cache: "no-store" })).json();
+  document.getElementById("games").textContent = day.games + " matchs";
+  document.getElementById("footer").replaceChildren(...(day.notes || []).map(n => el("span", {}, n)));
+  await refreshScores();
+}
+async function refreshScores() {
+  try {
+    [guesses, board] = await Promise.all([
+      sb("guesses?select=player,riddle,hints_used,guess,correct,points&day=eq." + day.id),
+      sb("leaderboard?select=name,total,trouvees,jouees")
+    ]);
+    banner("");
+  } catch (e) {
+    banner("Impossible de joindre la base de scores pour l'instant. Les devinettes restent visibles, réessaie dans un moment.");
+  }
+  render();
+}
+
+/* ---------- connexion ---------- */
+function renderWho() {
+  const box = document.getElementById("who");
+  if (!me) { box.replaceChildren(); return; }
+  box.replaceChildren("Connecté : ", el("strong", {}, me), el("button", { class: "link", type: "button", onclick: () => { me = null; store.del("me"); render(); } }, "changer"));
+}
+function loginCard() {
+  const sel = el("select", { id: "login-name" }, ...PLAYERS.map(p => el("option", { value: p }, p)));
+  const pin = el("input", { type: "password", id: "login-pin", inputmode: "numeric", maxlength: "4", placeholder: "••••", autocomplete: "off", "aria-label": "Code à 4 chiffres" });
+  const err = el("p", { class: "err", "aria-live": "polite" });
+  const form = el("form", { onsubmit: async e => {
+    e.preventDefault(); err.textContent = "";
+    try {
+      const rows = await sb("players?select=name,pin_hash&name=eq." + encodeURIComponent(sel.value));
+      const ok = rows.length && rows[0].pin_hash === await sha(sel.value + ":" + pin.value);
+      if (!ok) { err.textContent = "Code incorrect. Vérifie tes 4 chiffres."; return; }
+      me = sel.value; store.set("me", me); render();
+    } catch (x) { err.textContent = "La base ne répond pas. Réessaie dans un moment."; }
+  } }, el("label", { for: "login-name" }, "Je suis"), sel, el("label", { for: "login-pin" }, "Code"), pin, el("button", { type: "submit" }, "Jouer"));
+  return el("div", { class: "login" }, el("h2", {}, "Qui joue ?"), form, err,
+    el("p", { class: "note" }, "Tu peux regarder les devinettes sans te connecter. Pour répondre, choisis ton prénom et entre ton code."));
+}
+
+/* ---------- devinettes ---------- */
+function myGuess(i) { return guesses.find(g => g.player === me && g.riddle === i + 1); }
+function hintsKey(i) { return ["hints", me || "anon", day.id, i].join(":"); }
+
+function renderRiddle(r, i) {
+  const sec = unhide(r.secret);
+  const mine = me ? myGuess(i) : null;
+  const usedLocal = store.get(hintsKey(i), 0);
+  const used = mine ? mine.hints_used : usedLocal;
+  const card = el("article", { class: "riddle", id: "r-" + i });
+  card.append(el("div", { class: "r-head" },
+    el("div", {}, el("span", { class: "num" }, "0" + (i + 1) + " / 03"), el("h2", {}, r.cat)), el("p", {}, r.desc)));
+  const cells = el("div", { class: "cells" }, ...r.line.map(([lab, v]) => el("div", { class: "cell" }, el("b", {}, v), el("small", {}, lab))));
+  card.append(el("div", { class: "board", "aria-label": "Ligne de stats" }, cells,
+    el("div", { class: "result" }, "Résultat de son équipe : ", el("em", {}, r.result))));
+
+  const body = el("div", { class: "r-body" });
+  if (used > 0) body.append(el("ul", { class: "hints" }, ...sec.hints.slice(0, used).map((h, j) => el("li", {}, el("span", {}, "INDICE " + (j + 1)), h))));
+
+  if (me && !mine) {
+    const potential = 4 - used;
+    const input = el("input", { type: "text", id: "g-" + i, placeholder: "Nom du joueur", autocomplete: "off", "aria-label": "Ta réponse pour " + r.cat });
+    const err = el("p", { class: "err", "aria-live": "polite" });
+    const send = async (guessText, correct) => {
+      const row = { day: day.id, riddle: i + 1, player: me, hints_used: used, guess: guessText, correct, points: correct ? 4 - used : 0 };
+      try { await sb("guesses", { method: "POST", body: JSON.stringify(row), headers: { Prefer: "return=minimal" } }); }
+      catch (x) { if (x.status !== 409) { err.textContent = "Réponse non enregistrée : la base ne répond pas. Réessaie."; return; } }
+      await refreshScores();
+    };
+    body.append(el("form", { class: "guess", onsubmit: async e => {
+      e.preventDefault();
+      const g = norm(input.value); if (!g) return;
+      const correct = r.check.includes(await sha(g));
+      await send(input.value.trim(), correct);
+    } }, input, el("button", { type: "submit" }, "Valider")), err);
+    body.append(el("div", { class: "controls" },
+      el("button", { type: "button", disabled: used >= 3, onclick: () => { store.set(hintsKey(i), used + 1); render(); } },
+        used >= 3 ? "Plus d'indice" : "Voir l'indice " + (used + 1) + " (−1 pt)"),
+      el("button", { type: "button", class: "ghost", onclick: () => send("(abandon)", false) }, "Abandonner et voir la réponse")));
+    body.append(el("div", { class: "potential" }, "Une bonne réponse maintenant rapporte " + potential + " pt" + (potential > 1 ? "s" : "") + "."));
+  } else if (mine) {
+    body.append(el("div", { class: "feedback " + (mine.correct ? "ok" : "ko") },
+      mine.correct ? "Trouvé : " + mine.points + " pt" + (mine.points > 1 ? "s" : "") + " (" + mine.hints_used + " indice" + (mine.hints_used > 1 ? "s" : "") + ")."
+        : mine.guess === "(abandon)" ? "Abandon : 0 pt." : "Raté : tu as répondu « " + mine.guess + " ». 0 pt."));
+    body.append(el("div", { class: "answer" }, el("strong", {}, sec.answer), el("p", {}, sec.team + ". " + sec.why)));
+  }
+  // résultats des autres : visibles une fois qu'on a soi-même répondu
+  const others = PLAYERS.filter(p => p !== me).map(p => {
+    const g = guesses.find(x => x.player === p && x.riddle === i + 1);
+    const txt = !g ? "pas encore joué" : !mine ? "a répondu" : g.correct ? g.points + " pt" + (g.points > 1 ? "s" : "") + " · « " + g.guess + " »" : "0 pt · « " + g.guess + " »";
+    return el("span", {}, el("b", {}, p), " : " + txt);
+  });
+  if (me) body.append(el("div", { class: "others" }, ...others));
+  card.append(body);
+  return card;
+}
+
+function render() {
+  renderWho();
+  const main = document.getElementById("main");
+  const parts = [];
+  if (!me) parts.push(loginCard());
+  if (day) parts.push(el("div", { class: "riddles" }, ...day.riddles.map(renderRiddle)));
+  main.replaceChildren(...parts);
+  const rows = board.length ? board : PLAYERS.map(n => ({ name: n, total: 0, trouvees: 0 }));
+  document.getElementById("scores").replaceChildren(...rows.map((p, i) =>
+    el("tr", {}, el("td", { class: "rank" }, String(i + 1)), el("td", {}, p.name), el("td", { class: "sub" }, String(p.trouvees)), el("td", { class: "pts" }, String(p.total)))));
+}
+
+async function start() {
+  try {
+    days = await (await fetch("data/days.json", { cache: "no-store" })).json();
+  } catch (e) { banner("Les devinettes n'ont pas pu être chargées."); return; }
+  const sel = document.getElementById("day");
+  sel.replaceChildren(...days.map(d => el("option", { value: d.id }, d.label)));
+  sel.addEventListener("change", () => loadDay(sel.value));
+  render();
+  if (days.length) await loadDay(days[0].id);
+}
+start();
+</script>
+</body>
+</html>
