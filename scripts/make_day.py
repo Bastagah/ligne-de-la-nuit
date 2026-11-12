@@ -51,7 +51,8 @@ def main(path):
         out["riddles"].append({
             "cat": r["cat"], "desc": r["desc"], "line": r["line"], "result": r["result"],
             "check": sorted(h(a) for a in accepts if a),
-            "secret": hide({"answer": r["answer"], "team": r["team"], "hints": r["hints"], "why": r["why"]}),
+            "secret": hide({"answer": r["answer"], "team": r["team"], "hints": r["hints"], "why": r["why"],
+                            "accepts": sorted(a for a in accepts if a)}),
         })
     (ROOT / "data/days" / f"{out['id']}.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
     idx_path = ROOT / "data/days.json"

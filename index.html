@@ -131,7 +131,7 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
           <tr><td>Abandon</td><td class="pts">0</td></tr>
         </tbody>
       </table>
-      <p class="note">Essais illimités et gratuits. Le nom de famille suffit, accents et majuscules sans importance.</p>
+      <p class="note">Essais illimités et gratuits. Le nom de famille suffit, et les petites fautes d’orthographe sont acceptées (accents et majuscules sans importance).</p>
     </div>
   </section>
 
@@ -148,6 +148,20 @@ const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().repla
 async function sha(s) {
   const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s));
   return [...new Uint8Array(buf)].map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function lev(a, b) {
+  const m = a.length, n = b.length; let prev = Array.from({ length: n + 1 }, (_, j) => j);
+  for (let i = 1; i <= m; i++) {
+    const cur = [i];
+    for (let j = 1; j <= n; j++) cur[j] = Math.min(prev[j] + 1, cur[j - 1] + 1, prev[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+    prev = cur;
+  }
+  return prev[n];
+}
+// Tolérance aux fautes : 1 lettre jusqu'à 5 lettres, 2 jusqu'à 10, 3 au-delà
+const tolerance = len => len <= 5 ? 1 : len <= 10 ? 2 : 3;
+function closeEnough(g, accepts) {
+  return (accepts || []).some(a => lev(g, a) <= tolerance(a.length) || lev(g.replace(/ /g, ""), a.replace(/ /g, "")) <= tolerance(a.length));
 }
 const unhide = s => JSON.parse(decodeURIComponent(escape(atob([...s].reverse().join("")))));
 function el(tag, attrs, ...kids) {
@@ -267,7 +281,8 @@ function renderRiddle(r, i) {
       e.preventDefault();
       const g = norm(input.value); if (!g) return;
       if (st.wrong.some(w => norm(w.guess) === g)) { err.textContent = "Déjà tenté, essaie un autre nom."; return; }
-      const correct = r.check.includes(await sha(g));
+      const exact = r.check.includes(await sha(g));
+      const correct = exact || closeEnough(g, sec.accepts);
       await send(input.value.trim(), correct);
     } }, input, el("button", { type: "submit" }, "Valider")), err);
     if (st.wrong.length) body.append(el("div", { class: "feedback ko" },
