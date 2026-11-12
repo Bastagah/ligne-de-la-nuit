@@ -106,7 +106,7 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
       <div class="who" id="who"></div>
     </div>
     <h1>La ligne <span>de la nuit</span></h1>
-    <p class="lede">Trois lignes de stats brutes, trois joueurs à trouver. Une seule réponse par devinette. Chaque indice ouvert coûte un point.</p>
+    <p class="lede">Trois lignes de stats brutes, trois joueurs à trouver. Autant d'essais que tu veux : seuls les indices ouverts coûtent des points.</p>
   </header>
 
   <div id="banner"></div>
@@ -128,10 +128,10 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
           <tr><td>Avec 1 indice (minutes jouées)</td><td class="pts">3</td></tr>
           <tr><td>Avec 2 indices (+ poste et conférence)</td><td class="pts">2</td></tr>
           <tr><td>Avec 3 indices (+ contexte du match)</td><td class="pts">1</td></tr>
-          <tr><td>Mauvaise réponse ou abandon</td><td class="pts">0</td></tr>
+          <tr><td>Abandon</td><td class="pts">0</td></tr>
         </tbody>
       </table>
-      <p class="note">Le nom de famille suffit, accents et majuscules sans importance. Une réponse envoyée est définitive.</p>
+      <p class="note">Essais illimités et gratuits. Le nom de famille suffit, accents et majuscules sans importance.</p>
     </div>
   </section>
 
@@ -225,14 +225,23 @@ function loginCard() {
 }
 
 /* ---------- devinettes ---------- */
-function myGuess(i) { return guesses.find(g => g.player === me && g.riddle === i + 1); }
+const ABANDON = "(abandon)";
+function attemptsOf(player, i) { return guesses.filter(g => g.player === player && g.riddle === i + 1); }
+function statusOf(player, i) {
+  const a = attemptsOf(player, i);
+  const win = a.find(g => g.correct);
+  const gaveUp = a.some(g => g.guess === ABANDON);
+  const wrong = a.filter(g => !g.correct && g.guess !== ABANDON);
+  return { a, win, gaveUp, wrong, done: !!win || gaveUp };
+}
 function hintsKey(i) { return ["hints", me || "anon", day.id, i].join(":"); }
+const plural = (n, w) => n + " " + w + (n > 1 ? "s" : "");
 
 function renderRiddle(r, i) {
   const sec = unhide(r.secret);
-  const mine = me ? myGuess(i) : null;
+  const st = me ? statusOf(me, i) : null;
   const usedLocal = store.get(hintsKey(i), 0);
-  const used = mine ? mine.hints_used : usedLocal;
+  const used = st && st.win ? st.win.hints_used : Math.max(usedLocal, ...(st ? st.a.map(g => g.hints_used) : [0]));
   const card = el("article", { class: "riddle", id: "r-" + i });
   card.append(el("div", { class: "r-head" },
     el("div", {}, el("span", { class: "num" }, "0" + (i + 1) + " / 03"), el("h2", {}, r.cat)), el("p", {}, r.desc)));
@@ -243,7 +252,7 @@ function renderRiddle(r, i) {
   const body = el("div", { class: "r-body" });
   if (used > 0) body.append(el("ul", { class: "hints" }, ...sec.hints.slice(0, used).map((h, j) => el("li", {}, el("span", {}, "INDICE " + (j + 1)), h))));
 
-  if (me && !mine) {
+  if (st && !st.done) {
     const potential = 4 - used;
     const input = el("input", { type: "text", id: "g-" + i, placeholder: "Nom du joueur", autocomplete: "off", "aria-label": "Ta réponse pour " + r.cat });
     const err = el("p", { class: "err", "aria-live": "polite" });
@@ -252,31 +261,42 @@ function renderRiddle(r, i) {
       try { await sb("guesses", { method: "POST", body: JSON.stringify(row), headers: { Prefer: "return=minimal" } }); }
       catch (x) { if (x.status !== 409) { err.textContent = "Réponse non enregistrée : la base ne répond pas. Réessaie."; return; } }
       await refreshScores();
+      const box = document.getElementById("g-" + i); if (box) box.focus();
     };
     body.append(el("form", { class: "guess", onsubmit: async e => {
       e.preventDefault();
       const g = norm(input.value); if (!g) return;
+      if (st.wrong.some(w => norm(w.guess) === g)) { err.textContent = "Déjà tenté, essaie un autre nom."; return; }
       const correct = r.check.includes(await sha(g));
       await send(input.value.trim(), correct);
     } }, input, el("button", { type: "submit" }, "Valider")), err);
+    if (st.wrong.length) body.append(el("div", { class: "feedback ko" },
+      "Pas ça : " + st.wrong.map(w => "« " + w.guess + " »").join(", ") + ". Les essais ratés ne coûtent rien, continue."));
     body.append(el("div", { class: "controls" },
       el("button", { type: "button", disabled: used >= 3, onclick: () => { store.set(hintsKey(i), used + 1); render(); } },
         used >= 3 ? "Plus d'indice" : "Voir l'indice " + (used + 1) + " (−1 pt)"),
-      el("button", { type: "button", class: "ghost", onclick: () => send("(abandon)", false) }, "Abandonner et voir la réponse")));
-    body.append(el("div", { class: "potential" }, "Une bonne réponse maintenant rapporte " + potential + " pt" + (potential > 1 ? "s" : "") + "."));
-  } else if (mine) {
-    body.append(el("div", { class: "feedback " + (mine.correct ? "ok" : "ko") },
-      mine.correct ? "Trouvé : " + mine.points + " pt" + (mine.points > 1 ? "s" : "") + " (" + mine.hints_used + " indice" + (mine.hints_used > 1 ? "s" : "") + ")."
-        : mine.guess === "(abandon)" ? "Abandon : 0 pt." : "Raté : tu as répondu « " + mine.guess + " ». 0 pt."));
+      el("button", { type: "button", class: "ghost", onclick: () => send(ABANDON, false) }, "Abandonner et voir la réponse")));
+    body.append(el("div", { class: "potential" }, "Une bonne réponse maintenant rapporte " + plural(potential, "pt") + "."));
+  } else if (st && st.done) {
+    const tries = st.a.filter(g => g.guess !== ABANDON).length;
+    body.append(el("div", { class: "feedback " + (st.win ? "ok" : "ko") },
+      st.win ? "Trouvé : " + plural(st.win.points, "pt") + " (" + plural(st.win.hints_used, "indice") + ", " + plural(tries, "essai") + ")."
+             : "Abandon : 0 pt" + (st.wrong.length ? " après " + plural(st.wrong.length, "essai") : "") + "."));
     body.append(el("div", { class: "answer" }, el("strong", {}, sec.answer), el("p", {}, sec.team + ". " + sec.why)));
   }
-  // résultats des autres : visibles une fois qu'on a soi-même répondu
-  const others = PLAYERS.filter(p => p !== me).map(p => {
-    const g = guesses.find(x => x.player === p && x.riddle === i + 1);
-    const txt = !g ? "pas encore joué" : !mine ? "a répondu" : g.correct ? g.points + " pt" + (g.points > 1 ? "s" : "") + " · « " + g.guess + " »" : "0 pt · « " + g.guess + " »";
-    return el("span", {}, el("b", {}, p), " : " + txt);
-  });
-  if (me) body.append(el("div", { class: "others" }, ...others));
+  if (me) {
+    const others = PLAYERS.filter(p => p !== me).map(p => {
+      const o = statusOf(p, i);
+      const tries = o.a.filter(g => g.guess !== ABANDON).length;
+      let txt;
+      if (!o.a.length) txt = "pas encore joué";
+      else if (!o.done) txt = "cherche encore (" + plural(tries, "essai") + ")";
+      else if (!st.done) txt = o.win ? "a trouvé" : "a abandonné";
+      else txt = o.win ? plural(o.win.points, "pt") + " en " + plural(tries, "essai") : "abandon, 0 pt";
+      return el("span", {}, el("b", {}, p), " : " + txt);
+    });
+    body.append(el("div", { class: "others" }, ...others));
+  }
   card.append(body);
   return card;
 }
