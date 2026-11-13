@@ -1,7 +1,24 @@
 {
- "note": "Liste de départ issue de la saison 2025-26 et des box scores du 12/11/2026. À confirmer lors de la première vérification hebdomadaire (voir TASK.md).",
+ "note": "Liste de départ issue de la saison 2025-26 et des box scores du 12/11/2026. À confirmer lors de la première vérification hebdomadaire (voir TASK.md). Ajout le 13/11 : Rudy Gobert et Moussa Diabaté (oubliés dans la liste de départ).",
  "verified_on": null,
- "players": ["Victor Wembanyama", "Zaccharie Risacher", "Alexandre Sarr", "Bilal Coulibaly", "Sidy Cissoko", "Ousmane Dieng",
-  "Noa Essengue", "Mohamed Diawara", "Guerschon Yabusele", "Tidjane Salaün", "Rayan Rupert", "Joan Beringer",
-  "Nolan Traoré", "Noah Penda", "Maxime Raynaud", "Pacôme Dadiet"]
+ "players": [
+  "Victor Wembanyama",
+  "Zaccharie Risacher",
+  "Alexandre Sarr",
+  "Bilal Coulibaly",
+  "Sidy Cissoko",
+  "Ousmane Dieng",
+  "Noa Essengue",
+  "Mohamed Diawara",
+  "Guerschon Yabusele",
+  "Tidjane Salaün",
+  "Rayan Rupert",
+  "Joan Beringer",
+  "Nolan Traoré",
+  "Noah Penda",
+  "Maxime Raynaud",
+  "Pacôme Dadiet",
+  "Rudy Gobert",
+  "Moussa Diabaté"
+ ]
 }
