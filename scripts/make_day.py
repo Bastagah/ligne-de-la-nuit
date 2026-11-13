@@ -8,12 +8,13 @@ Usage : python3 scripts/make_day.py brut.json
 Format du fichier brut :
 {
   "id": "2026-11-12", "label": "Nuit du 11 au 12 novembre 2026", "games": 10,
-  "riddles": [   # 4, dans l'ordre MVP, Frenchie, Révélation, Rookie
+  "matchups": [{"away": "SAS", "home": "CHI"}, ...],
+  "riddles": [   # 5, dans l'ordre MVP, Frenchie, Révélation, Rookie, Looser
     {"cat": "MVP de la nuit", "desc": "...",
-     "line": [["PTS","32"], ["TIR","13/18"], ...], "result": "Victoire",
+     "line": [["MIN","34"], ["PTS","32"], ["TIR","13/18"], ...], "result": "Victoire",
      "answer": "Victor Wembanyama", "team": "San Antonio Spurs",
      "accepts": ["wembanyama", "wemby"],          # le nom complet et le nom de famille sont ajoutés d'office
-     "hints": ["34 min", "Pivot · Conférence Ouest", "Victoire 124-119 à Chicago"],  # exactement 3
+     "hints": ["Pivot · Conférence Ouest", "Victoire 124-119 à Chicago", "1er choix de la draft 2023"],  # exactement 3
      "why": "Pourquoi ce choix, en une ou deux phrases."}
   ],
   "notes": ["Source des stats...", "Moyennes : ..."]
@@ -39,8 +40,9 @@ def hide(obj) -> str:
 
 def main(path):
     raw = json.loads(Path(path).read_text())
-    assert len(raw["riddles"]) in (3, 4), "il faut 4 devinettes (3 pour les anciens jours)"
+    assert 3 <= len(raw["riddles"]) <= 5, "il faut 5 devinettes (3 ou 4 pour les anciens jours)"
     out = {k: raw[k] for k in ("id", "label", "games")}
+    out["matchups"] = raw.get("matchups", [])   # [{"away": "DET", "home": "WAS"}], sans les scores
     out["notes"] = raw.get("notes", [])
     out["riddles"] = []
     for r in raw["riddles"]:

@@ -2,6 +2,48 @@
  "id": "2026-11-12",
  "label": "Nuit du 11 au 12 novembre 2026",
  "games": 10,
+ "matchups": [
+  {
+   "away": "CLE",
+   "home": "NYK"
+  },
+  {
+   "away": "BOS",
+   "home": "TOR"
+  },
+  {
+   "away": "WAS",
+   "home": "IND"
+  },
+  {
+   "away": "DEN",
+   "home": "MEM"
+  },
+  {
+   "away": "LAL",
+   "home": "MIL"
+  },
+  {
+   "away": "SAS",
+   "home": "CHI"
+  },
+  {
+   "away": "BKN",
+   "home": "NOP"
+  },
+  {
+   "away": "ORL",
+   "home": "UTA"
+  },
+  {
+   "away": "GSW",
+   "home": "HOU"
+  },
+  {
+   "away": "OKC",
+   "home": "POR"
+  }
+ ],
  "notes": [
   "Stats : box scores officiels des matchs de la nuit (fournisseur SportRadar).",
   "Moyenne de la révélation : saison 2025-26, Land of Basketball.",

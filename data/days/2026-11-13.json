@@ -2,6 +2,24 @@
  "id": "2026-11-13",
  "label": "Nuit du 12 au 13 novembre 2026",
  "games": 4,
+ "matchups": [
+  {
+   "away": "TOR",
+   "home": "PHI"
+  },
+  {
+   "away": "DET",
+   "home": "WAS"
+  },
+  {
+   "away": "DAL",
+   "home": "MIN"
+  },
+  {
+   "away": "CHA",
+   "home": "PHX"
+  }
+ ],
  "notes": [
   "Stats : box scores Covers (Pistons-Wizards, Mavericks-Timberwolves, Hornets-Suns) et ESPN (Raptors-76ers, recoupé avec Raptors Republic) ; l'outil de données sportives n'était pas disponible.",
   "Moyenne de la révélation : saison 2026-27 avant le match (ESPN, CBS Sports).",

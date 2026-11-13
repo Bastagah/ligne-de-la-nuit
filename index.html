@@ -49,7 +49,13 @@ select { font-family: var(--display); font-weight: 700; letter-spacing: .08em; t
 .num { font-family: var(--display); font-weight: 700; color: var(--muted); font-size: 15px; letter-spacing: .1em; }
 .board { background: var(--board); padding: 16px 18px 18px; display: grid; gap: 10px;
   background-image: radial-gradient(rgba(255,255,255,.045) 1px, transparent 1.2px); background-size: 6px 6px; }
-.cells { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.cells { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+@media (max-width: 560px) { .cells { grid-template-columns: repeat(4, 1fr); } }
+.cell.min { border-color: #4a3a12; }
+.matchups { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; font-size: 14px; }
+.matchups b { font-family: var(--display); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; color: var(--muted); margin-right: 4px; }
+.matchups span { font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: .06em; border: 1px solid var(--rule); background: var(--card); border-radius: 3px; padding: 1px 8px; }
+.matchups span i { font-style: normal; color: var(--muted); font-weight: 500; padding: 0 3px; }
 .cell { border: 1px solid #2a2d31; border-radius: 3px; padding: 6px 6px 4px; text-align: center; background: rgba(0,0,0,.35); }
 .cell b { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(20px, 5vw, 34px); line-height: 1; color: var(--led); white-space: nowrap;
   text-shadow: 0 0 6px rgba(255,178,26,.55), 0 0 16px rgba(255,178,26,.25); font-variant-numeric: tabular-nums; }
@@ -120,10 +126,11 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
       <div class="who" id="who"></div>
     </div>
     <h1>La ligne <span>de la nuit</span></h1>
-    <p class="lede">Quatre lignes de stats brutes, quatre joueurs à trouver. Autant d'essais que tu veux : seuls les indices ouverts coûtent des points.</p>
+    <p class="lede">Les lignes de stats brutes de la nuit, un joueur à trouver pour chacune. Essais illimités, mais chaque série de 3 essais ratés coûte un point.</p>
   </header>
 
   <div id="banner"></div>
+  <div class="matchups" id="matchups"></div>
   <div id="main"></div>
 
   <section class="cols">
@@ -139,14 +146,16 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
       <table>
         <tbody>
           <tr><td>Bonne réponse sans indice</td><td class="pts">4</td></tr>
-          <tr><td>Avec 1 indice (minutes jouées)</td><td class="pts">3</td></tr>
-          <tr><td>Avec 2 indices (+ poste et conférence)</td><td class="pts">2</td></tr>
-          <tr><td>Avec 3 indices (+ contexte du match)</td><td class="pts">1</td></tr>
+          <tr><td>Avec 1 indice</td><td class="pts">3</td></tr>
+          <tr><td>Avec 2 indices</td><td class="pts">2</td></tr>
+          <tr><td>Avec 3 indices</td><td class="pts">1</td></tr>
           <tr><td>Bonus si trouvé au premier essai</td><td class="pts">+1</td></tr>
+          <tr><td>Malus par série de 3 essais ratés</td><td class="pts">−1</td></tr>
+          <tr><td>Une bonne réponse rapporte toujours au moins</td><td class="pts">1</td></tr>
           <tr><td>Abandon</td><td class="pts">0</td></tr>
         </tbody>
       </table>
-      <p class="note">Essais illimités et gratuits. Le nom de famille suffit, et les petites fautes d’orthographe sont acceptées (accents et majuscules sans importance).</p>
+      <p class="note">Essais illimités. Le nom de famille suffit, et les petites fautes d’orthographe sont acceptées (accents et majuscules sans importance).</p>
     </div>
   </section>
 
@@ -214,6 +223,8 @@ function banner(msg) { document.getElementById("banner").replaceChildren(msg ? e
 async function loadDay(id) {
   day = await (await fetch("data/days/" + id + ".json", { cache: "no-store" })).json();
   document.getElementById("games").textContent = day.games + " matchs";
+  const mu = document.getElementById("matchups");
+  mu.replaceChildren(...(day.matchups && day.matchups.length ? [el("b", {}, "Les matchs de la nuit")].concat(day.matchups.map(m => el("span", {}, m.away, el("i", {}, "@"), m.home))) : []));
   document.getElementById("footer").replaceChildren(...(day.notes || []).map(n => el("span", {}, n)));
   await refreshScores();
 }
@@ -274,7 +285,7 @@ function renderRiddle(r, i) {
   const card = el("article", { class: "riddle", id: "r-" + i });
   card.append(el("div", { class: "r-head" },
     el("div", {}, el("span", { class: "num" }, "0" + (i + 1) + " / 0" + day.riddles.length), el("h2", {}, r.cat)), el("p", {}, r.desc)));
-  const cells = el("div", { class: "cells" }, ...r.line.map(([lab, v]) => el("div", { class: "cell" }, el("b", {}, v), el("small", {}, lab))));
+  const cells = el("div", { class: "cells" }, ...r.line.map(([lab, v]) => el("div", { class: "cell" + (lab === "MIN" ? " min" : "") }, el("b", {}, v), el("small", {}, lab))));
   card.append(el("div", { class: "board", "aria-label": "Ligne de stats" }, cells,
     el("div", { class: "result" }, "Résultat de son équipe : ", el("em", {}, r.result))));
 
@@ -282,12 +293,15 @@ function renderRiddle(r, i) {
   if (used > 0) body.append(el("ul", { class: "hints" }, ...sec.hints.slice(0, used).map((h, j) => el("li", {}, el("span", {}, "INDICE " + (j + 1)), h))));
 
   if (st && !st.done) {
-    const potential = 4 - used;
+    const malus = Math.floor(st.wrong.length / 3);
+    const potential = Math.max(1, 4 - used - malus);
+    const nextMalusIn = 3 - (st.wrong.length % 3);
     const input = el("input", { type: "text", id: "g-" + i, placeholder: "Nom du joueur", autocomplete: "off", "aria-label": "Ta réponse pour " + r.cat });
     const err = el("p", { class: "err", "aria-live": "polite" });
     const send = async (guessText, correct) => {
       const firstTry = st.wrong.length === 0;
-      const row = { day: day.id, riddle: i + 1, player: me, hints_used: used, guess: guessText, correct, points: correct ? 4 - used + (firstTry ? 1 : 0) : 0 };
+      const pts = Math.max(1, 4 - used - malus) + (firstTry ? 1 : 0);
+      const row = { day: day.id, riddle: i + 1, player: me, hints_used: used, guess: guessText, correct, points: correct ? pts : 0 };
       try { await sb("guesses", { method: "POST", body: JSON.stringify(row), headers: { Prefer: "return=minimal" } }); }
       catch (x) { if (x.status !== 409) { err.textContent = "Réponse non enregistrée : la base ne répond pas. Réessaie."; return; } }
       await refreshScores();
@@ -309,12 +323,13 @@ function renderRiddle(r, i) {
         used >= 3 ? "Plus d'indice" : "Voir l'indice " + (used + 1) + " (−1 pt)"),
       el("button", { type: "button", class: "ghost", onclick: () => send(ABANDON, false) }, "Abandonner et voir la réponse")));
     body.append(el("div", { class: "potential" }, st.wrong.length
-      ? "Une bonne réponse maintenant rapporte " + plural(potential, "pt") + "."
+      ? "Une bonne réponse maintenant rapporte " + plural(potential, "pt") + (malus ? " (malus −" + malus + " pour les essais ratés)" : "") + "."
+        + (potential > 1 ? " Prochain malus dans " + plural(nextMalusIn, "essai") + " raté" + (nextMalusIn > 1 ? "s" : "") + "." : "")
       : "Une bonne réponse maintenant rapporte " + plural(potential, "pt") + ", +1 si c'est ton premier essai."));
   } else if (st && st.done) {
     const tries = st.a.filter(g => g.guess !== ABANDON).length;
     body.append(el("div", { class: "feedback " + (st.win ? "ok" : "ko") },
-      st.win ? "Bingo : " + plural(st.win.points, "pt") + " (" + plural(st.win.hints_used, "indice") + ", " + plural(tries, "essai") + (tries === 1 ? ", bonus premier essai" : "") + ")."
+      st.win ? "Bingo : " + plural(st.win.points, "pt") + " (" + plural(st.win.hints_used, "indice") + ", " + plural(tries, "essai") + (tries === 1 ? ", bonus premier essai" : "") + (tries > 3 ? ", malus −" + Math.floor((tries - 1) / 3) : "") + ")."
              : "Abandon : 0 pt" + (st.wrong.length ? " après " + plural(st.wrong.length, "essai") : "") + "."));
     body.append(el("div", { class: "answer" }, el("strong", {}, sec.answer), el("p", {}, sec.team + ". " + sec.why)));
   }
