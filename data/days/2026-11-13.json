@@ -23,7 +23,8 @@
  "notes": [
   "Stats : box scores Covers (Pistons-Wizards, Mavericks-Timberwolves, Hornets-Suns) et ESPN (Raptors-76ers, recoupé avec Raptors Republic) ; l'outil de données sportives n'était pas disponible.",
   "Moyenne de la révélation : saison 2026-27 avant le match (ESPN, CBS Sports).",
-  "Rookies : draft 2026 (NBC Sports, Fox Carolina)."
+  "Rookies : draft 2026 (NBC Sports, Fox Carolina).",
+  "Looser ajouté à l'essai l'après-midi du 13/11 (minutes : archive ESPN de la nuit, stats recoupées avec SportRadar)."
  ],
  "riddles": [
   {
@@ -238,6 +239,64 @@
     "c1d35cc3471fe509203d65b3e7a53fc82337ac9ae2c797b836621f706fe37df8"
    ],
    "secret": "==QfdJicqBibvNnclRmbhBibhlGdzlmcoNmIgwiIu92cyVGZuFGIuFWa0NXayh2YiACLi42bzJXZk5WYisFI6Iyc0BXZjNWYiACLi4yclRXdulWbggTMg4WZgMHdul2bwByMgA6wgYzLzACdu9GZgMHdul2bwByMxAiOgkSNsYDKgMXZpt2bvJHIzVGbgkWbyFGcgUmcvN2cgUWbhdGIyVXZsxWal1kIgojI5h2diACLdJiNyAjMgQnZhJHZgEGbgUGZggXavh2YgUGOxAytCDCep5WZvhGUgA6wgwic1VWayl6w0hXZnwGIgOMIxATMtYTOgUGdpFmZpOMRiACLiQ3cFBSZj5WZyl6wm52bDBytCDCZyFWdHJCIsIibp1GI4EjIbBiOiMHdulGaiACLiMHdl5mcvhEIlRHdvxmchh2QiAiOi0WYlRnIgwiIu92cyVGZuFEIuFWa0NXayh2QiAiOiIXZ3NnbhJye"
+  },
+  {
+   "cat": "Looser de la nuit",
+   "desc": "La pire ligne d'un joueur à 20 minutes ou plus dans une défaite.",
+   "line": [
+    [
+     "MIN",
+     "22"
+    ],
+    [
+     "PTS",
+     "5"
+    ],
+    [
+     "TIR",
+     "1/8"
+    ],
+    [
+     "3 PTS",
+     "0/5"
+    ],
+    [
+     "LF",
+     "3/3"
+    ],
+    [
+     "REB",
+     "1"
+    ],
+    [
+     "PD",
+     "4"
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "CTR",
+     "0"
+    ],
+    [
+     "BP",
+     "5"
+    ],
+    [
+     "+/-",
+     "−15"
+    ]
+   ],
+   "result": "Défaite",
+   "check": [
+    "0c90e40c22bdcfc685fa306c0c7e851cd9441167c0357de074236d068118da71",
+    "73509888a788c68d4bb9ed8efa9ca16f3df0011d04a954f2f61e94efee8bbb97",
+    "e867882c95dd9c3f5a4f1d9d77fa71c54972b7e4849eba311be39b19bed707a6",
+    "f04a21f9e1c244d59df2255328fb2684c83f51c09e3c53108ed766681b5f4c84"
+   ],
+   "secret": "=0XXiInag42b0lXYsNGIyVGdsF2diACLi42b0lXYsNGIyVGdsF2diACLiInaiACLi42b0lXYsNmIbBiOiMHdwV2YjFmIgwiIuMXZ0Vnbp1GIyIDIuVGIzVWdkJXZwByclxGbhJGI1ACdlByc05WavBHIzACoDDSNvADIsIXa0BSdhBCOvEDI6ASZ0lWYml6wkBSZuVHIz5WYkByc1xGcgU3bgMXZ0Vnbp1GIwIDIgOMIzJXdlV3bqByclxGIp1mchBHIpcDLxIJiijCI0lWduBSYsBSZkBSZy92YzBSZtF2ZgMXYiByc1xGUiAiOikHa3JCIs0lIhRWay9GbGByYlZXYgUjMwIDIBF0QOBibvlGctFGajBytCDSNyAjMgQnZhJHZgEGbgUGZggXavh2YgUGOxICIsISY092cl5mbp1EIgOMIsIXdllmcpOMd4V2JsBCoDDyMzETL0kDIlRXahZWqDTkIgwiI0NXZ19EIlNmblJXqDbmbvNEI3KMIyVXZuVWTisFI6Iyc05WaoJCIsIycrNWayVmdh1EIzFGbsFGRiAiOi0WYlRnIgwiIuInSg42b0lXYsNEIyVGdsF2ViAiOiIXZ3NnbhJye"
   }
  ]
 }
