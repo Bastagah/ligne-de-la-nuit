@@ -91,6 +91,20 @@ td.sub { color: var(--muted); font-size: 14px; text-align: right; }
 .rank { font-family: var(--display); font-weight: 900; color: var(--muted); width: 2.2em; }
 .note { font-size: 13px; color: var(--muted); margin: 8px 0 0; }
 .banner { background: var(--card); border: 1px solid var(--bad); color: var(--bad); border-radius: 6px; padding: 10px 14px; font-size: 14px; }
+.bingo { position: fixed; inset: 0; display: grid; place-items: center; pointer-events: none; z-index: 50; background: rgba(10,11,13,.55); }
+.bingo-box { display: grid; gap: 6px; justify-items: center; background: var(--board); border: 2px solid var(--led); border-radius: 10px; padding: 22px 34px 18px;
+  background-image: radial-gradient(rgba(255,255,255,.05) 1px, transparent 1.2px); background-size: 6px 6px; box-shadow: 0 0 40px rgba(255,178,26,.45); }
+.bingo-word { font-family: var(--display); font-weight: 900; font-size: clamp(64px, 18vw, 150px); line-height: .9; color: var(--led); text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255,178,26,.8), 0 0 30px rgba(255,178,26,.5), 0 0 60px rgba(255,178,26,.3); }
+.bingo-pts { font-family: var(--display); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: #e9ecef; font-size: clamp(16px, 4vw, 22px); }
+@media (prefers-reduced-motion: no-preference) {
+  .bingo { animation: bg-in 1.9s ease forwards; }
+  .bingo-box { animation: pop 1.9s cubic-bezier(.2,1.4,.4,1) forwards; }
+  .bingo-word { animation: led 0.5s steps(2) 3; }
+  @keyframes bg-in { 0% { opacity: 0 } 10% { opacity: 1 } 80% { opacity: 1 } 100% { opacity: 0 } }
+  @keyframes pop { 0% { transform: scale(.3) rotate(-6deg) } 18% { transform: scale(1.12) rotate(2deg) } 28% { transform: scale(1) rotate(0) } 80% { transform: scale(1) } 100% { transform: scale(.9) } }
+  @keyframes led { 0% { opacity: 1 } 50% { opacity: .35 } 100% { opacity: 1 } }
+}
 footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule); padding-top: 12px; display: grid; gap: 4px; }
 @media (prefers-reduced-motion: no-preference) {
   .answer, .hints li { animation: flick .35s ease-out; }
@@ -128,6 +142,7 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
           <tr><td>Avec 1 indice (minutes jouées)</td><td class="pts">3</td></tr>
           <tr><td>Avec 2 indices (+ poste et conférence)</td><td class="pts">2</td></tr>
           <tr><td>Avec 3 indices (+ contexte du match)</td><td class="pts">1</td></tr>
+          <tr><td>Bonus si trouvé au premier essai</td><td class="pts">+1</td></tr>
           <tr><td>Abandon</td><td class="pts">0</td></tr>
         </tbody>
       </table>
@@ -271,10 +286,12 @@ function renderRiddle(r, i) {
     const input = el("input", { type: "text", id: "g-" + i, placeholder: "Nom du joueur", autocomplete: "off", "aria-label": "Ta réponse pour " + r.cat });
     const err = el("p", { class: "err", "aria-live": "polite" });
     const send = async (guessText, correct) => {
-      const row = { day: day.id, riddle: i + 1, player: me, hints_used: used, guess: guessText, correct, points: correct ? 4 - used : 0 };
+      const firstTry = st.wrong.length === 0;
+      const row = { day: day.id, riddle: i + 1, player: me, hints_used: used, guess: guessText, correct, points: correct ? 4 - used + (firstTry ? 1 : 0) : 0 };
       try { await sb("guesses", { method: "POST", body: JSON.stringify(row), headers: { Prefer: "return=minimal" } }); }
       catch (x) { if (x.status !== 409) { err.textContent = "Réponse non enregistrée : la base ne répond pas. Réessaie."; return; } }
       await refreshScores();
+      if (correct) bingo(row.points, firstTry);
       const box = document.getElementById("g-" + i); if (box) box.focus();
     };
     body.append(el("form", { class: "guess", onsubmit: async e => {
@@ -291,11 +308,13 @@ function renderRiddle(r, i) {
       el("button", { type: "button", disabled: used >= 3, onclick: () => { store.set(hintsKey(i), used + 1); render(); } },
         used >= 3 ? "Plus d'indice" : "Voir l'indice " + (used + 1) + " (−1 pt)"),
       el("button", { type: "button", class: "ghost", onclick: () => send(ABANDON, false) }, "Abandonner et voir la réponse")));
-    body.append(el("div", { class: "potential" }, "Une bonne réponse maintenant rapporte " + plural(potential, "pt") + "."));
+    body.append(el("div", { class: "potential" }, st.wrong.length
+      ? "Une bonne réponse maintenant rapporte " + plural(potential, "pt") + "."
+      : "Une bonne réponse maintenant rapporte " + plural(potential, "pt") + ", +1 si c'est ton premier essai."));
   } else if (st && st.done) {
     const tries = st.a.filter(g => g.guess !== ABANDON).length;
     body.append(el("div", { class: "feedback " + (st.win ? "ok" : "ko") },
-      st.win ? "Trouvé : " + plural(st.win.points, "pt") + " (" + plural(st.win.hints_used, "indice") + ", " + plural(tries, "essai") + ")."
+      st.win ? "Bingo : " + plural(st.win.points, "pt") + " (" + plural(st.win.hints_used, "indice") + ", " + plural(tries, "essai") + (tries === 1 ? ", bonus premier essai" : "") + ")."
              : "Abandon : 0 pt" + (st.wrong.length ? " après " + plural(st.wrong.length, "essai") : "") + "."));
     body.append(el("div", { class: "answer" }, el("strong", {}, sec.answer), el("p", {}, sec.team + ". " + sec.why)));
   }
@@ -314,6 +333,15 @@ function renderRiddle(r, i) {
   }
   card.append(body);
   return card;
+}
+
+function bingo(points, firstTry) {
+  const old = document.querySelector(".bingo"); if (old) old.remove();
+  const ov = el("div", { class: "bingo", role: "status", "aria-live": "assertive" },
+    el("div", { class: "bingo-box" }, el("div", { class: "bingo-word" }, "Bingo !"),
+      el("div", { class: "bingo-pts" }, "+" + plural(points, "pt") + (firstTry ? " · bonus premier essai" : ""))));
+  document.body.append(ov);
+  setTimeout(() => ov.remove(), matchMedia("(prefers-reduced-motion: reduce)").matches ? 2500 : 1950);
 }
 
 function render() {
