@@ -19,9 +19,13 @@ Ordre de sélection : MVP, Frenchie, Rookie, Looser, puis Révélation. Ordre d'
 2. **Frenchie de la nuit** : le plus haut game score parmi les joueurs de `data/french.json`, hors MVP. Si aucun Français n'a joué, remplacer par **Défenseur de la nuit** (plus haut total interceptions + contres, départage au game score).
 3. **Rookie de la nuit** : le plus haut game score parmi les joueurs de `data/rookies.json`, hors joueurs déjà choisis. Si aucun rookie n'a joué, remplacer par **Le perdant magnifique** : le meilleur game score parmi les joueurs des équipes perdantes, hors joueurs déjà choisis.
 4. **Looser de la nuit** : parmi les joueurs ayant joué **au moins 20 minutes dans une défaite**, hors joueurs déjà choisis, le **plus bas game score**. Départage : le plus mauvais +/-.
-5. **Révélation de la nuit** (hors joueurs déjà choisis) : parmi les 12 meilleurs game scores restants ayant marqué au moins 15 points, celui dont l'écart « points de la nuit − moyenne de points de la saison » est le plus grand.
-   - Moyenne : chercher la moyenne de la saison en cours. Si moins de 5 matchs joués, ou si deux sources se contredisent de plus de 2 points, prendre la saison précédente et l'écrire dans `why` et dans `notes`.
+5. **Révélation de la nuit** (hors joueurs déjà choisis) : le joueur qui a le plus marqué **par rapport à sa moyenne**.
+   - Candidats : les **25 meilleurs game scores** de la nuit, parmi tous les joueurs (vainqueurs et perdants), hors joueurs déjà choisis.
+   - On écarte ceux qui tournent à **15 points de moyenne ou plus** cette saison (les stars ne sont pas des révélations).
+   - On classe par le **rapport points de la nuit ÷ moyenne de points**. Pour éviter les divisions absurdes, une moyenne inférieure à 3 points compte pour 3. Départage : le plus gros écart « points − moyenne ».
+   - Moyenne : chercher la moyenne de la saison en cours. Si moins de 5 matchs joués, ou si deux sources se contredisent de plus de 2 points, prendre la saison précédente ; un rookie sans 5 matchs compte pour 3 points. Écrire la moyenne utilisée et sa source dans `why` et dans `notes`.
    - Quand `data/lines/` contient au moins 15 jours, calculer la moyenne à partir des archives si le joueur y a au moins 8 matchs, et préférer ce chiffre.
+   - Si aucun candidat n'est sous les 15 points de moyenne, prendre le meilleur rapport parmi les 25 candidats sans ce filtre et le signaler dans le résumé.
 
 ## 3. Écrire la ligne et les indices
 - `line`, dans cet ordre : MIN, PTS, TIR (`fgm/fga`), 3 PTS, LF, REB, PD, INT, CTR, BP, +/-. Les minutes s'écrivent en minutes entières (`34`). Les zéros s'écrivent `0`, le signe moins est `−`. Si les minutes sont introuvables, mettre `—` et le signaler.
