@@ -30,6 +30,7 @@ Ordre de sélection : MVP, Frenchie, Rookie, Looser, puis Révélation. Ordre d'
 - Indice 2 : contexte du match (`Victoire 124-119 à l'extérieur, à Chicago`).
 - Indice 3 : parcours, vérifié (`1er choix de la draft 2023`, université ou club d'avant la NBA, nombre de saisons NBA).
 - `why` : une ou deux phrases qui justifient le choix avec les chiffres (game score, minutes, écart à la moyenne et sa source).
+- `profile` : l'adresse de la fiche officielle du joueur sur NBA.com, au format `https://www.nba.com/player/<id>/<nom>`, trouvée par une recherche web limitée à nba.com (l'identifiant doit apparaître dans un résultat, ne jamais le deviner). Si introuvable, laisser vide : le site proposera alors un lien de recherche.
 - `accepts` : surnoms courants seulement ; le nom complet et le nom de famille sont ajoutés automatiquement.
 - `matchups` : la liste des matchs de la nuit **sans les scores**, en abréviations à 3 lettres, `[{"away": "DET", "home": "WAS"}, ...]`.
 - **Ne rien inventer** : toute info d'un indice ou de `why` doit venir des données ou d'une source trouvée. Dans le doute, l'enlever.

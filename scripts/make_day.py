@@ -15,7 +15,8 @@ Format du fichier brut :
      "answer": "Victor Wembanyama", "team": "San Antonio Spurs",
      "accepts": ["wembanyama", "wemby"],          # le nom complet et le nom de famille sont ajoutés d'office
      "hints": ["Pivot · Conférence Ouest", "Victoire 124-119 à Chicago", "1er choix de la draft 2023"],  # exactement 3
-     "why": "Pourquoi ce choix, en une ou deux phrases."}
+     "why": "Pourquoi ce choix, en une ou deux phrases.",
+     "profile": "https://www.nba.com/player/1641705/victor-wembanyama"}   # fiche NBA.com, vide si introuvable
   ],
   "notes": ["Source des stats...", "Moyennes : ..."]
 }
@@ -54,7 +55,8 @@ def main(path):
             "cat": r["cat"], "desc": r["desc"], "line": r["line"], "result": r["result"],
             "check": sorted(h(a) for a in accepts if a),
             "secret": hide({"answer": r["answer"], "team": r["team"], "hints": r["hints"], "why": r["why"],
-                            "accepts": sorted(a for a in accepts if a)}),
+                            "accepts": sorted(a for a in accepts if a),
+                            "profile": r.get("profile", "")}),
         })
     (ROOT / "data/days" / f"{out['id']}.json").write_text(json.dumps(out, ensure_ascii=False, indent=1))
     idx_path = ROOT / "data/days.json"
