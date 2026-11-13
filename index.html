@@ -52,10 +52,17 @@ select { font-family: var(--display); font-weight: 700; letter-spacing: .08em; t
 .cells { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
 @media (max-width: 560px) { .cells { grid-template-columns: repeat(4, 1fr); } }
 .cell.min { border-color: #4a3a12; }
-.matchups { display: flex; flex-wrap: wrap; gap: 6px 8px; align-items: center; font-size: 14px; }
-.matchups b { font-family: var(--display); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 13px; color: var(--muted); margin-right: 4px; }
-.matchups span { font-family: var(--display); font-weight: 700; font-size: 17px; letter-spacing: .06em; border: 1px solid var(--rule); background: var(--card); border-radius: 3px; padding: 1px 8px; }
-.matchups span i { font-style: normal; color: var(--muted); font-weight: 500; padding: 0 3px; }
+.matchups { display: grid; gap: 10px; }
+.matchups h2 { margin: 0; font-family: var(--display); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 14px; color: var(--muted); }
+.games { display: grid; grid-template-columns: repeat(auto-fill, minmax(166px, 1fr)); gap: 8px; }
+.game { background: var(--board); border-radius: 6px; padding: 10px 6px 8px; display: grid; grid-template-columns: 1fr auto 1fr; align-items: start; gap: 4px;
+  background-image: radial-gradient(rgba(255,255,255,.045) 1px, transparent 1.2px); background-size: 6px 6px; border: 1px solid #2a2d31; }
+.team { display: grid; justify-items: center; gap: 4px; min-width: 0; }
+.badge { width: 42px; height: 42px; border-radius: 8px; display: grid; place-items: center; font-family: var(--display); font-weight: 900; font-size: 18px; letter-spacing: .04em;
+  color: #fff; background: var(--c1); box-shadow: inset 0 -6px 0 var(--c2), 0 0 0 2px rgba(255,255,255,.08); text-shadow: 0 1px 2px rgba(0,0,0,.45); }
+.team small { font-family: var(--display); font-weight: 700; letter-spacing: .01em; text-transform: uppercase; font-size: 11px; line-height: 1.15; color: #b9bdc3; text-align: center; text-wrap: balance; max-width: 100%; }
+.at { align-self: start; margin-top: 10px; font-family: var(--display); font-weight: 900; font-size: 18px; color: var(--led); text-shadow: 0 0 8px rgba(255,178,26,.5); }
+.game-note { grid-column: 1 / -1; text-align: center; font-family: var(--display); font-weight: 700; letter-spacing: .14em; text-transform: uppercase; font-size: 11px; color: #6f747b; }
 .cell { border: 1px solid #2a2d31; border-radius: 3px; padding: 6px 6px 4px; text-align: center; background: rgba(0,0,0,.35); }
 .cell b { display: block; font-family: var(--display); font-weight: 700; font-size: clamp(20px, 5vw, 34px); line-height: 1; color: var(--led); white-space: nowrap;
   text-shadow: 0 0 6px rgba(255,178,26,.55), 0 0 16px rgba(255,178,26,.25); font-variant-numeric: tabular-nums; }
@@ -166,6 +173,23 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
 const SB_URL = "https://waucnburxcgkwisuwvon.supabase.co";
 const SB_KEY = "sb_publishable_J2P1OiiA-KGD4V5uhvhTeA_WgQgNTpL";
 const PLAYERS = ["Bastien", "Alex", "Guillaume"];
+// Couleurs d'équipe (principale, secondaire) et ville affichée
+const TEAMS = {
+  ATL: ["#C8102E", "#FDB927", "Atlanta"], BOS: ["#007A33", "#BA9653", "Boston"], BKN: ["#2b2b2b", "#777D84", "Brooklyn"],
+  CHA: ["#1D1160", "#00788C", "Charlotte"], CHI: ["#CE1141", "#000000", "Chicago"], CLE: ["#860038", "#FDBB30", "Cleveland"],
+  DAL: ["#00538C", "#B8C4CA", "Dallas"], DEN: ["#0E2240", "#FEC524", "Denver"], DET: ["#C8102E", "#1D42BA", "Detroit"],
+  GSW: ["#1D428A", "#FFC72C", "Golden State"], HOU: ["#CE1141", "#C4CED4", "Houston"], IND: ["#002D62", "#FDBB30", "Indiana"],
+  LAC: ["#C8102E", "#1D428A", "LA Clippers"], LAL: ["#552583", "#FDB927", "LA Lakers"], MEM: ["#5D76A9", "#12173F", "Memphis"],
+  MIA: ["#98002E", "#F9A01B", "Miami"], MIL: ["#00471B", "#EEE1C6", "Milwaukee"], MIN: ["#0C2340", "#78BE20", "Minnesota"],
+  NOP: ["#0C2340", "#C8102E", "New Orleans"], NYK: ["#006BB6", "#F58426", "New York"], OKC: ["#007AC1", "#EF3B24", "Oklahoma City"],
+  ORL: ["#0077C0", "#C4CED4", "Orlando"], PHI: ["#006BB6", "#ED174C", "Philadelphie"], PHX: ["#1D1160", "#E56020", "Phoenix"],
+  POR: ["#E03A3E", "#000000", "Portland"], SAC: ["#5A2D81", "#63727A", "Sacramento"], SAS: ["#3a3f44", "#C4CED4", "San Antonio"],
+  TOR: ["#CE1141", "#2b2b2b", "Toronto"], UTA: ["#002B5C", "#F9A01B", "Utah"], WAS: ["#002B5C", "#E31837", "Washington"]
+};
+function teamEl(code) {
+  const [c1, c2, city] = TEAMS[code] || ["#444", "#888", code];
+  return el("div", { class: "team" }, el("div", { class: "badge", style: "--c1:" + c1 + ";--c2:" + c2 }, code), el("small", {}, city));
+}
 
 /* ---------- utilitaires ---------- */
 const norm = s => s.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z ]/g, " ").replace(/\s+/g, " ").trim();
@@ -224,7 +248,11 @@ async function loadDay(id) {
   day = await (await fetch("data/days/" + id + ".json", { cache: "no-store" })).json();
   document.getElementById("games").textContent = day.games + " matchs";
   const mu = document.getElementById("matchups");
-  mu.replaceChildren(...(day.matchups && day.matchups.length ? [el("b", {}, "Les matchs de la nuit")].concat(day.matchups.map(m => el("span", {}, m.away, el("i", {}, "@"), m.home))) : []));
+  mu.replaceChildren(...(day.matchups && day.matchups.length ? [
+    el("h2", {}, "Les matchs de la nuit · " + day.matchups.length),
+    el("div", { class: "games" }, ...day.matchups.map(m => el("div", { class: "game" },
+      teamEl(m.away), el("div", { class: "at", "aria-label": "chez" }, "@"), teamEl(m.home),
+      el("div", { class: "game-note" }, "Score masqué"))))] : []));
   document.getElementById("footer").replaceChildren(...(day.notes || []).map(n => el("span", {}, n)));
   await refreshScores();
 }
