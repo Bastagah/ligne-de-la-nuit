@@ -21,7 +21,7 @@ Ce fichier est le mode d'emploi de la tâche programmée qui tourne chaque matin
 Ordre de sélection : MVP, Frenchie, Rookie, Looser, puis Révélation. Ordre d'affichage dans le fichier : MVP, Frenchie, Révélation, Rookie, Looser.
 
 1. **MVP de la nuit** : le plus haut game score parmi les joueurs des équipes gagnantes.
-2. **Frenchie de la nuit** : le plus haut game score parmi les joueurs de `data/french.json`, hors MVP. Si aucun Français n'a joué, remplacer par **Défenseur de la nuit** (plus haut total interceptions + contres, départage au game score).
+2. **Frenchie de la nuit** : le plus haut game score parmi les joueurs de `data/french.json`, hors MVP et **toujours hors Victor Wembanyama** (règle du jeu : c'est un alien avant d'être français). `desc` : « La meilleure ligne d'un joueur français. Wembanyama exclu : alien avant d'être français. » Si aucun Français n'a joué, remplacer par **Défenseur de la nuit** (plus haut total interceptions + contres, départage au game score).
 3. **Rookie de la nuit** : le plus haut game score parmi les joueurs de `data/rookies.json`, hors joueurs déjà choisis. Si aucun rookie n'a joué, remplacer par **Le perdant magnifique** : le meilleur game score parmi les joueurs des équipes perdantes, hors joueurs déjà choisis.
 4. **Looser de la nuit** : parmi les joueurs ayant joué **au moins 20 minutes dans une défaite**, hors joueurs déjà choisis, le **plus bas game score**. Départage : le plus mauvais +/-.
 5. **Révélation de la nuit** (hors joueurs déjà choisis) : le joueur qui a le plus marqué **par rapport à sa moyenne**.
@@ -34,8 +34,8 @@ Ordre de sélection : MVP, Frenchie, Rookie, Looser, puis Révélation. Ordre d'
 - `line`, dans cet ordre : MIN, PTS, TIR (`fgm/fga`), 3 PTS, LF, REB, PD, INT, CTR, BP, +/-. Les minutes s'écrivent en minutes entières (`34`). Les zéros s'écrivent `0`, le signe moins est `−`. Si les minutes sont introuvables, mettre `—` et le signaler.
 - `result` : `Victoire` ou `Défaite`.
 - Indice 1 : poste et conférence (`Pivot · Conférence Ouest`).
-- Indice 2 : contexte du match (`Victoire 124-119 à l'extérieur, à Chicago`).
-- Indice 3 : parcours, vérifié (`1er choix de la draft 2023`, université ou club d'avant la NBA, nombre de saisons NBA).
+- Indice 2 : parcours, vérifié (`1er choix de la draft 2023`, université ou club d'avant la NBA, nombre de saisons NBA).
+- Indice 3 : **moyenne de points de la saison en cours, avant ce match** (`Moyenne cette saison : 6,8 pts en 11 matchs`), avec la même source que pour la Révélation. Pour un rookie à moins de 5 matchs, donner quand même sa moyenne réelle et le nombre de matchs. Ne pas donner l'adversaire ni le score (les matchs sont déjà affichés sur le site).
 - `why` : une ou deux phrases qui justifient le choix avec les chiffres (game score, minutes, écart à la moyenne et sa source).
 - `profile` : l'adresse de la fiche officielle du joueur sur NBA.com, au format `https://www.nba.com/player/<id>/<nom>`, trouvée par une recherche web limitée à nba.com (l'identifiant doit apparaître dans un résultat, ne jamais le deviner). Si introuvable, laisser vide : le site proposera alors un lien de recherche.
 - `accepts` : surnoms courants seulement ; le nom complet et le nom de famille sont ajoutés automatiquement.
