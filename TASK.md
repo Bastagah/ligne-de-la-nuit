@@ -3,7 +3,8 @@
 Ce fichier est le mode d'emploi de la tâche programmée qui tourne chaque matin. Le site lit `data/days.json` puis `data/days/<date>.json`. Les scores sont dans Supabase et ne sont jamais touchés par cette tâche.
 
 ## 1. Récupérer la nuit
-- Date du jour = date à Paris. Les matchs de la nuit sont ceux terminés dont l'heure de début, en heure de Paris, tombe entre 00:00 et 08:00 ce jour-là.
+- Date du jour = date à Paris. Les matchs de la nuit sont ceux qui ont **commencé entre 08:00 la veille et 08:00 ce jour-là** (heure de Paris) : ça inclut les matchs du dimanche après-midi ou soir, joués en début de soirée en France.
+- Un match **pas encore terminé** au moment du passage est ignoré : ne pas l'inclure dans les devinettes ni dans `matchups`, et le signaler dans le résumé.
 - **Source principale : les box scores ESPN ou NBA.com** (recherche web puis lecture de la page). Ils sont complets et donnent les minutes jouées.
 - **Recoupement :** pour les 5 joueurs choisis, vérifier la ligne dans une deuxième source (Covers, Basketball-Reference, CBS Sports). En cas d'écart, garder la source officielle (NBA.com) et le signaler dans le résumé.
 - L'outil `fetch_sports_data` (SportRadar), s'il est disponible, sert seulement de vérification : ses box scores oublient parfois des joueurs.
