@@ -4,7 +4,11 @@ Ce fichier est le mode d'emploi de la tâche programmée qui tourne chaque matin
 
 ## 1. Récupérer la nuit
 - Date du jour = date à Paris. Les matchs de la nuit sont ceux qui ont **commencé entre 08:00 la veille et 08:00 ce jour-là** (heure de Paris) : ça inclut les matchs du dimanche après-midi ou soir, joués en début de soirée en France.
-- Un match **pas encore terminé** au moment du passage est ignoré : ne pas l'inclure dans les devinettes ni dans `matchups`, et le signaler dans le résumé.
+- **Avant toute autre chose, vérifier que tous les matchs de la fenêtre sont terminés** (scores de la nuit : `fetch_sports_data` si disponible, sinon ESPN/NBA.com). Si un match est encore en cours :
+  1. attendre 10 minutes (`sleep 600` dans le terminal), puis revérifier ;
+  2. recommencer jusqu'à 4 fois au maximum (soit environ 40 minutes d'attente) ;
+  3. une fois le match terminé, attendre encore 5 minutes (`sleep 300`) pour que son box score soit complet en ligne, puis continuer normalement ;
+  4. si le match n'est toujours pas fini après les 4 attentes, publier sans lui : ne l'inclure ni dans les devinettes ni dans `matchups`, et le signaler dans le résumé.
 - **Source principale : les box scores ESPN ou NBA.com** (recherche web puis lecture de la page). Ils sont complets et donnent les minutes jouées.
 - **Recoupement :** pour les 5 joueurs choisis, vérifier la ligne dans une deuxième source (Covers, Basketball-Reference, CBS Sports). En cas d'écart, garder la source officielle (NBA.com) et le signaler dans le résumé.
 - L'outil `fetch_sports_data` (SportRadar), s'il est disponible, sert seulement de vérification : ses box scores oublient parfois des joueurs.
