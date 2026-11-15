@@ -40,6 +40,9 @@ select { font-family: var(--display); font-weight: 700; letter-spacing: .08em; t
 .login form { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 .login input { width: 14ch; letter-spacing: .15em; }
 .err { color: var(--bad); font-size: 14px; margin: 0; }
+.ovni { margin: 0 18px 12px; padding: 10px 14px; border-radius: 6px; background: #0f1a12; border: 1px solid #2e5a3a; color: #cfe9d6; display: grid; gap: 2px; }
+.ovni-title { font-family: var(--display); font-weight: 900; font-size: 20px; letter-spacing: .04em; text-transform: uppercase; color: #7bd88f; }
+.ovni p { margin: 0; font-size: 14px; }
 .err .alien { display: block; color: var(--ink); background: var(--paper); border-left: 3px solid #7bd88f; padding: 6px 10px; border-radius: 3px; }
 
 .riddles { display: grid; gap: 22px; }
@@ -151,6 +154,7 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
         <thead><tr><th>#</th><th>Joueur</th><th class="pts">Trouvées</th><th class="pts">Pts</th></tr></thead>
         <tbody id="scores"><tr><td colspan="4" class="note">Chargement…</td></tr></tbody>
       </table>
+      <p class="note" id="board-note"></p>
     </div>
     <div>
       <h2 class="sec">Règles</h2>
@@ -248,6 +252,9 @@ async function sb(path, opts = {}) {
 
 /* ---------- état ---------- */
 let me = store.get("me", null);
+const SEASON_START = "2026-11-13";
+let allGuesses = [], latestCount = 0;
+const parisToday = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Paris" }).format(new Date());
 let days = [], day = null, guesses = [], board = [];
 
 function banner(msg) { document.getElementById("banner").replaceChildren(msg ? el("div", { class: "banner" }, msg) : ""); }
@@ -262,9 +269,9 @@ async function loadDay(id) {
 }
 async function refreshScores() {
   try {
-    [guesses, board] = await Promise.all([
+    [guesses, allGuesses] = await Promise.all([
       sb("guesses?select=player,riddle,hints_used,guess,correct,points&day=eq." + day.id),
-      sb("leaderboard?select=name,total,trouvees,jouees")
+      sb("guesses?select=player,day,riddle,guess,correct,points&day=gte." + SEASON_START)
     ]);
     banner("");
   } catch (e) {
@@ -310,7 +317,43 @@ function statusOf(player, i) {
 function hintsKey(i) { return ["hints", me || "anon", day.id, i].join(":"); }
 const plural = (n, w) => n + " " + w + (n > 1 ? "s" : "");
 
+function alienKey(i) { return ["alien", me || "anon", day.id, i].join(":"); }
+function lineBoard(line, result) {
+  const cells = el("div", { class: "cells" }, ...line.map(([lab, v]) => el("div", { class: "cell" + (lab === "MIN" ? " min" : "") }, el("b", {}, v), el("small", {}, lab))));
+  return el("div", { class: "board", "aria-label": "Ligne de stats" }, cells, el("div", { class: "result" }, "Résultat de son équipe : ", el("em", {}, result)));
+}
+// Étape OVNI : la ligne de Wemby est à deviner d'abord, pour 0 point, puis le vrai Frenchie apparaît.
+function renderAlienStage(r, i) {
+  const al = r.alien, asec = unhide(al.secret);
+  const card = el("article", { class: "riddle", id: "r-" + i });
+  card.append(el("div", { class: "r-head" },
+    el("div", {}, el("span", { class: "num" }, "0" + (i + 1) + " / 0" + day.riddles.length), el("h2", {}, r.cat)), el("p", {}, "La meilleure ligne d'un joueur français.")));
+  card.append(lineBoard(al.line, al.result));
+  const body = el("div", { class: "r-body" });
+  const tried = store.get(alienKey(i) + ":tries", []);
+  const input = el("input", { type: "text", id: "g-" + i, placeholder: "Nom du joueur", autocomplete: "off", "aria-label": "Ta réponse pour " + r.cat });
+  const err = el("p", { class: "err", "aria-live": "polite" });
+  const pass = () => { store.set(alienKey(i), true); render(); };
+  body.append(el("form", { class: "guess", onsubmit: async e => {
+    e.preventDefault();
+    const g = norm(input.value); if (!g) return;
+    if (al.check.includes(await sha(g)) || closeEnough(g, asec.accepts)) { pass(); return; }
+    if (!tried.includes(input.value.trim())) { tried.push(input.value.trim()); store.set(alienKey(i) + ":tries", tried); }
+    render();
+  } }, input, el("button", { type: "submit" }, "Valider")), err);
+  if (tried.length) body.append(el("div", { class: "feedback ko" }, "Pas ça : " + tried.map(t => "« " + t + " »").join(", ") + ". Ces essais ne comptent pas."));
+  body.append(el("div", { class: "controls" }, el("button", { type: "button", class: "ghost", onclick: pass }, "Je sèche, montre-moi")));
+  card.append(body);
+  return card;
+}
+function alienBanner(r) {
+  const asec = unhide(r.alien.secret);
+  return el("div", { class: "ovni" }, el("div", { class: "ovni-title" }, "👽 OVNI détecté : " + asec.answer),
+    el("p", {}, "Wemby est un alien avant d'être français : pas de point pour lui. Voici le vrai Frenchie de la nuit, à toi de jouer."));
+}
+
 function renderRiddle(r, i) {
+  if (r.alien && me && !store.get(alienKey(i), false) && !statusOf(me, i).a.length) return renderAlienStage(r, i);
   const sec = unhide(r.secret);
   const st = me ? statusOf(me, i) : null;
   const usedLocal = store.get(hintsKey(i), 0);
@@ -318,9 +361,8 @@ function renderRiddle(r, i) {
   const card = el("article", { class: "riddle", id: "r-" + i });
   card.append(el("div", { class: "r-head" },
     el("div", {}, el("span", { class: "num" }, "0" + (i + 1) + " / 0" + day.riddles.length), el("h2", {}, r.cat)), el("p", {}, r.desc)));
-  const cells = el("div", { class: "cells" }, ...r.line.map(([lab, v]) => el("div", { class: "cell" + (lab === "MIN" ? " min" : "") }, el("b", {}, v), el("small", {}, lab))));
-  card.append(el("div", { class: "board", "aria-label": "Ligne de stats" }, cells,
-    el("div", { class: "result" }, "Résultat de son équipe : ", el("em", {}, r.result))));
+  if (r.alien && me) card.append(alienBanner(r));
+  card.append(lineBoard(r.line, r.result));
 
   const body = el("div", { class: "r-body" });
   if (used > 0) body.append(el("ul", { class: "hints" }, ...sec.hints.slice(0, used).map((h, j) => el("li", {}, el("span", {}, "INDICE " + (j + 1)), h))));
@@ -398,6 +440,28 @@ function bingo(points, firstTry) {
   setTimeout(() => ov.remove(), matchMedia("(prefers-reduced-motion: reduce)").matches ? 2500 : 1950);
 }
 
+// Classement : les points de la dernière journée ne comptent qu'une fois que tout le monde a fini,
+// ou le lendemain (heure de Paris). Les journées précédentes comptent toujours.
+function renderBoard() {
+  const latest = days.length ? days[0].id : null;
+  const finished = p => latestCount > 0 && Array.from({ length: latestCount }, (_, k) => k + 1).every(n =>
+    allGuesses.some(g => g.day === latest && g.player === p && g.riddle === n && (g.correct || g.guess === ABANDON)));
+  const allDone = PLAYERS.every(finished);
+  const hideLatest = latest && parisToday() <= latest && !allDone;
+  const rows = PLAYERS.map(name => {
+    const mine = allGuesses.filter(g => g.player === name && !(hideLatest && g.day === latest));
+    return { name, total: mine.reduce((t, g) => t + (g.points || 0), 0), trouvees: mine.filter(g => g.correct).length };
+  }).sort((a, b) => b.total - a.total || b.trouvees - a.trouvees);
+  document.getElementById("scores").replaceChildren(...rows.map((p, i) =>
+    el("tr", {}, el("td", { class: "rank" }, String(i + 1)), el("td", {}, p.name), el("td", { class: "sub" }, String(p.trouvees)), el("td", { class: "pts" }, String(p.total)))));
+  const note = document.getElementById("board-note");
+  if (!latest) { note.textContent = ""; return; }
+  note.replaceChildren(hideLatest
+    ? "Points du jour cachés : ils s'ajoutent quand tout le monde a fini ses devinettes, ou à minuit. Ont fini aujourd'hui : "
+      + (PLAYERS.filter(finished).join(", ") || "personne pour l'instant") + "."
+    : "Classement à jour, journée du jour comprise.");
+}
+
 function render() {
   renderWho();
   const main = document.getElementById("main");
@@ -405,9 +469,7 @@ function render() {
   if (!me) parts.push(loginCard());
   if (day) parts.push(el("div", { class: "riddles" }, ...day.riddles.map(renderRiddle)));
   main.replaceChildren(...parts);
-  const rows = board.length ? board : PLAYERS.map(n => ({ name: n, total: 0, trouvees: 0 }));
-  document.getElementById("scores").replaceChildren(...rows.map((p, i) =>
-    el("tr", {}, el("td", { class: "rank" }, String(i + 1)), el("td", {}, p.name), el("td", { class: "sub" }, String(p.trouvees)), el("td", { class: "pts" }, String(p.total)))));
+  renderBoard();
 }
 
 async function start() {
@@ -418,7 +480,10 @@ async function start() {
   sel.replaceChildren(...days.map(d => el("option", { value: d.id }, d.label)));
   sel.addEventListener("change", () => loadDay(sel.value));
   render();
-  if (days.length) await loadDay(days[0].id);
+  if (days.length) {
+    try { latestCount = (await (await fetch("data/days/" + days[0].id + ".json", { cache: "no-store" })).json()).riddles.length; } catch (e) {}
+    await loadDay(days[0].id);
+  }
 }
 start();
 </script>

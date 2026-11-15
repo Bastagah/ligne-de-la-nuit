@@ -21,7 +21,9 @@ Ce fichier est le mode d'emploi de la tâche programmée qui tourne chaque matin
 Ordre de sélection : MVP, Frenchie, Rookie, Looser, puis Révélation. Ordre d'affichage dans le fichier : MVP, Frenchie, Révélation, Rookie, Looser.
 
 1. **MVP de la nuit** : le plus haut game score parmi les joueurs des équipes gagnantes.
-2. **Frenchie de la nuit** : le plus haut game score parmi les joueurs de `data/french.json`, hors MVP et **toujours hors Victor Wembanyama** (règle du jeu : c'est un alien avant d'être français). `desc` : « La meilleure ligne d'un joueur français. Wembanyama exclu : alien avant d'être français. » Si aucun Français n'a joué, remplacer par **Défenseur de la nuit** (plus haut total interceptions + contres, départage au game score).
+2. **Frenchie de la nuit** : le plus haut game score parmi les joueurs de `data/french.json`, hors MVP **et hors Victor Wembanyama**. Si aucun Français n'a joué, remplacer par **Défenseur de la nuit** (plus haut total interceptions + contres, départage au game score).
+   - **Règle OVNI** : si Wembanyama a le plus haut game score des Français (et n'est pas déjà MVP), ajouter à la devinette du Frenchie un bloc `alien` avec sa ligne (format décrit dans `scripts/make_day.py`). Sur le site, sa ligne est à deviner d'abord, pour 0 point ; puis « OVNI détecté » s'affiche et le vrai Frenchie (le Français suivant) apparaît. Sinon, pas de bloc `alien`.
+   - `desc` du Frenchie : « La meilleure ligne d'un joueur français (Wembanyama exclu : alien avant d'être français). »
 3. **Rookie de la nuit** : le plus haut game score parmi les joueurs de `data/rookies.json`, hors joueurs déjà choisis. Si aucun rookie n'a joué, remplacer par **Le perdant magnifique** : le meilleur game score parmi les joueurs des équipes perdantes, hors joueurs déjà choisis.
 4. **Looser de la nuit** : parmi les joueurs ayant joué **au moins 20 minutes dans une défaite**, hors joueurs déjà choisis, le **plus bas game score**. Départage : le plus mauvais +/-.
 5. **Révélation de la nuit** (hors joueurs déjà choisis) : le joueur qui a le plus marqué **par rapport à sa moyenne**.

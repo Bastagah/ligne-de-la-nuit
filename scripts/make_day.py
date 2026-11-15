@@ -17,6 +17,9 @@ Format du fichier brut :
      "hints": ["Pivot · Conférence Ouest", "Victoire 124-119 à Chicago", "1er choix de la draft 2023"],  # exactement 3
      "why": "Pourquoi ce choix, en une ou deux phrases.",
      "profile": "https://www.nba.com/player/1641705/victor-wembanyama"}   # fiche NBA.com, vide si introuvable
+  Frenchie uniquement, si Wembanyama a la meilleure ligne des Français : ajouter
+     "alien": {"line": [...], "result": "Victoire", "answer": "Victor Wembanyama", "team": "San Antonio Spurs", "accepts": ["wemby"]}
+  à la devinette du Frenchie (dont la réponse reste le Français suivant).
   ],
   "notes": ["Source des stats...", "Moyennes : ..."]
 }
@@ -51,7 +54,14 @@ def main(path):
         accepts = {norm(a) for a in r.get("accepts", [])}
         accepts.add(norm(r["answer"]))
         accepts.add(norm(r["answer"]).split(" ")[-1])
+        alien = None
+        if r.get("alien"):
+            a = r["alien"]
+            acc = {norm(x) for x in a.get("accepts", [])} | {norm(a["answer"]), norm(a["answer"]).split(" ")[-1]}
+            alien = {"line": a["line"], "result": a["result"], "check": sorted(h(x) for x in acc if x),
+                     "secret": hide({"answer": a["answer"], "team": a["team"], "accepts": sorted(x for x in acc if x)})}
         out["riddles"].append({
+            **({"alien": alien} if alien else {}),
             "cat": r["cat"], "desc": r["desc"], "line": r["line"], "result": r["result"],
             "check": sorted(h(a) for a in accepts if a),
             "secret": hide({"answer": r["answer"], "team": r["team"], "hints": r["hints"], "why": r["why"],
