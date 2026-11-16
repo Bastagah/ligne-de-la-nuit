@@ -45,6 +45,9 @@ Ordre de sélection : MVP, Frenchie, Rookie, Looser, puis Révélation. Ordre d'
 - `matchups` : la liste des matchs de la nuit **sans les scores**, en abréviations à 3 lettres, `[{"away": "DET", "home": "WAS"}, ...]`.
 - **Ne rien inventer** : toute info d'un indice ou de `why` doit venir des données ou d'une source trouvée. Dans le doute, l'enlever.
 
+- `winners` : le vainqueur de chaque match de `matchups`, `{"DET-WAS": "DET", ...}` (clé AWAY-HOME, abréviations à 3 lettres). Le script le cache dans `results` : le site n'affiche que les vainqueurs, jamais les scores.
+- `tonight` (pronos) : les matchs de la nuit à venir, c'est-à-dire ceux qui commencent entre 08:00 aujourd'hui et 08:00 demain (heure de Paris), d'après le calendrier officiel NBA.com ou ESPN. Format `{"night": "<date de demain>", "lock": "<1er coup d'envoi en UTC ISO>", "games": [{"away": "MEM", "home": "WAS", "start": "2026-11-17T00:00:00Z"}, ...]}`. `lock` = l'heure de début la plus tôt. Pas de match ce soir : omettre `tonight`.
+
 ## 4. Publier
 1. Écrire le fichier brut **hors du dépôt** (`/tmp/brut-<date>.json`, format décrit en tête de `scripts/make_day.py`). Il contient les réponses en clair : ne jamais le commiter.
 2. `python3 scripts/make_day.py /tmp/brut-<date>.json`

@@ -21,7 +21,10 @@ Format du fichier brut :
      "alien": {"line": [...], "result": "Victoire", "answer": "Victor Wembanyama", "team": "San Antonio Spurs", "accepts": ["wemby"]}
   à la devinette du Frenchie (dont la réponse reste le Français suivant).
   ],
-  "notes": ["Source des stats...", "Moyennes : ..."]
+  "notes": ["Source des stats...", "Moyennes : ..."],
+  "winners": {"SAS-CHI": "SAS", ...},   # vainqueur de chaque match de la nuit (clé AWAY-HOME), caché dans "results"
+  "tonight": {"night": "2026-11-13", "lock": "2026-11-13T00:00:00Z",   # pronos : matchs de la nuit à venir
+              "games": [{"away": "MEM", "home": "WAS", "start": "2026-11-13T00:00:00Z"}, ...]}  # lock = 1er coup d'envoi (UTC)
 }
 """
 import base64, hashlib, json, re, sys, unicodedata
@@ -48,6 +51,15 @@ def main(path):
     out = {k: raw[k] for k in ("id", "label", "games")}
     out["matchups"] = raw.get("matchups", [])   # [{"away": "DET", "home": "WAS"}], sans les scores
     out["notes"] = raw.get("notes", [])
+    if raw.get("winners"):
+        keys = {m["away"] + "-" + m["home"] for m in out["matchups"]}
+        assert set(raw["winners"]) <= keys, "winners : clés AWAY-HOME absentes des matchups"
+        assert all(w in k.split("-") for k, w in raw["winners"].items()), "winners : vainqueur hors du match"
+        out["results"] = hide(raw["winners"])
+    if raw.get("tonight"):
+        t = raw["tonight"]
+        assert t["games"] and t["lock"] == min(g["start"] for g in t["games"]), "tonight : lock = 1er coup d'envoi"
+        out["tonight"] = t
     out["riddles"] = []
     for r in raw["riddles"]:
         assert len(r["hints"]) == 3, "il faut 3 indices par devinette"
