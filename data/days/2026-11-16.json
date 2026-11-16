@@ -1,0 +1,389 @@
+{
+ "id": "2026-11-16",
+ "label": "Nuit du 15 au 16 novembre 2026",
+ "games": 9,
+ "matchups": [
+  {
+   "away": "IND",
+   "home": "PHI"
+  },
+  {
+   "away": "LAL",
+   "home": "PHX"
+  },
+  {
+   "away": "CHA",
+   "home": "LAC"
+  },
+  {
+   "away": "SAS",
+   "home": "UTA"
+  },
+  {
+   "away": "DAL",
+   "home": "BOS"
+  },
+  {
+   "away": "NYK",
+   "home": "TOR"
+  },
+  {
+   "away": "HOU",
+   "home": "WAS"
+  },
+  {
+   "away": "ATL",
+   "home": "MIL"
+  },
+  {
+   "away": "OKC",
+   "home": "SAC"
+  }
+ ],
+ "notes": [
+  "Stats : box scores officiels NBA.com (7 matchs), StatMuse (Hawks-Bucks), CBS Sports (Knicks-Raptors) et Land of Basketball (Hornets-Clippers) ; totaux de points vérifiés avec les 18 scores finaux. Les box scores ESPN ne se chargeaient pas (pages d'avant-match).",
+  "Recoupements : CBS Sports (MVP, Révélation, Looser), AP via Yahoo Sports (Frenchie, points seulement), AP via The Score 1260 (Rookie : 16 pts, 13 rebonds ; CBS en compte 12, NBA.com retenu).",
+  "Moyennes avant le match : Basketball-Reference (mise à jour du 15/11 au matin) ; recoupée avec CBS Sports pour le Frenchie (11,2 pts en 12 matchs).",
+  "Parcours : fiches officielles NBA.com."
+ ],
+ "riddles": [
+  {
+   "cat": "MVP de la nuit",
+   "desc": "La meilleure ligne d'un joueur dont l'équipe a gagné.",
+   "line": [
+    [
+     "MIN",
+     "36"
+    ],
+    [
+     "PTS",
+     "43"
+    ],
+    [
+     "TIR",
+     "13/28"
+    ],
+    [
+     "3 PTS",
+     "5/13"
+    ],
+    [
+     "LF",
+     "12/14"
+    ],
+    [
+     "REB",
+     "3"
+    ],
+    [
+     "PD",
+     "9"
+    ],
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "CTR",
+     "0"
+    ],
+    [
+     "BP",
+     "2"
+    ],
+    [
+     "+/-",
+     "+10"
+    ]
+   ],
+   "result": "Victoire",
+   "check": [
+    "7f1d601f5256fd52dd1a2e491a9e779c33e89dbd05f07e52cd836d7ee5eda974",
+    "b53a87d939b510c95498e81098caaf6f2b178e73adb07323d7a60116975b01ab",
+    "d580754468330f66e5c155e16968a2be2a7828eca0885b42a0ce356594bfeab9"
+   ],
+   "secret": "9JyYpNmbvRWLhtWds9SOyATOyYTMvIXZ5FGbw9SbvNmLhJmbuc3d39yL6MHc0RHaiAiOiUGbpZ2byBnIgwSXiMWaj52bkBSYrVHbiACLiE2a1xmIgwiIjl2Yu9GZisFI6Iyc0BXZjNWYiACLi4CUBBibvxWZzBibvNXahNHIlRHdlNGIzRnbp9GcgADNgA6wgg2Y0FWbgUWboOca4l2cg42bTBiLlJXavR3YpZHIl5WdgMnbhRGIzVGd15WatBiNzAiblByclN3chBHI5ACLpMnclNmbhxGI4VXYgQTMvITMoACOy8yMxACoDDyc05WavBHIzQDI6ASKwwiMzgCI0lWduBSYsBSZkBSZy92YzBSZtF2ZgQXdhhGIzVHbQJCI6ISeodnIgwSXiMHajRXYtBSMxAiblByc0BHI2wCOzAiOg42bzlWYzBSZ0RXZjBSZu5WZ59WTiACLiEkQOBibvNXahNHIllDIsQWayRWYNBCbhVmUgUHZgUnblZHIsgTMwIDI0ZWYyRGIhxGIlRGI4l2boNGIlNjIgwiI0NXZ19EIlNmblJXqDbmbvNEI3KMIlJHqDnmcyFWLyVWaslWQisFI6Iyc05WaoJCIsIycyV2ahxEIzVGbldmbBBycvxkIgojItFWZ0JCIsIyhEnWjE72bEBSYrVHTiAiOiIXZ3NnbhJye"
+  },
+  {
+   "alien": {
+    "line": [
+     [
+      "MIN",
+      "35"
+     ],
+     [
+      "PTS",
+      "26"
+     ],
+     [
+      "TIR",
+      "10/21"
+     ],
+     [
+      "3 PTS",
+      "4/12"
+     ],
+     [
+      "LF",
+      "2/3"
+     ],
+     [
+      "REB",
+      "10"
+     ],
+     [
+      "PD",
+      "6"
+     ],
+     [
+      "INT",
+      "1"
+     ],
+     [
+      "CTR",
+      "5"
+     ],
+     [
+      "BP",
+      "2"
+     ],
+     [
+      "+/-",
+      "+7"
+     ]
+    ],
+    "result": "Victoire",
+    "check": [
+     "74678981e89619a52fc94bffef66df0b26b4908dd5ddb9cdf22e0bdc2cf9a843",
+     "a81752c857bb96fa09903f91577069ffd6fa21c62141d807bce6e012c5b91a44",
+     "d47d4d7b56649da4212b7268e8227f98abe40ad2084583df4abbc11484e7f0d6"
+    ],
+    "secret": "91lI5JWbldnIgwiIh1WY55WYi1WZ3JCIsISYtFWeuFmYtV2dgI3b0NWa2JyWgojIzRHclN2YhJCIsIycyVHcTBybp52b05WQg4WYTJCI6ISbhVGdiACLiEWbhlnbhJWbldFIy9GdjlmViAiOiIXZ3NnbhJye"
+   },
+   "cat": "Frenchie de la nuit",
+   "desc": "La meilleure ligne d'un joueur français (Wembanyama exclu : alien avant d'être français).",
+   "line": [
+    [
+     "MIN",
+     "27"
+    ],
+    [
+     "PTS",
+     "25"
+    ],
+    [
+     "TIR",
+     "9/13"
+    ],
+    [
+     "3 PTS",
+     "3/6"
+    ],
+    [
+     "LF",
+     "4/8"
+    ],
+    [
+     "REB",
+     "9"
+    ],
+    [
+     "PD",
+     "2"
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "CTR",
+     "3"
+    ],
+    [
+     "BP",
+     "1"
+    ],
+    [
+     "+/-",
+     "−15"
+    ]
+   ],
+   "result": "Défaite",
+   "check": [
+    "8dc2b7956478814b4412e0db14397de6055c9b4081c8d1794d5de3d3a58439d7",
+    "9779ff5a0e7d44c78af17756cf0d02d296566af804c53d531f5bcb867c9e87ab",
+    "c5ba1fe3f9281726d3ae8f46784f0cefbcc10702a2616a4c80ce5b5caa91af0b"
+   ],
+   "secret": "=0nIyJXYz1CelxWYvkTNyIDN2EzLyVWehxGcv02bj5SYi5mL3d3dv8iOzBHd0hmIgojIlxWam9mcwJCIs0lIyJXYzJCIsIicyF2cgUmck5WY4VGbhJCIsIicyF2cggXZsFmIbBiOiMHdwV2YjFmIgwiIukkTW90JsBCdzV2JjBiOgMXahd6wuFmcGByclRGIl52ZpxGIlJXdlxGbpVWbgEGbgQXahZXYgkiNsQjMgUmcvN2cgUWbhdGKgEWbhlnbhJWbldFIuUGdpFmZpOMZgEGbgk6wydGbh1GIsMXZ0Vnbp1GI3IDIuVGIzVmc052bjByMgQXZgMHZu9mYlJHI5ACLzEzL5ACoDDyc05WavBHI1IDI6ASK3wiMygCIh1WY55WYi1WZXBycy9GagMXahd6wuFmcGByclRGIlJ3bjNHIl1WYnBic1VGbslWZNJCI6ISeodnIgwSXiMHajRXYtBiMxAiblByc0BHIywSMxAiOg42bzlWYzBSZ0RXZjBSZu5WZ59WTiACLiEkQOBibvNXahNHIlNDIskSZpxWYyR3c1FEKgMHdhNGZsl2VggGdyVGUgMXZkBSduVmdgwCNyAjMgQnZhJHZgEGbgUGZggXavh2YgUmMiACLiQ3cFBSZj5WZyl6wm52bDBytCDCdvZXaQJyWgojIzRnbphmIgwiIzRmchpXaXBibvR3ZulGazF2ViAiOi0WYlRnIgwiIyJXYTBCelxWQiAiOiIXZ3NnbhJye"
+  },
+  {
+   "cat": "Révélation de la nuit",
+   "desc": "Le joueur qui a le plus dépassé ce qu'on attend de lui.",
+   "line": [
+    [
+     "MIN",
+     "26"
+    ],
+    [
+     "PTS",
+     "25"
+    ],
+    [
+     "TIR",
+     "9/16"
+    ],
+    [
+     "3 PTS",
+     "4/10"
+    ],
+    [
+     "LF",
+     "3/3"
+    ],
+    [
+     "REB",
+     "5"
+    ],
+    [
+     "PD",
+     "5"
+    ],
+    [
+     "INT",
+     "3"
+    ],
+    [
+     "CTR",
+     "0"
+    ],
+    [
+     "BP",
+     "2"
+    ],
+    [
+     "+/-",
+     "+7"
+    ]
+   ],
+   "result": "Défaite",
+   "check": [
+    "0d4d024fd15ea4fa78a4d92f1db3b0a2638ec785fbc83efd57000183092bc6fc",
+    "6d6a4f6fee29c0fb0aa92a3f174f163e1382be60dbffd5e042540a6bdf3112f1",
+    "c3fb904d503f2cdcc096289bded60bd22f03a31778fb14a4eee2a3942d25d99e"
+   ],
+   "secret": "=0nIzlmbvl2Y1tWYq1ychJXYwNXYr9yN1gjM0YTMvIXZ5FGbw9SbvNmLhJmbuc3d39yL6MHc0RHaiAiOiUGbpZ2byBnIgwSXiMXau9WajV3ahpGIzFmchB3chtmIgwiIzFmchB3chtmIgwiIzlmbvl2Y1tWYqJyWgojIzRHclN2YhJCIsIiLlRXahZWqDTGIl5WdgMnbhRGIsMXZ0Vnbp1GI2IDIuVGIywCNyASZy92YzBSZtF2ZgwSZu5WZ59WbgE2cgMXavZGI4wyMgoDIpU2YuVmclZWZS1CbsFmY0V2azFmQoACajRXYtBSZsBCduFmdhBiNsYDIlRGIl5mbll3btBSZuVHIyV3bwBSKQFEIu9GblNHIlJHqDnmcyF2Yg4WZgQmcvNWZyhCIzRnbp9GcgUjMiAiOikHa3JCIs0lIzh2Y0FWbgITMg4WZgMHdwBiNsYDI6AibvNXahNHIlRHdlNGIl5mbll3bNJCIsISQC5EIu92cpF2cgUmMgwycp9mbpxGbJBichBHIpO8czFGcgwSNyAjMgQnZhJHZgEGbgUGZggXavh2YgUGMyICIsICdzVEIlNmblJXqDbmbvNEI3KMIlJHqDnmcyFkIbBiOiMHdulGaiACLiM3ajVnQgUWZrVXY3xWaNJCI6ISbhVGdiACLiMXau9WaNScdrFmSgMXYyFGczF2SiAiOiIXZ3NnbhJye"
+  },
+  {
+   "cat": "Rookie de la nuit",
+   "desc": "La meilleure ligne d'un joueur dans sa première saison NBA.",
+   "line": [
+    [
+     "MIN",
+     "26"
+    ],
+    [
+     "PTS",
+     "16"
+    ],
+    [
+     "TIR",
+     "8/11"
+    ],
+    [
+     "3 PTS",
+     "0/0"
+    ],
+    [
+     "LF",
+     "0/0"
+    ],
+    [
+     "REB",
+     "13"
+    ],
+    [
+     "PD",
+     "3"
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "CTR",
+     "0"
+    ],
+    [
+     "BP",
+     "4"
+    ],
+    [
+     "+/-",
+     "+8"
+    ]
+   ],
+   "result": "Victoire",
+   "check": [
+    "7d669a0a74464130112c50f1c0b449a21a50025086cc350c25a0952adf6ee267",
+    "c8b6c061e8591dfeaabefdbad7cdacc0ece53900f0bb02160860a0e3ef7d2acc"
+   ],
+   "secret": "==QfiEmch1WL5FGZh9CMzUzM0YTMvIXZ5FGbw9SbvNmLhJmbuc3d39yL6MHc0RHaiAiOiUGbpZ2byBnIgwSXiEmch1mIgwiIhJXYtBSehRWYisFI6Iyc0BXZjNWYiACLi4yclRXdulWbgYjMg4WZgkCM2ITMgUmcvN2UgUGaUBibvxWZzBibvNXahNHIhxGIlRGIkJ3bjVmcg42bzhCIzRmbvJWZyByMxACdlBSMx8COgA6wgMHdul2bwBiNxAiOgkSMsUTMoAycll2av9mcgMXZkBSZy92YzBSZtF2ZgIXdlxGbpVWTiAiOikHa3JCIs0lIzh2Y0FWbgMTMg4WZgMHdwBiNsgDI6AibvNXahNHIlRHdlNGIl5mbll3bNJCIsIibhdWaoNWaNBichBHIpO8czFGcgwiNyAjMgQnZhJHZgEGbgUGZggXavh2YgUmMxICIsICdzVWdPBSZj5WZyl6wm52bDBytCDCdvZXaQJyWgojIzRnbphmIgwiIyVGZuVHaUBSe0l2QgEWbvhWYst2TiAiOi0WYlRnIgwiIhJXYNBSehRWQiAiOiIXZ3NnbhJye"
+  },
+  {
+   "cat": "Looser de la nuit",
+   "desc": "La pire ligne d'un joueur à 20 minutes ou plus dans une défaite.",
+   "line": [
+    [
+     "MIN",
+     "22"
+    ],
+    [
+     "PTS",
+     "1"
+    ],
+    [
+     "TIR",
+     "0/2"
+    ],
+    [
+     "3 PTS",
+     "0/1"
+    ],
+    [
+     "LF",
+     "1/2"
+    ],
+    [
+     "REB",
+     "2"
+    ],
+    [
+     "PD",
+     "0"
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "CTR",
+     "0"
+    ],
+    [
+     "BP",
+     "4"
+    ],
+    [
+     "+/-",
+     "−20"
+    ]
+   ],
+   "result": "Défaite",
+   "check": [
+    "27a0f645e20497a65f997aef769b2c72324d983a92faac73e9cd467173466641",
+    "aeb725ab52836aa46d14aecbd2fcffa2a8291f4af771bdba36e5423815f7e453"
+   ],
+   "secret": "9Jycr92byJWLu9GbslGZvUTM0gjM2EzLyVWehxGcv02bj5SYi5mL3d3dv8iOzBHd0hmIgojIlxWam9mcwJCIs0lIzt2bvJnYg42bsxWakJCIsIycr92byJmIbBiOiMHdwV2YjFmIgwiIukCMyIJiijCIzVGd15WatBiMyAiblByclVHZyVGcgMXZsxWYiBCNgQXZgU2czFGcgADIsIXa0BSdhBiMvADIgOMI05WavBHIxAiOgUGdpFmZpOMZgUmb1BycuFGZgMXdsBHI19GIzVGd15WatBCMyACoDDycyVXZ19magMXZsBSatJXYwBSK0wSNtgCIlJ3bjNHIl1WYnBychJGIzVHbQJCI6ISeodnIgwSXiMHajRXYtBSMxAiblByc0BHI5wCNxAiOg42bzlWYzBSZ0RXZjBSZu5WZ59WTiACLiEkQOBibvNXahNHIlBTMgwibvdWZy9EIyFGcgk6wzNXYwBCL3EDMyACdmFmckBSYsBSZkBCep9GajBSZ1QjIgwiI0NXZ19EIlNmblJXqDbmbvNEI3KMIyVWaslWYtUmcoOcayJXQisFI6Iyc05WaoJCIsIycuV3UggXauV2boBlIgojItFWZ0JCIsIycr92byJEIu9GbslGRiAiOiIXZ3NnbhJye"
+  }
+ ]
+}
