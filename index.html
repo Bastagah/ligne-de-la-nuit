@@ -144,8 +144,15 @@ td.sub { color: var(--muted); font-size: 14px; text-align: right; }
 .ptable td, .ptable th { padding: 5px 6px; font-size: 14px; }
 .ok-t { color: var(--good); font-weight: 700; } .ko-t { color: var(--bad); }
 .recap h2.sec { margin-bottom: 4px; }
+.rnav { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 6px; font-family: var(--display); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; font-size: 14px; color: var(--muted); }
+.rnav .arrow { font-size: 22px; line-height: 1; padding: 4px 14px; }
+.rnav .arrow:disabled { opacity: .3; }
 .recap .scroll { overflow-x: auto; }
 .recap table { min-width: 460px; }
+.recap table.narrow { min-width: 0; table-layout: fixed; }
+.recap table.narrow td, .recap table.narrow th { font-size: 11.5px; padding: 7px 2px; hyphens: auto; -webkit-hyphens: auto; overflow-wrap: anywhere; }
+.recap table.narrow th { letter-spacing: .04em; }
+.recap table.narrow td.cat, .recap table.narrow th:first-child { width: 34px; line-height: 1.15; }
 .recap td.cat, .recap th:first-child { position: sticky; left: 0; background: var(--paper); z-index: 1; }
 .recap td.cat { font-family: var(--display); font-weight: 700; text-transform: uppercase; letter-spacing: .06em; font-size: 13px; color: var(--muted); white-space: nowrap; }
 .recap td.hid { color: var(--muted); }
@@ -295,7 +302,7 @@ async function sb(path, opts = {}) {
 /* ---------- état ---------- */
 let me = store.get("me", null);
 const SEASON_START = "2026-11-13";
-let allGuesses = [], latestCount = 0, allDays = {}, picks = [], boardTab = "week", picksOpen = false;
+let allGuesses = [], latestCount = 0, allDays = {}, picks = [], boardTab = "week", picksOpen = false, recapWs = null;
 const parisToday = () => new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Paris" }).format(new Date());
 let days = [], day = null, guesses = [], board = [];
 
@@ -610,24 +617,38 @@ function renderBoard() {
 function renderRecap() {
   const box = document.getElementById("recap"); const latest = latestId();
   if (!latest || !day) { box.replaceChildren(); return; }
-  const ws = weekStart(day.id); const ids = Array.from({ length: 7 }, (_, k) => addDays(ws, k));
+  const cur = weekStart(latest); const first = weekStart(Object.keys(allDays).sort()[0]);
+  const ws = recapWs && recapWs >= first && recapWs <= cur ? recapWs : cur; const ids = Array.from({ length: 7 }, (_, k) => addDays(ws, k));
   const catName = c => c.replace(/ de la nuit$/i, "");
   const cats = []; ids.forEach(id => (allDays[id] ? allDays[id].riddles : []).forEach(r => { if (!cats.includes(catName(r.cat))) cats.push(catName(r.cat)); }));
   if (!cats.length) { box.replaceChildren(); return; }
   const shown = (id, k) => id < latest || parisToday() > id || (me && allGuesses.some(g => g.day === id && g.player === me && g.riddle === k + 1 && (g.correct || g.guess === ABANDON)));
   const count = {};
-  const rows = cats.map(c => el("tr", {}, el("td", { class: "cat" }, c), ...ids.map(id => {
+  const cell = (c, id) => {
     const d = allDays[id]; const k = d ? d.riddles.findIndex(r => catName(r.cat) === c) : -1;
     if (k < 0) return el("td", { class: "hid" }, "");
     if (!shown(id, k)) return el("td", { class: "hid" }, "?");
     const name = unhide(d.riddles[k].secret).answer; count[name] = (count[name] || 0) + 1;
     return el("td", {}, name.replace(/ Jr\.?$/, "").split(" ").slice(-1)[0]);
-  })));
+  };
+  // Téléphone : jours en lignes, catégories en colonnes (le tableau tient dans l'écran, le glissement change de semaine)
+  const narrow = window.matchMedia("(max-width: 560px)").matches;
+  const SHORT = { "MVP": "MVP", "Frenchie": "FR", "Révélation": "RÉV", "Rookie": "ROOK", "Looser": "LOOS" };
+  const head = narrow ? [el("th", {}, ""), ...cats.map(c => el("th", { title: c }, SHORT[c] || c.slice(0, 4)))]
+                      : [el("th", {}, ""), ...ids.map((id, k) => el("th", {}, DOW[k] + " " + dParse(id).getUTCDate()))];
+  const rows = narrow ? ids.map((id, k) => el("tr", {}, el("td", { class: "cat" }, DOW[k], el("br"), String(dParse(id).getUTCDate())), ...cats.map(c => cell(c, id))))
+                      : cats.map(c => el("tr", {}, el("td", { class: "cat" }, c), ...ids.map(id => cell(c, id))));
   const fmt = id => dParse(id).getUTCDate();
   const multi = Object.entries(count).filter(([, n]) => n > 1).sort((a, b) => b[1] - a[1]);
-  box.replaceChildren(el("h2", { class: "sec" }, "La semaine en revue"),
-    el("div", { class: "scroll" }, el("table", {}, el("thead", {}, el("tr", {}, el("th", {}, ""), ...ids.map((id, k) => el("th", {}, DOW[k] + " " + fmt(id))))), el("tbody", {}, ...rows))),
-    el("p", { class: "note" }, (multi.length ? "Les plus cités : " + multi.map(([n, c]) => n + " ×" + c).join(", ") + ". " : "") + "« ? » = devinette que tu n'as pas encore jouée."));
+  const go = n => { recapWs = addDays(ws, 7 * n); renderRecap(); };
+  const fmtL = id => { const dt = dParse(id); return dt.getUTCDate() + "/" + (dt.getUTCMonth() + 1); };
+  const nav = el("div", { class: "rnav" },
+    el("button", { type: "button", class: "arrow", "aria-label": "Semaine précédente", disabled: ws <= first, onclick: () => go(-1) }, "‹"),
+    el("span", {}, (ws === cur ? "Cette semaine · " : "") + fmtL(ws) + " → " + fmtL(addDays(ws, 6))),
+    el("button", { type: "button", class: "arrow", "aria-label": "Semaine suivante", disabled: ws >= cur, onclick: () => go(1) }, "›"));
+  box.replaceChildren(el("h2", { class: "sec" }, "La semaine en revue"), nav,
+    el("div", { class: "scroll" }, el("table", { class: narrow ? "narrow" : "" }, el("thead", {}, el("tr", {}, ...head)), el("tbody", {}, ...rows))),
+    el("p", { class: "note" }, (multi.length ? "Les plus cités : " + multi.map(([n, c]) => n + " ×" + c).join(", ") + ". " : "") + "« ? » = devinette que tu n'as pas encore jouée." + (narrow ? " Glisse pour changer de semaine." : "")));
 }
 
 // (ancienne version, remplacée)
@@ -673,6 +694,19 @@ async function start() {
   sel.replaceChildren(...days.map(d => el("option", { value: d.id }, d.label)));
   sel.addEventListener("change", () => loadDay(sel.value));
   render();
+  (() => {
+    const box = document.getElementById("recap"); let x0 = null, y0 = 0, sl = 0, sc = null;
+    box.addEventListener("touchstart", e => { const t = e.touches[0]; x0 = t.clientX; y0 = t.clientY; sc = box.querySelector(".scroll"); sl = sc ? sc.scrollLeft : 0; }, { passive: true });
+    box.addEventListener("touchend", e => {
+      if (x0 == null) return; const t = e.changedTouches[0]; const dx = t.clientX - x0, dy = t.clientY - y0; x0 = null;
+      if (Math.abs(dx) < 50 || Math.abs(dx) < 1.5 * Math.abs(dy)) return;
+      // si le tableau défile encore dans ce sens, on laisse le tableau défiler
+      if (sc) { const max = sc.scrollWidth - sc.clientWidth; if (dx > 0 && sl > 2) return; if (dx < 0 && sl < max - 2) return; }
+      const btn = box.querySelectorAll(".rnav .arrow")[dx > 0 ? 0 : 1];
+      if (btn && !btn.disabled) { btn.click(); const tb = box.querySelector("table"); if (tb && tb.animate) tb.animate([{ opacity: 0, transform: "translateX(" + (dx > 0 ? -30 : 30) + "px)" }, { opacity: 1, transform: "none" }], { duration: 220, easing: "ease-out" }); }
+    }, { passive: true });
+  })();
+  window.matchMedia("(max-width: 560px)").addEventListener("change", () => renderRecap());
   document.getElementById("tab-week").addEventListener("click", () => { boardTab = "week"; render(); });
   document.getElementById("tab-all").addEventListener("click", () => { boardTab = "all"; render(); });
   if (days.length) {
