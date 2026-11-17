@@ -182,7 +182,7 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
       <div class="who" id="who"></div>
     </div>
     <h1>La ligne <span>de la nuit</span></h1>
-    <p class="lede">Les lignes de stats brutes de la nuit, un joueur à trouver pour chacune. Essais illimités, mais chaque série de 3 essais ratés coûte un point.</p>
+    <p class="lede">Les lignes de stats brutes de la nuit, un joueur à trouver pour chacune. Essais illimités, mais chaque série de 4 essais ratés coûte un point.</p>
   </header>
 
   <div id="banner"></div>
@@ -212,7 +212,7 @@ footer { font-size: 13px; color: var(--muted); border-top: 1px solid var(--rule)
           <tr><td>Avec 2 indices</td><td class="pts">2</td></tr>
           <tr><td>Avec 3 indices</td><td class="pts">1</td></tr>
           <tr><td>Bonus si trouvé au premier essai, sans indice</td><td class="pts">+1</td></tr>
-          <tr><td>Malus par série de 3 essais ratés</td><td class="pts">−1</td></tr>
+          <tr><td>Malus par série de 4 essais ratés</td><td class="pts">−1</td></tr>
           <tr><td>Une bonne réponse rapporte toujours au moins</td><td class="pts">1</td></tr>
           <tr><td>Abandon</td><td class="pts">0</td></tr>
         </tbody>
@@ -418,9 +418,9 @@ function renderRiddle(r, i) {
   if (used > 0) body.append(el("ul", { class: "hints" }, ...sec.hints.slice(0, used).map((h, j) => el("li", {}, el("span", {}, "INDICE " + (j + 1)), h))));
 
   if (st && !st.done) {
-    const malus = Math.floor(st.wrong.length / 3);
+    const malus = Math.floor(st.wrong.length / 4);
     const potential = Math.max(1, 4 - used - malus);
-    const nextMalusIn = 3 - (st.wrong.length % 3);
+    const nextMalusIn = 4 - (st.wrong.length % 4);
     const input = el("input", { type: "text", id: "g-" + i, placeholder: "Nom du joueur", autocomplete: "off", "aria-label": "Ta réponse pour " + r.cat });
     const err = el("p", { class: "err", "aria-live": "polite" });
     const send = async (guessText, correct) => {
@@ -459,7 +459,7 @@ function renderRiddle(r, i) {
   } else if (st && st.done) {
     const tries = st.a.filter(g => g.guess !== ABANDON).length;
     body.append(el("div", { class: "feedback " + (st.win ? "ok" : "ko") },
-      st.win ? "Bingo : " + plural(st.win.points, "pt") + " (" + plural(st.win.hints_used, "indice") + ", " + plural(tries, "essai") + (tries === 1 && st.win.hints_used === 0 ? ", bonus premier essai" : "") + (tries > 3 ? ", malus −" + Math.floor((tries - 1) / 3) : "") + ")."
+      st.win ? "Bingo : " + plural(st.win.points, "pt") + " (" + plural(st.win.hints_used, "indice") + ", " + plural(tries, "essai") + (tries === 1 && st.win.hints_used === 0 ? ", bonus premier essai" : "") + (tries > 4 ? ", malus −" + Math.floor((tries - 1) / 4) : "") + ")."
              : "Abandon : 0 pt" + (st.wrong.length ? " après " + plural(st.wrong.length, "essai") : "") + "."));
     const href = sec.profile || ("https://www.basketball-reference.com/search/search.fcgi?search=" + encodeURIComponent(sec.answer));
     body.append(el("div", { class: "answer" }, el("strong", {}, sec.answer), el("p", {}, sec.team + ". " + sec.why),
@@ -519,7 +519,7 @@ function pronoScore(p, night) {
   const winners = unhide(d.results); const games = Object.keys(winners);
   const mine = myPicks(p, night); if (!Object.keys(mine).length) return { right: 0, total: games.length, bonus: 0, played: false };
   const right = games.filter(g => mine[g] === winners[g]).length; const wrong = games.length - right;
-  return { right, total: games.length, bonus: wrong === 0 ? 5 : wrong === 1 ? 2 : 0, played: true };
+  return { right, total: games.length, bonus: wrong === 0 ? 5 : wrong === 1 ? 3 : wrong === 2 ? 1 : 0, played: true };
 }
 function dayPoints(p, id) {
   const riddles = allGuesses.filter(g => g.player === p && g.day === id).reduce((t, g) => t + (g.points || 0), 0);
@@ -533,20 +533,27 @@ function renderPronos() {
   // 1. Résultats des pronos de la nuit passée, derrière un bouton, une fois ses devinettes terminées
   if (L && L.results && me) {
     const winners = unhide(L.results); const mine = myPicks(me, latest); const done = finishedDay(me, latest) || parisToday() > latest;
-    const pbox = el("div", { class: "pbox" }, el("h2", {}, "Tes pronos de la nuit"));
-    if (!Object.keys(mine).length) pbox.append(el("p", { class: "sub2" }, "Tu n'avais pas fait de pronos pour cette nuit."));
+    const pbox = el("div", { class: "pbox" }, el("h2", {}, "Les pronos de la nuit"));
+    const anyone = PLAYERS.some(p => Object.keys(myPicks(p, latest)).length);
+    if (!anyone) pbox.append(el("p", { class: "sub2" }, "Personne n'avait fait de pronos pour cette nuit."));
     else if (!done) pbox.append(el("p", { class: "sub2" }, "Les gagnants se dévoilent une fois tes devinettes du jour terminées : pas de spoil avant."));
     else if (!picksOpen) pbox.append(el("p", { class: "sub2" }, "Seuls les vainqueurs s'affichent, jamais les scores."),
-      el("div", {}, el("button", { type: "button", onclick: () => { picksOpen = true; render(); } }, "Voir les gagnants et mon score paris")));
+      el("div", {}, el("button", { type: "button", onclick: () => { picksOpen = true; render(); } }, "Voir les gagnants et les scores paris")));
     else {
-      const sc = pronoScore(me, latest);
-      pbox.append(el("p", { class: "sub2" }, sc.right + " / " + sc.total + " bons pronos → " + (sc.bonus ? "+" + sc.bonus + " pts" : "pas de bonus") + " (tout juste : +5, une erreur : +2)."));
-      pbox.append(el("div", { class: "pgames" }, ...Object.keys(winners).map(g => {
-        const [a, h] = g.split("-");
-        const b = t => el("button", { type: "button", disabled: true, class: "pick" + (mine[g] === t ? " on" : " off") + (winners[g] === t ? " win" : ""), style: "--c:" + (TEAMS[t] || ["#444"])[0], title: winners[g] === t ? "Vainqueur" : "" }, t);
-        return el("div", { class: "pgame" }, b(a), el("span", { class: "at2" }, "@"), b(h));
-      })));
-      pbox.append(el("p", { class: "sub2" }, "Contour vert = vainqueur. En couleur = ton prono."));
+      const bar = "Barème : 0 erreur +5, 1 erreur +3, 2 erreurs +1.";
+      const board2 = PLAYERS.map(p => ({ p, sc: pronoScore(p, latest) })).sort((x, y) => (y.sc.played - x.sc.played) || (y.sc.right - x.sc.right));
+      pbox.append(el("table", { class: "ptable" }, el("thead", {}, el("tr", {}, el("th", {}, ""), el("th", {}, "Bons pronos"), el("th", { class: "pts" }, "Bonus"))),
+        el("tbody", {}, ...board2.map(({ p, sc }) => el("tr", {}, el("td", {}, p === me ? el("b", {}, p) : p),
+          el("td", {}, sc.played ? sc.right + " / " + sc.total : "pas joué"), el("td", { class: "pts" }, sc.bonus ? "+" + sc.bonus : "0"))))));
+      pbox.append(el("p", { class: "sub2" }, bar));
+      if (Object.keys(mine).length) {
+        pbox.append(el("div", { class: "pgames" }, ...Object.keys(winners).map(g => {
+          const [a, h] = g.split("-");
+          const b = t => el("button", { type: "button", disabled: true, class: "pick" + (mine[g] === t ? " on" : " off") + (winners[g] === t ? " win" : ""), style: "--c:" + (TEAMS[t] || ["#444"])[0], title: winners[g] === t ? "Vainqueur" : "" }, t);
+          return el("div", { class: "pgame" }, b(a), el("span", { class: "at2" }, "@"), b(h));
+        })));
+        pbox.append(el("p", { class: "sub2" }, "Contour vert = vainqueur. En couleur = ton prono."));
+      } else pbox.append(el("p", { class: "sub2" }, "Vainqueurs : " + Object.values(winners).join(", ") + "."));
     }
     parts.push(pbox);
   }
@@ -558,7 +565,7 @@ function renderPronos() {
     const saved = me ? myPicks(me, T.night) : {};
     const draft = Object.assign({}, saved, store.get("draft:" + T.night, {}));
     if (open) {
-      pbox.append(el("p", { class: "sub2" }, "Choisis le vainqueur de chaque match. Modifiable jusqu'au premier coup d'envoi, à " + lockTxt + ". Tout juste : +5 pts, une seule erreur : +2."));
+      pbox.append(el("p", { class: "sub2" }, "Choisis le vainqueur de chaque match. Modifiable jusqu'au premier coup d'envoi, à " + lockTxt + ". Barème : 0 erreur +5, 1 erreur +3, 2 erreurs +1."));
       if (!me) pbox.append(el("p", { class: "sub2" }, "Connecte-toi pour pronostiquer."));
       pbox.append(el("div", { class: "pgames" }, ...T.games.map(gm => {
         const g = gm.away + "-" + gm.home;
