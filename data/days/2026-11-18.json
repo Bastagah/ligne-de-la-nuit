@@ -1,0 +1,437 @@
+{
+ "id": "2026-11-18",
+ "label": "Nuit du 17 au 18 novembre 2026",
+ "games": 5,
+ "matchups": [
+  {
+   "away": "NYK",
+   "home": "TOR"
+  },
+  {
+   "away": "DET",
+   "home": "SAS"
+  },
+  {
+   "away": "POR",
+   "home": "MIN"
+  },
+  {
+   "away": "CHA",
+   "home": "LAL"
+  },
+  {
+   "away": "UTA",
+   "home": "LAC"
+  }
+ ],
+ "notes": [
+  "Stats : box scores ESPN (espn.com) ; totaux de points vérifiés avec les 10 scores finaux.",
+  "Recoupements : journaux de matchs ESPN des joueurs (lignes identiques ; minutes et points seulement pour la Révélation) et un résumé de match sur NBA.com (points, rebonds et passes identiques pour la Révélation). Box scores NBA.com illisibles cette nuit.",
+  "Moyennes avant le match : journaux de matchs ESPN (match de la nuit exclu).",
+  "Parcours : fiches officielles NBA.com."
+ ],
+ "results": "9JSQUVlIgojIDFETtEEVVJCIsICTBxkIgojIMFETtEESDJCIsIiTJ1kIgojIOlUTtI1TQJCIsICVFRkIgojITF0UtQVREJCIsIySZ5kIgojIS9EVtsUWOJye",
+ "tonight": {
+  "night": "2026-11-19",
+  "lock": "2026-11-19T00:00:00Z",
+  "games": [
+   {
+    "away": "HOU",
+    "home": "IND",
+    "start": "2026-11-19T00:00:00Z"
+   },
+   {
+    "away": "PHI",
+    "home": "ORL",
+    "start": "2026-11-19T00:00:00Z"
+   },
+   {
+    "away": "MIL",
+    "home": "MIA",
+    "start": "2026-11-19T00:00:00Z"
+   },
+   {
+    "away": "MEM",
+    "home": "CLE",
+    "start": "2026-11-19T00:00:00Z"
+   },
+   {
+    "away": "CHI",
+    "home": "BKN",
+    "start": "2026-11-19T00:30:00Z"
+   },
+   {
+    "away": "WAS",
+    "home": "TOR",
+    "start": "2026-11-19T00:30:00Z"
+   },
+   {
+    "away": "GSW",
+    "home": "DAL",
+    "start": "2026-11-19T01:00:00Z"
+   },
+   {
+    "away": "ATL",
+    "home": "OKC",
+    "start": "2026-11-19T01:00:00Z"
+   },
+   {
+    "away": "DET",
+    "home": "NOP",
+    "start": "2026-11-19T01:00:00Z"
+   },
+   {
+    "away": "BOS",
+    "home": "DEN",
+    "start": "2026-11-19T02:30:00Z"
+   },
+   {
+    "away": "PHX",
+    "home": "SAC",
+    "start": "2026-11-19T03:00:00Z"
+   },
+   {
+    "away": "UTA",
+    "home": "LAL",
+    "start": "2026-11-19T03:00:00Z"
+   }
+  ]
+ },
+ "riddles": [
+  {
+   "cat": "MVP de la nuit",
+   "desc": "La meilleure ligne d'un joueur dont l'équipe a gagné.",
+   "line": [
+    [
+     "MIN",
+     "42"
+    ],
+    [
+     "PTS",
+     "47"
+    ],
+    [
+     "TIR",
+     "16/24"
+    ],
+    [
+     "3 PTS",
+     "10/14"
+    ],
+    [
+     "LF",
+     "5/6"
+    ],
+    [
+     "REB",
+     "6"
+    ],
+    [
+     "PD",
+     "3"
+    ],
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "CTR",
+     "0"
+    ],
+    [
+     "BP",
+     "3"
+    ],
+    [
+     "+/-",
+     "+5"
+    ]
+   ],
+   "result": "Victoire",
+   "check": [
+    "a97b73a0db48a29ed982de69f66510c1b8f63fa747ca6d0936dd82986cdacbda",
+    "b5293a12d6b1625bd3978766a3b1870113073fe846afe48d32ff58d817bd9787"
+   ],
+   "secret": "==QfiMXZtlmcn1ibpRnblVXcvYTN2kjM2EzLyVWehxGcv02bj5SYi5mL3d3dv8iOzBHd0hmIgojIlxWam9mcwJCIs0lIzVWbpJ3Zg4Wa05WZ1FnIgwiIzVWbpJ3ZisFI6Iyc0BXZjNWYiACLi4SKzh2Y0FWbgITMg4WZgMHdwBCMxEDIs4EUTVEKgg2Y0FWbgUGbgQnbhZXYgUmbuVWev1GIlRGIywSOgUmc052bjBCLzRnbp9GcgMDIgOMI0EzLwEDI052bkBCNy8iNxACoDDyc05WavBHI3QDI6ASZzlmcw12bjBibvlGdhdmbvx2byBHIsMXZ0Vnbp1GIyQDIuVGIpUDL4MDKgQXa15GIhxGIlRGIlJ3bjNHIl1WYnBCd1FGagMXdsBlIgojI5h2diACLdJycoNGdh1GIyEDIuVGIzRHcgIDL5AiOg42bzlWYzBSZ0RXZjBSZu5WZ59WTiACLiEkQOBibvNXahNHIlZDIs42b0NXdvhEIyFGcgk6wzNXYwBCLxIDMyACdmFmckBSYsBSZkBCep9GajBSZ1IjIgwiI0NXZ19EIlNmblJXqDbmbvNEI3KMIlJHqDnmcyFkIbBiOiMHdulGaiACLiMncltWYMByclxWZn5WQgM3bMJCI6ISbhVGdiACLiMXZtlmcHBibpRnblVXUiAiOiIXZ3NnbhJye"
+  },
+  {
+   "alien": {
+    "line": [
+     [
+      "MIN",
+      "34"
+     ],
+     [
+      "PTS",
+      "25"
+     ],
+     [
+      "TIR",
+      "11/23"
+     ],
+     [
+      "3 PTS",
+      "1/8"
+     ],
+     [
+      "LF",
+      "2/2"
+     ],
+     [
+      "REB",
+      "18"
+     ],
+     [
+      "PD",
+      "4"
+     ],
+     [
+      "INT",
+      "1"
+     ],
+     [
+      "CTR",
+      "1"
+     ],
+     [
+      "BP",
+      "3"
+     ],
+     [
+      "+/-",
+      "+6"
+     ]
+    ],
+    "result": "Défaite",
+    "check": [
+     "74678981e89619a52fc94bffef66df0b26b4908dd5ddb9cdf22e0bdc2cf9a843",
+     "a81752c857bb96fa09903f91577069ffd6fa21c62141d807bce6e012c5b91a44",
+     "d47d4d7b56649da4212b7268e8227f98abe40ad2084583df4abbc11484e7f0d6"
+    ],
+    "secret": "91lI5JWbldnIgwiIh1WY55WYi1WZ3JCIsISYtFWeuFmYtV2dgI3b0NWa2JyWgojIzRHclN2YhJCIsIycyVHcTBybp52b05WQg4WYTJCI6ISbhVGdiACLiEWbhlnbhJWbldFIy9GdjlmViAiOiIXZ3NnbhJye"
+   },
+   "cat": "Frenchie de la nuit",
+   "desc": "La meilleure ligne d'un joueur français (Wembanyama exclu : alien avant d'être français).",
+   "line": [
+    [
+     "MIN",
+     "38"
+    ],
+    [
+     "PTS",
+     "5"
+    ],
+    [
+     "TIR",
+     "2/2"
+    ],
+    [
+     "3 PTS",
+     "0/0"
+    ],
+    [
+     "LF",
+     "1/2"
+    ],
+    [
+     "REB",
+     "16"
+    ],
+    [
+     "PD",
+     "2"
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "CTR",
+     "1"
+    ],
+    [
+     "BP",
+     "2"
+    ],
+    [
+     "+/-",
+     "−4"
+    ]
+   ],
+   "result": "Défaite",
+   "check": [
+    "0aa082da5aeeb3403c7d9c247236d58af7011abb98244a5d1133dae566cb0668",
+    "751b7e63a03d4e72f99dc1d399616bc738f10a4f78f577d7e606297f66bca0a2"
+   ],
+   "secret": "9JSZ0FmYhlGZtE2czV3bt9yNxITMzYTMvIXZ5FGbw9SbvNmLhJmbuc3d39yL6MHc0RHaiAiOiUGbpZ2byBnIgwSXiUGdhJWYpRGIhN3c19WbiACLiUGdhJWYpRmIbBiOiMHdwV2YjFmIgwiIukkTW9EI6AycpF2pD7WYyZEIzVGZgUmbnlGbgUmc1VGbslWZtBSYsBCdpFmdhBSKlJ3bjNHIl1WYnBSZkBCOsEjMoASYtFWeuFmYtV2Vg4SKOB1UFhCIl5mbll3btBSZkByc0BHIwwSOgUmc052bjBCLu9Wa0F2Zu9GbvJHcgMHqDLHchBSZ0lWYml6wkBSZuVHIz5WYkByclRXdulWbggzMg4WZgMHZu9mYlJHI2EDI0VGIy8iMgA6wgMHdul2bwBSNgoDIpkDL4gCIh1WY55WYi1WZXBycy9GagMXahd6wuFmcGByclRGIlJ3bjNHIl1WYnBic1VGbslWZNJCI6ISeodnIgwSXiMHajRXYtBSMxAiblByc0BHIwwSOgoDIu92cpF2cgUGd0V2YgUmbuVWev1kIgwiIBJkTg42bzlWYzBSZ1ACLuF2Zph2Yp1EIyFGcgk6wzNXYwBCLpIXdvRHIlJDKgIjMwIDI0ZWYyRGIhxGIlRGI4l2boNGIlNDNiACLiQ3cFBSZj5WZyl6wm52bDBytCDicllGbpFkIbBiOiMHdulGaiACLiMHdl5mcvhEIlRHdvxmchh2QiAiOi0WYlRnIgwiIpOMdhJWYpREIhN3c19WTiAiOiIXZ3NnbhJye"
+  },
+  {
+   "cat": "Révélation de la nuit",
+   "desc": "Le joueur qui a le plus dépassé ce qu'on attend de lui.",
+   "line": [
+    [
+     "MIN",
+     "35"
+    ],
+    [
+     "PTS",
+     "40"
+    ],
+    [
+     "TIR",
+     "16/21"
+    ],
+    [
+     "3 PTS",
+     "8/11"
+    ],
+    [
+     "LF",
+     "0/1"
+    ],
+    [
+     "REB",
+     "11"
+    ],
+    [
+     "PD",
+     "5"
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "CTR",
+     "1"
+    ],
+    [
+     "BP",
+     "2"
+    ],
+    [
+     "+/-",
+     "+24"
+    ]
+   ],
+   "result": "Victoire",
+   "check": [
+    "3ea26cd18a68a11dd0f6fe4924dcc83da568740d2cc14665c32aeddc5f3f85cd",
+    "787e3981d8e44c1150344ad02eaa2b866484638aa18a90194c1f8210ebfb031c"
+   ],
+   "secret": "9JCanVXYiF2cuV2ctU2YpJnYvkjM3EDN2EzLyVWehxGcv02bj5SYi5mL3d3dv8iOzBHd0hmIgojIlxWam9mcwJCIs0lIodWdhJWYz5WZzJCIsICanVXYiF2cuV2cgU2YpJnYisFI6Iyc0BXZjNWYiACLi4SKylGdgUXYgEjMvYTMgwSZy92YzBSZtF2ZgUGZgYDL1MDKgMHduFGdzVmcgMXZy92YzBSZtF2ZgMnc1VGbslWZtBSNyAyclxGIp1mchBHI0J3bwBXYyBycvJ3ZgMXdsBHIlxGI6AiNsEzMrACdlBSZu5WZ59WbgE2cgMXavZGI3wCNgQXavNHIskycoNGdh1GI0EDIuVGIzRHcggTMxACLOB1UFhCIoNGdh1GIlxGI05WY2FGIl5mbll3btBSZkBCNsgDIyV3bwByc05WavBHIwQjIgojI5h2diACLdJycoNGdh1GI0EDIuVGIzRHcgQDL4AiOg42bzlWYzBSZ0RXZjBSZu5WZ59WTiACLiEkQOBibvNXahNHIlRDIsUGdhR3Ug8Wao9EIyFGcgk6wzNXYwBCLzIDMyACdmFmckBSYsBSZkBCep9GajBSZ4IjIgwiI0NXZ19EIlNmblJXqDbmbvNEI3KMIyVWaslWQisFI6Iyc05WaoJCIsIie6FmSggWY0VlIgojItFWZ0JCIsICanVXYiF2cuV2UgU2YpJnQiAiOiIXZ3NnbhJye"
+  },
+  {
+   "cat": "Rookie de la nuit",
+   "desc": "La meilleure ligne d'un joueur dans sa première saison NBA.",
+   "line": [
+    [
+     "MIN",
+     "18"
+    ],
+    [
+     "PTS",
+     "15"
+    ],
+    [
+     "TIR",
+     "5/9"
+    ],
+    [
+     "3 PTS",
+     "1/3"
+    ],
+    [
+     "LF",
+     "4/5"
+    ],
+    [
+     "REB",
+     "2"
+    ],
+    [
+     "PD",
+     "0"
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "CTR",
+     "0"
+    ],
+    [
+     "BP",
+     "1"
+    ],
+    [
+     "+/-",
+     "−14"
+    ]
+   ],
+   "result": "Défaite",
+   "check": [
+    "1625dcf05ad2ab3e57abb8e466c8c8efe9f4d2824f01394babb41858f2d25a07",
+    "fd5fbb74ced891ee0616094d78de4cea1e51d54d0ac39954a441188b57ab8862"
+   ],
+   "secret": "=0nIyVGbnF2dt42b0FWZr9yMxQzM0YTMvIXZ5FGbw9SbvNmLhJmbuc3d39yL6MHc0RHaiAiOiUGbpZ2byBnIgwSXiIXZsdWY3JCIsIiclx2ZhdHIu9GdhV2aisFI6Iyc0BXZjNWYiACLi4SKzh2Y0FWbgITMg4WZgMHdwBCO0EDIs4EUTVEKgUmbuVWev1GIlRGIzwiMxASZyRnbvNGIsUGdpFmZpOMZgUGZyV3bsBSZuVHIz5WYkByclRXdulWbggTMg4WZgkzL1ACoDDyc05WavBHI1EDI6ASKzwCMxgCIzVWar92byByclRGIlJ3bjNHIl1WYnBic1VGbslWZNJCI6ISeodnIgwSXiMHajRXYtBiMxAiblByc0BHIzwiMxAiOg42bzlWYzBSZ0RXZjBSZu5WZ59WTiACLiUWar92byBCLzl2bulGbslEIyFGcgk6wzNXYwBCL2IDMyACdmFmckBSYsBSZkBCep9GajBSZ1ICIsICdzVWdPBSZj5WZyl6wm52bDBytCDSZyh6wpJncBJyWgojIzRnbphmIgwiIzJXZwBXasNEIBxkIgojItFWZ0JCIsIiclx2ZhdFIu9GdhV2SiAiOiIXZ3NnbhJye"
+  },
+  {
+   "cat": "Looser de la nuit",
+   "desc": "La pire ligne d'un joueur à 20 minutes ou plus dans une défaite.",
+   "line": [
+    [
+     "MIN",
+     "34"
+    ],
+    [
+     "PTS",
+     "6"
+    ],
+    [
+     "TIR",
+     "3/10"
+    ],
+    [
+     "3 PTS",
+     "0/5"
+    ],
+    [
+     "LF",
+     "0/0"
+    ],
+    [
+     "REB",
+     "2"
+    ],
+    [
+     "PD",
+     "2"
+    ],
+    [
+     "INT",
+     "2"
+    ],
+    [
+     "CTR",
+     "0"
+    ],
+    [
+     "BP",
+     "3"
+    ],
+    [
+     "+/-",
+     "−11"
+    ]
+   ],
+   "result": "Défaite",
+   "check": [
+    "776cb326ab0cd5f0a974c1b9606044d8485201f2db19cf8e3749bdee5f36e200",
+    "d4ea02b5e2652d7518f882dfec63b85b441965e49748426c44e2841b01bd11e5"
+   ],
+   "secret": "=0nI49mZt42byFWYlR2L4YzM4IjNx8icllXYsB3Lt92YuEmYu5yd3d3LvozcwRHdoJCI6ISZslmZvJHciACLdJCevZmIgwiI49mZg42byFWYgUGZisFI6Iyc0BXZjNWYiACLi4SKzh2Y0FWbgMTMg4WZgMHdwByN3EDIs4EUTVEKgMHdwBiNsMTMgoDIl5mbll3bNBiLzVGd15WatBCNzAiblBSMxIJiiDCdlByclVHZyVGcgMXZsxWYiByMgwSKzRnbp9GcgMDIgOMI18CMoACMx8yMgA6wgMHdul2bwBiNgoDIlRXahZWqDTGIl5WdgMnbhRGIzVHbwBSdvByclRXdulWbgAjMgA6wgMnc1VWdvpGIzVGbgkWbyFGcgkCMsADKgUmcvN2cgUWbhdGIzFmYgMXdsBlIgojI5h2diACLdJycoNGdh1GIzEDIuVGIzRHcgYDLzEDI6AibvNXahNHIlRHdlNGIl5mbll3bNJCIsISQC5EIu92cpF2cgUGMxACL5t2Y1RnbltEIyFGcgk6wzNXYwBCL3EDMyACdmFmckBSYsBSZkBCep9GajBSZ1ICIsICdzVWdPBSZj5WZyl6wm52bDBytCDic1Vmbl1kIbBiOiMHdulGaiACLiMnc1B3Ug8Wau9GduFEIuF2UiAiOi0WYlRnIgwiI49mRg42byFWQnUGRiAiOiIXZ3NnbhJye"
+  }
+ ]
+}
