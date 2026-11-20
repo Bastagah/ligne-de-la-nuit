@@ -32,6 +32,13 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 
+SUFFIXES = {"jr", "sr", "ii", "iii", "iv"}
+def name_variants(answer):
+    """Nom complet, nom sans suffixe (Jr, II...) et nom de famille : jamais le suffixe seul."""
+    words = norm(answer).split(" ")
+    core = [w for w in words if w not in SUFFIXES] or words
+    return {" ".join(words), " ".join(core), core[-1]}
+
 def norm(s: str) -> str:
     s = unicodedata.normalize("NFD", s)
     s = "".join(c for c in s if unicodedata.category(c) != "Mn").lower()
@@ -65,11 +72,11 @@ def main(path):
         assert len(r["hints"]) == 3, "il faut 3 indices par devinette"
         accepts = {norm(a) for a in r.get("accepts", [])}
         accepts.add(norm(r["answer"]))
-        accepts.add(norm(r["answer"]).split(" ")[-1])
+        accepts |= name_variants(r["answer"])
         alien = None
         if r.get("alien"):
             a = r["alien"]
-            acc = {norm(x) for x in a.get("accepts", [])} | {norm(a["answer"]), norm(a["answer"]).split(" ")[-1]}
+            acc = {norm(x) for x in a.get("accepts", [])} | name_variants(a["answer"])
             alien = {"line": a["line"], "result": a["result"], "check": sorted(h(x) for x in acc if x),
                      "secret": hide({"answer": a["answer"], "team": a["team"], "accepts": sorted(x for x in acc if x)})}
         out["riddles"].append({

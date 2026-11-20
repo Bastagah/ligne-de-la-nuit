@@ -269,8 +269,14 @@ function lev(a, b) {
 }
 // Tolérance aux fautes : 1 lettre jusqu'à 5 lettres, 2 jusqu'à 10, 3 au-delà
 const tolerance = len => len <= 5 ? 1 : len <= 10 ? 2 : 3;
+// Suffixes (Jr, Sr, II...) : facultatifs dans la réponse, et jamais acceptés seuls
+const SUFFIX = /(^| )(jr|sr|ii|iii|iv)$/;
+const bareSuffix = g => /^(jr|sr|ii|iii|iv)$/.test(g);
 function closeEnough(g, accepts) {
-  return (accepts || []).some(a => lev(g, a) <= tolerance(a.length) || lev(g.replace(/ /g, ""), a.replace(/ /g, "")) <= tolerance(a.length));
+  if (bareSuffix(g)) return false;
+  const gs = [g, g.replace(SUFFIX, "").trim()].filter(Boolean);
+  const as = (accepts || []).filter(a => !bareSuffix(a)).flatMap(a => [a, a.replace(SUFFIX, "").trim()]).filter(Boolean);
+  return gs.some(x => as.some(a => lev(x, a) <= tolerance(a.length) || lev(x.replace(/ /g, ""), a.replace(/ /g, "")) <= tolerance(a.length)));
 }
 const unhide = s => JSON.parse(decodeURIComponent(escape(atob([...s].reverse().join("")))));
 function el(tag, attrs, ...kids) {
@@ -437,7 +443,7 @@ function renderRiddle(r, i) {
       e.preventDefault();
       const g = norm(input.value); if (!g) return;
       if (st.wrong.some(w => norm(w.guess) === g)) { err.textContent = "Déjà tenté, essaie un autre nom."; return; }
-      const exact = r.check.includes(await sha(g));
+      const exact = !bareSuffix(g) && r.check.includes(await sha(g));
       const correct = exact || closeEnough(g, sec.accepts);
       if (!correct && /^frenchie/i.test(r.cat) && closeEnough(g, ALIEN)) {
         err.replaceChildren(el("span", { class: "alien" }, "👽 Bien vu… mais Wemby est un alien avant d'être français : il ne compte pas dans cette catégorie. Ni point, ni essai perdu : cherche le Français suivant !"));
