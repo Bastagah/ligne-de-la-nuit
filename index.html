@@ -520,6 +520,15 @@ function myPicks(p, night) {
   picks.filter(x => x.player === p && x.night === night && Date.parse(x.created_at) <= lock).forEach(x => { out[x.game] = x.pick; });
   return out;
 }
+// Réussite cumulée aux pronos : seuls les matchs effectivement pronostiqués comptent (une nuit sans prono ne change rien)
+function pronoStats(p, upTo) {
+  let right = 0, total = 0;
+  Object.keys(allDays).filter(id => id <= upTo && allDays[id].results).forEach(id => {
+    const winners = unhide(allDays[id].results); const mine = myPicks(p, id);
+    Object.keys(winners).forEach(g => { if (mine[g]) { total++; if (mine[g] === winners[g]) right++; } });
+  });
+  return { right, total, pct: total ? Math.round(100 * right / total) : null };
+}
 function pronoScore(p, night) {
   const d = allDays[night]; if (!d || !d.results) return null;
   const winners = unhide(d.results); const games = Object.keys(winners);
@@ -548,10 +557,11 @@ function renderPronos() {
     else {
       const bar = "Barème : 0 erreur +5, 1 erreur +3, 2 erreurs +1.";
       const board2 = PLAYERS.map(p => ({ p, sc: pronoScore(p, latest) })).sort((x, y) => (y.sc.played - x.sc.played) || (y.sc.right - x.sc.right));
-      pbox.append(el("table", { class: "ptable" }, el("thead", {}, el("tr", {}, el("th", {}, ""), el("th", {}, "Bons pronos"), el("th", { class: "pts" }, "Bonus"))),
+      pbox.append(el("table", { class: "ptable" }, el("thead", {}, el("tr", {}, el("th", {}, ""), el("th", {}, "Cette nuit"), el("th", { class: "pts" }, "Bonus"), el("th", { class: "pts", title: "Réussite cumulée depuis le début" }, "% total"))),
         el("tbody", {}, ...board2.map(({ p, sc }) => el("tr", {}, el("td", {}, p === me ? el("b", {}, p) : p),
-          el("td", {}, sc.played ? sc.right + " / " + sc.total : "pas joué"), el("td", { class: "pts" }, sc.bonus ? "+" + sc.bonus : "0"))))));
-      pbox.append(el("p", { class: "sub2" }, bar));
+          el("td", {}, sc.played ? sc.right + " / " + sc.total : "pas joué"), el("td", { class: "pts" }, sc.bonus ? "+" + sc.bonus : "0"),
+          (st => el("td", { class: "pts", title: st.right + " / " + st.total + " matchs" }, st.pct == null ? "—" : st.pct + " %"))(pronoStats(p, latest)))))));
+      pbox.append(el("p", { class: "sub2" }, bar + " % total : bons pronos depuis le début, sur les seuls matchs pronostiqués."));
       if (Object.keys(mine).length) {
         pbox.append(el("div", { class: "pgames" }, ...Object.keys(winners).map(g => {
           const [a, h] = g.split("-");
