@@ -1,7 +1,7 @@
 {
  "id": "2026-11-21",
  "label": "Nuit du 20 au 21 novembre 2026",
- "games": 5,
+ "games": 9,
  "matchups": [
   {
    "away": "CHA",
@@ -16,25 +16,40 @@
    "home": "CLE"
   },
   {
+   "away": "TOR",
+   "home": "DET"
+  },
+  {
    "away": "WAS",
    "home": "CHI"
   },
   {
    "away": "NOP",
    "home": "OKC"
+  },
+  {
+   "away": "PHX",
+   "home": "UTA"
+  },
+  {
+   "away": "HOU",
+   "home": "DEN"
+  },
+  {
+   "away": "SAC",
+   "home": "LAL"
   }
  ],
  "notes": [
-  "Nuit incomplète : 9 matchs joués, 5 publiés (Hornets-Hawks, Magic-Nets, Pacers-Cavaliers, Wizards-Bulls, Pelicans-Thunder). Les box scores ESPN (www et miroirs) de Raptors-Pistons, Suns-Jazz, Rockets-Nuggets et Kings-Lakers sont restés figés en cours ou avant match pendant plus de deux heures : ces matchs sont exclus des devinettes.",
-  "Mise à jour à 9h45 : ajout de Hornets-Hawks, devenu lisible ; le Frenchie change, les autres devinettes restent les mêmes.",
-  "Stats : box scores ESPN, www.espn.com (Magic-Nets, Pacers-Cavaliers, Wizards-Bulls) et miroir espn.ph (Hornets-Hawks, Pelicans-Thunder) ; totaux de points vérifiés avec les 5 scores finaux.",
+  "Les 9 matchs de la nuit sont publiés (mise à jour à 10h30 : ajout de Hornets-Hawks, Raptors-Pistons, Suns-Jazz, Rockets-Nuggets et Kings-Lakers, absents de la première version).",
+  "Stats : box scores ESPN, www.espn.com (Magic-Nets, Pacers-Cavaliers, Wizards-Bulls) et miroir espn.ph (Hornets-Hawks, Pelicans-Thunder) ; Basket USA (Raptors-Pistons, Suns-Jazz, Rockets-Nuggets, Kings-Lakers), car les pages ESPN de ces matchs restaient figées en cours de match. Totaux de points vérifiés avec les 9 scores finaux, rebonds et fautes avec les totaux d'équipe.",
+  "Changements par rapport aux versions précédentes : Frenchie (le Français des Hornets passe devant) et Révélation (le joueur retenu à 4 matchs sort du top 25 des game scores une fois les 9 matchs comptés). MVP, Rookie et Looser inchangés.",
   "Corrections après contrôle des totaux d'équipe : Wizards-Bulls relu une seconde fois (rebonds offensifs d'un joueur des Wizards, interceptions/balles perdues d'un joueur des Bulls).",
-  "Recoupements : Révélation vérifiée sur la fiche joueur ESPN (ligne identique) ; Frenchie : points, tirs, lancers et rebonds confirmés par la page du match ESPN ; MVP : 51 points confirmés par le résumé ESPN ; Rookie et Looser vus seulement dans le box score (journaux de matchs ESPN pas encore à jour).",
-  "Moyennes avant le match : journaux de matchs ESPN (MVP 16,2 en 15, Frenchie 8,7 en 12, Rookie 9,2 en 15) ; pages de stats d'équipe ESPN arrêtées juste avant ce match (Révélation 2,7 en 12, Looser 6,9 en 14).",
-  "Révélation : 2,7 pts de moyenne, comptée 3 (règle du minimum) ; rapport 5,0 contre 2,54 pour le suivant parmi les moyennes vérifiées.",
-  "Parcours : fiches ESPN et NBA.com."
+  "Recoupements : Frenchie confirmé par la page du match ESPN ; Révélation : score et 10 rebonds confirmés par la page du match ESPN ; MVP : 51 points confirmés par le résumé ESPN ; Rookie et Looser vus seulement dans le box score (journaux de matchs ESPN pas encore à jour).",
+  "Moyennes avant le match : journaux de matchs ESPN (MVP 16,2 en 15, Frenchie 8,7 en 12, Rookie 9,2 en 15) ; pages de stats d'équipe ESPN (Révélation 4,6 en 15, Looser 6,9 en 14). Pour la Révélation, la page d'équipe pourrait déjà inclure ce match ; sa moyenne d'avant serait alors encore plus basse, ce qui ne change pas le choix.",
+  "Parcours : fiches ESPN et NBA.com, communiqué de draft des Raptors."
  ],
- "results": "9JCTUFkIgojIMRVQtEESDJCIsIyQL9kIgojIDt0TtA1TOJCIsIyUBdlIgojIJh0QtMVQXJCIsISRMNkIgojIFx0QtQkTJJCIsICTS9kIgojIOtkQtwkUPJye",
+ "results": "9JCTBxkIgojIMFETtMUQTJCIsIiTFRkIgojIOVERtU1TIJCIsICWIBlIgojIBRVVtgFSQJCIsIyQL9kIgojIDt0TtA1TOJCIsIyUBdlIgojIJh0QtMVQXJCIsIiUPRlIgojIUVERtI1TUJCIsISRMNkIgojIFx0QtQkTJJCIsICTS9kIgojIOtkQtwkUPJCIsICTUFkIgojIMRVQtEESDJye",
  "tonight": {
   "night": "2026-11-22",
   "lock": "2026-11-21T18:00:00Z",
@@ -191,27 +206,27 @@
    "line": [
     [
      "MIN",
-     "23"
+     "32"
     ],
     [
      "PTS",
-     "15"
+     "20"
     ],
     [
      "TIR",
-     "5/5"
+     "6/9"
     ],
     [
      "3 PTS",
-     "3/3"
+     "2/4"
     ],
     [
      "LF",
-     "2/2"
+     "6/6"
     ],
     [
      "REB",
-     "8"
+     "10"
     ],
     [
      "PD",
@@ -219,28 +234,27 @@
     ],
     [
      "INT",
-     "0"
+     "3"
     ],
     [
      "CTR",
-     "0"
+     "1"
     ],
     [
      "BP",
-     "2"
+     "1"
     ],
     [
      "+/-",
-     "−1"
+     "+12"
     ]
    ],
    "result": "Victoire",
    "check": [
-    "02501855e4afb36bd65c26db927d74a2c7d9c454a9bf21733ea821899374b6fd",
-    "8bee8e6e29650f2caa29357cbf3d8cd035f0d755b2d3226ef231bff25b985853",
-    "bca8c361d7811ab2944d008c745934adbb4fe8484ec0b80478e43036b561cf14"
+    "30e687664b1e3a0f18d1cfd9aa07e8cb3c06fcd9cfa922e1bfbbd6963c064b98",
+    "eb953fd6e066c352c95c5d21ddc8610406836e6caa464803d2e695fd4e4eaabb"
    ],
-   "secret": "9JyYpZXZjVndtEGbvtWau9iN5YjMwIzLyVWehxGcv02bj5SYi5mL3d3dv8iOzBHd0hmIgojIlxWam9mcwJCIs0lIjlmdlNWd2JCIsICaj92b2JCIsIyYpZXZjVndgEGbvtWauJyWgojIzRHclN2YhJCIsIiLpYDL0EDIlJ3bjNHIl1WYnhCIzVGd15WatByMyAiblByck52biVmcggDIsMnclNmbhxGI4VXYgIzLyACLzRnbp9GcgMDIgOMIz8yMgwicpRHI1FGI18SNgoDIjVGajl6wgMnbhNFIuQTNsIDIgOMIyVXZ19mag4WdgQnbhZXZkBCLzRnbhR3clJHIzVmcvN2cgUWbhdGIzJXdlxGbpVWbgUjMgMXZsBSatJXYwBCdy9GcwFmcgM3bydGIzVHbwBSZsBiOgMDLyEzKgQXZgUmbuVWev1GIhNHIzl2bmBSNgQXavNHIskSZsdGqDLHIhxGIu9GblNHIzASZpOMdw12bjByOgMHajRXYtBiMxACLOB1UFBSZwlWdxl6wnQGIzRXY0NHKgg2Y0FWbgUGbgQnbhZXYgUmbuVWev1GIlRGI3wiMgIXdvBHIzRnbp9GcgUTMiAiOikHa3JCIs0lIzh2Y0FWbgITMg4WZgMHdwByNsIDI6AibvNXahNHIlRHdlNGIl5mbll3bNJCIsISQC5EIu92cpF2cgUmNxACLDNVVgIXYwBSqDP3chBHIsETMwIDI0ZWYyRGIhxGIlRGI4l2boNGIlZTMiACLiQ3cFBSZj5WZyl6wm52bDBytCDCdvZXaQJyWgojIzRnbphmIgwiIjl2Zh1EIvRmbhxmcPJCI6ISbhVGdiACLiMWa2V2Y1ZFIhx2brlmTiAiOiIXZ3NnbhJye"
+   "secret": "9JyclZXYydWLuVGbsF2LyETNzQjNx8icllXYsB3Lt92YuEmYu5yd3d3LvozcwRHdoJCI6ISZslmZvJHciACLdJyclZXYydmIgwiIzVmdhJ3Zg4WZsxWYisFI6Iyc0BXZjNWYiACLi4SK5wiMyASZy92YzBSZtF2ZoAyclRXdulWbgIzMg4WZgMnbvlGdwV2YyVGdulGIzACdlBycyV2YuFGbggXdhBiNvYDIsMHZu9mYlJHIwEDIjVmdhBSZsJWdvRWLlxmY19GRg4CN1wiMgA6wgIXdlV3bqBib1BCduFmdlRGIsMHduFGdzVmcgMXZy92YzBSZtF2ZgMnc1VGbslWZtBSNyAyclxGIp1mchBHI0J3bwBXYyBycvJ3ZgMXdsBHIlxGI6ACNsUTMrACdlBSZu5WZ59WbgE2cgMXavZGI1MDL0ACdp92cgwSKzh2Y0FWbgUTMgwiTQNVRgUGcpVXcpO8JkByc0FGdzhCIoNGdh1GIlxGI05WY2FGIl5mbll3btBSZkBiNsQDIyV3bwByc05WavBHIwIjIgojI5h2diACLdJycoNGdh1GI1EDIuVGIzRHcgYDL0AiOg42bzlWYzBSZ0RXZjBSZu5WZ59WTiACLiUWar92byBCLhJXYsNEIhRnbhNFIyFGcgk6wzNXYwBCL2IDMyACdmFmckBSYsBSZkBCep9GajBSZ5EjIgwiI0NXRgU2YuVmcpOsZu92QgcrwgIXZpxWaBJyWgojIzRnbphmIgwiIzJ3b0BXYSByb052by9GViAiOi0WYlRnIgwiIzVmdhJ3Rg4WZsxWQiAiOiIXZ3NnbhJye"
   },
   {
    "cat": "Rookie de la nuit",
