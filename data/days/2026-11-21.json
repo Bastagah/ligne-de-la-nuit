@@ -1,8 +1,12 @@
 {
  "id": "2026-11-21",
  "label": "Nuit du 20 au 21 novembre 2026",
- "games": 4,
+ "games": 5,
  "matchups": [
+  {
+   "away": "CHA",
+   "home": "ATL"
+  },
   {
    "away": "ORL",
    "home": "BKN"
@@ -21,15 +25,16 @@
   }
  ],
  "notes": [
-  "Nuit incomplète : 9 matchs joués, seuls 4 publiés (Magic-Nets, Pacers-Cavaliers, Wizards-Bulls, Pelicans-Thunder). Les box scores ESPN (www et miroirs) des 5 autres matchs (Hornets-Hawks, Raptors-Pistons, Suns-Jazz, Rockets-Nuggets, Kings-Lakers) restaient figés en cours ou avant match après 3 attentes de 10 minutes : ces matchs sont exclus des devinettes.",
-  "Stats : box scores ESPN, www.espn.com (Magic-Nets, Pacers-Cavaliers, Wizards-Bulls) et miroir espn.ph (Pelicans-Thunder) ; totaux de points vérifiés avec les 4 scores finaux.",
+  "Nuit incomplète : 9 matchs joués, 5 publiés (Hornets-Hawks, Magic-Nets, Pacers-Cavaliers, Wizards-Bulls, Pelicans-Thunder). Les box scores ESPN (www et miroirs) de Raptors-Pistons, Suns-Jazz, Rockets-Nuggets et Kings-Lakers sont restés figés en cours ou avant match pendant plus de deux heures : ces matchs sont exclus des devinettes.",
+  "Mise à jour à 9h45 : ajout de Hornets-Hawks, devenu lisible ; le Frenchie change, les autres devinettes restent les mêmes.",
+  "Stats : box scores ESPN, www.espn.com (Magic-Nets, Pacers-Cavaliers, Wizards-Bulls) et miroir espn.ph (Hornets-Hawks, Pelicans-Thunder) ; totaux de points vérifiés avec les 5 scores finaux.",
   "Corrections après contrôle des totaux d'équipe : Wizards-Bulls relu une seconde fois (rebonds offensifs d'un joueur des Wizards, interceptions/balles perdues d'un joueur des Bulls).",
-  "Recoupements : Révélation vérifiée sur la fiche joueur ESPN (ligne identique) ; Frenchie relu sur une seconde lecture du box score ; MVP : 51 points confirmés par le résumé ESPN ; Rookie et Looser vus seulement dans le box score (journaux de matchs ESPN pas encore à jour).",
-  "Moyennes avant le match : journaux de matchs ESPN (MVP 16,2 en 15 matchs, Rookie 9,2 en 15 matchs) ; pages de stats d'équipe ESPN arrêtées juste avant ce match (Frenchie 4,7 en 13, Révélation 2,7 en 12, Looser 6,9 en 14).",
-  "Révélation : 2,7 pts de moyenne, comptée 3 (règle du minimum) ; rapport 5,0 contre 2,54 pour le suivant.",
+  "Recoupements : Révélation vérifiée sur la fiche joueur ESPN (ligne identique) ; Frenchie : points, tirs, lancers et rebonds confirmés par la page du match ESPN ; MVP : 51 points confirmés par le résumé ESPN ; Rookie et Looser vus seulement dans le box score (journaux de matchs ESPN pas encore à jour).",
+  "Moyennes avant le match : journaux de matchs ESPN (MVP 16,2 en 15, Frenchie 8,7 en 12, Rookie 9,2 en 15) ; pages de stats d'équipe ESPN arrêtées juste avant ce match (Révélation 2,7 en 12, Looser 6,9 en 14).",
+  "Révélation : 2,7 pts de moyenne, comptée 3 (règle du minimum) ; rapport 5,0 contre 2,54 pour le suivant parmi les moyennes vérifiées.",
   "Parcours : fiches ESPN et NBA.com."
  ],
- "results": "9JyQL9kIgojIDt0TtA1TOJCIsIyUBdlIgojIJh0QtMVQXJCIsISRMNkIgojIFx0QtQkTJJCIsICTS9kIgojIOtkQtwkUPJye",
+ "results": "9JCTUFkIgojIMRVQtEESDJCIsIyQL9kIgojIDt0TtA1TOJCIsIyUBdlIgojIJh0QtMVQXJCIsISRMNkIgojIFx0QtQkTJJCIsICTS9kIgojIOtkQtwkUPJye",
  "tonight": {
   "night": "2026-11-22",
   "lock": "2026-11-21T18:00:00Z",
@@ -130,31 +135,31 @@
    "line": [
     [
      "MIN",
-     "15"
+     "30"
     ],
     [
      "PTS",
-     "8"
+     "21"
     ],
     [
      "TIR",
-     "3/3"
+     "9/12"
     ],
     [
      "3 PTS",
-     "2/2"
+     "0/0"
     ],
     [
      "LF",
-     "0/2"
+     "3/5"
     ],
     [
      "REB",
-     "4"
+     "15"
     ],
     [
      "PD",
-     "0"
+     "2"
     ],
     [
      "INT",
@@ -166,19 +171,19 @@
     ],
     [
      "BP",
-     "1"
+     "4"
     ],
     [
      "+/-",
-     "+18"
+     "+5"
     ]
    ],
    "result": "Défaite",
    "check": [
-    "1798541d6d1c6d6be8c958d1d95aecc22d8d152bfa1e9226c4f924fa088c4dd6",
-    "452f2dfc0df14f7abb711f3ba2de2d4fbbd12fc77a1d1e53b50fc2c3bcc4a9d1"
+    "0aa082da5aeeb3403c7d9c247236d58af7011abb98244a5d1133dae566cb0668",
+    "751b7e63a03d4e72f99dc1d399616bc738f10a4f78f577d7e606297f66bca0a2"
    ],
-   "secret": "=0nIlV3ZuV2czVWLh9mbvUTN4IDN2EzLyVWehxGcv02bj5SYi5mL3d3dv8iOzBHd0hmIgojIlxWam9mcwJCIs0lIlV3ZuV2czVGIh9mbiACLiUWdn5WZzNXZisFI6Iyc0BXZjNWYiACLi4CdpVnbgUGd0V2YgMXYwBCdpFWdvpGIl5GIh1WY55WYi1WZXBiLpMHajRXYtByMxACLOB1UFBSZwlWdxl6wnQGIzRXY0NHKgg2Y0FWbgUGbgQnbhZXYgUmbuVWev1GIlRGI3wCNgUmc052bjBCLzVGd15WatBSNxAiblBCOxsCI0VGIzRnbp9GcgMDIgOMIy8iMgQnbvRGIz8yMgA6wgMHdul2bwBCOgoDIpcDL2gCI0lWduBSYsBSZkBycpF2pD7WYyZEIzVGZgUmcvN2cgUWbhdGIyVXZsxWal1kIgojI5h2diACLdJycoNGdh1GIzEDIuVGIzRHcgcDL0AiOg42bzlWYzBSZ0RXZjBSZu5WZ59WTiACLiEkQOBibvNXahNHIlJDIs0GbVBichBHIpO8czFGcgwSNyAjMgQnZhJHZgEGbgUGZggXavh2YgUmMxICIsICdzVEIlNmblJXqDbmbvNEI3KMIyVWaslWQisFI6Iyc05WaoJCIsIycsxWdCBybnF2Yph2QiAiOi0WYlRnIgwiIlV3ZuV2czVEIh9mTiAiOiIXZ3NnbhJye"
+   "secret": "==QfiUGdhJWYpRWLhN3c19WbvcTMyEzM2EzLyVWehxGcv02bj5SYi5mL3d3dv8iOzBHd0hmIgojIlxWam9mcwJCIs0lIlRXYiFWakBSYzNXdv1mIgwiIlRXYiFWakJyWgojIzRHclN2YhJCIsIiL0lWduBSZ0RXZjBychBHI0lWY19magUmbgEWbhlnbhJWbldFIukycoNGdh1GIyEDIuVGIzRHcgQDMxACLOB1UFBycoNGdh1GIlRGIsFmbyV3bqhCIoNGdh1GIlxGI05WY2FGIl5mbll3btBSZkByNsgDIlJHdu92YgwyclRXdulWbgAzMg4WZgMnZpNnblZmZvBCOgQnbvRGIzRmbvJWZyBSNxACdlBiMx8SOgA6wgMHdul2bwBSMyAiOgkSMsEjMoACdpVnbgEGbgUGZgMXahd6wuFmcGByclRGIlJ3bjNHIl1WYnBic1VGbslWZNJCI6ISeodnIgwSXiMHajRXYtBiMxAiblByc0BHI3wCOgoDIu92cpF2cgUGd0V2YgUmbuVWev1kIgwiIBJkTg42bzlWYzBSZ1ACLuF2Zph2Yp1EIyFGcgk6wzNXYwBCLpMnclBHcpx2QgMXZsBichBHIsIXdvRHIlJDKgIjMwIDI0ZWYyRGIhxGIlRGI4l2boNGIlNDNiACLiQ3cFBSZj5WZyl6wm52bDBytCDicllGbpFkIbBiOiMHdulGaiACLiMHdl5mcvhEIlRHdvxmchh2QiAiOi0WYlRnIgwiIpOMdhJWYpREIhN3c19WTiAiOiIXZ3NnbhJye"
   },
   {
    "cat": "Révélation de la nuit",
