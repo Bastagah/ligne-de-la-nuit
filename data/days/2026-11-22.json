@@ -1,7 +1,7 @@
 {
  "id": "2026-11-22",
  "label": "Nuit du 21 au 22 novembre 2026",
- "games": 5,
+ "games": 6,
  "matchups": [
   {
    "away": "MIL",
@@ -22,17 +22,21 @@
   {
    "away": "LAC",
    "home": "DAL"
+  },
+  {
+   "away": "BOS",
+   "home": "SAC"
   }
  ],
  "notes": [
-  "5 matchs sur 6 publiés (mise à jour vers 8h : ajout de Clippers-Mavericks, qui ne change aucune devinette). Celtics-Kings est terminé, mais son box score restait figé (avant-match ou en cours) sur ESPN, ses miroirs et NBA.com, et pas encore indexé sur Basket USA : il ne compte pas dans les devinettes.",
-  "Stats : Basket USA (Sixers-Bucks Knicks-Blazers et Clippers-Mavericks, tableaux des articles de match ; Spurs-Pelicans, page boxscore) et box score ESPN www.espn.com (Wolves-Grizzlies). Points vérifiés avec les 5 scores finaux, rebonds (off. + déf.) et fautes avec les totaux d'équipe.",
-  "Recoupements : MVP et Looser cohérents avec les box scores ESPN pris en cours de match ; Frenchie vérifié sur le box score Basket USA (31 min au lieu de 32 sur ESPN, le reste identique) ; Révélation vérifiée sur son journal de matchs ESPN (40 min au lieu de 39 sur Basket USA, le reste identique) ; Rookie vu seulement chez Basket USA (journal ESPN pas à jour).",
-  "Moyennes avant le match : pages de stats d'équipe ESPN, qui n'incluent pas encore cette nuit (MVP 28,6 en 16, Frenchie 7,6 en 14, Rookie 10,4 en 16, Looser 9,9 en 15) ; journaux de matchs ESPN pour la Révélation (19,4 en 15) et ses deux poursuivants (10,1 en 11 ; 5,25 en 12). Un joueur des Sixers revenu de blessure (1er match de la saison) compte avec sa moyenne de la saison passée (7,7, NBA.com).",
-  "Parcours : fiches NBA.com des joueurs (draft, dernier club ou université, expérience).",
+  "Les 6 matchs de la nuit sont publiés (mises à jour vers 8h et 8h30 : ajout de Clippers-Mavericks, puis de Celtics-Kings, dont les box scores restaient figés sur ESPN et NBA.com). L'ajout de Celtics-Kings change la Révélation ; MVP, Frenchie, Rookie et Looser inchangés.",
+  "Stats : Basket USA (Sixers-Bucks, Knicks-Blazers, Clippers-Mavericks et Celtics-Kings, tableaux des articles de match ; Spurs-Pelicans, page boxscore) et box score ESPN www.espn.com (Wolves-Grizzlies). Points vérifiés avec les 6 scores finaux, rebonds (off. + déf.) et fautes avec les totaux d'équipe.",
+  "Recoupements : MVP et Looser cohérents avec les box scores ESPN pris en cours de match ; Frenchie vérifié sur le box score Basket USA (31 min au lieu de 32 sur ESPN, le reste identique) ; Révélation : 19 points confirmés par NBA.com (5 derniers matchs) ; Rookie vu seulement chez Basket USA (journal ESPN pas à jour).",
+  "Moyennes avant le match : pages de stats d'équipe ESPN, qui n'incluent pas encore cette nuit (MVP 28,6 en 16, Frenchie 7,6 en 14, Rookie 10,4 en 16, Looser 9,9 en 15). Révélation : 4 matchs seulement cette saison (3,0 pts, ESPN et Basket USA), donc moyenne 2025-26 de 4,5 pts en 54 matchs (fiche Basket USA). 2e : 50 points pour 19,4 de moyenne (journal ESPN, 2,58). Un joueur des Sixers revenu de blessure compte avec sa moyenne 2025-26 (7,7, NBA.com).",
+  "Parcours : fiches NBA.com des joueurs (draft, dernier club ou université, expérience) ; fiche ESPN et Basket USA pour la Révélation.",
   "Pronos : calendrier officiel NBA (PDF du 13 août 2026, sous réserve de changements)."
  ],
- "results": "9JCTBRkIgojIMFERtMUQMJCIsIyUBNlIgojITF0UtA1TOJCIsIiTJ1kIgojIOlUTt0URNJCIsIySZ5kIgojILllTtI1TQJCIsISSIBlIgojIJhEUtwUSNJye",
+ "results": "9JyQBNlIgojIDF0UtM1TCJCIsICTBRkIgojIMFERtMUQMJCIsIyUBNlIgojITF0UtA1TOJCIsIiTJ1kIgojIOlUTt0URNJCIsIySZ5kIgojILllTtI1TQJCIsISSIBlIgojIJhEUtwUSNJye",
  "tonight": {
   "night": "2026-11-23",
   "lock": "2026-11-22T20:30:00Z",
@@ -196,35 +200,35 @@
    "line": [
     [
      "MIN",
-     "39"
+     "18"
     ],
     [
      "PTS",
-     "50"
+     "19"
     ],
     [
      "TIR",
-     "15/23"
+     "6/7"
     ],
     [
      "3 PTS",
-     "7/12"
+     "4/4"
     ],
     [
      "LF",
-     "13/13"
+     "3/3"
     ],
     [
      "REB",
-     "11"
+     "4"
     ],
     [
      "PD",
-     "7"
+     "2"
     ],
     [
      "INT",
-     "1"
+     "3"
     ],
     [
      "CTR",
@@ -232,19 +236,19 @@
     ],
     [
      "BP",
-     "2"
+     "1"
     ],
     [
      "+/-",
-     "+1"
+     "+17"
     ]
    ],
    "result": "Défaite",
    "check": [
-    "c047f75a888afd6a2f411947f4f2b386a0b1048fe646b343a2591c867a4582ee",
-    "e013778242c665b3e26f41c8d6d348008dcd6f82f0374c32cb9c4c1883cfc97b"
+    "0a87e66f10dbb0a7878e06a9312a1430296dd4e1af1d74257811d10ba6d022d3",
+    "856b8cf9c646ddf57e6c23817422ee0ee3459cc8fb77ed62756c25e1b201b687"
    ],
-   "secret": "9JybyJXZo1iclxWe09SOzYTOyYTMvIXZ5FGbw9SbvNmLhJmbuc3d39yL6MHc0RHaiAiOiUGbpZ2byBnIgwSXi8mcyVGagIXZslHdiACLi8mcyVGaisFI6Iyc0BXZjNWYiACLi4CO0wiMgA6wgQnbvNHIpM3ajlmclZXYNByclRGIuVHI0VGIz5WYjlGblBFIzVGZgIXdlV3bqBib1hCIzVGaj9mcwByc1xGcgMXZsByc05WY2lWdzJXdvBHIzVGTg4SK1wyN0gCIzVmcvN2cgUWbhdGIzJXdlxGbpVWbgUjMgMXZsBSatJXYwBCdy9GcwFmcgIXdlxGbpVWbgwSZu5WZ59WbgE2cgMXavZGI4UDLyACdp92cgwSKzh2Y0FWbgUTMgwiTQNVRgMHajRXYtBSZkBCbh5mc19maoACajRXYtBSZsBCduFmdhBCNskTMgUGZgUmbuVWev1GIl5WdgIXdvBHIzRnbp9GcgATNiAiOikHa3JCIs0lIzh2Y0FWbgUTMg4WZgMHdwBCNskTMgoDIu92cpF2cgUGd0V2YgUmbuVWev1kIgwiIBJkTg42bzlWYzBSZ4AytCDSerNWd05WZLBichBHIpO8czFGcgwSOxAjMgQnZhJHZgEGbgUGZggXavh2YgU2MxICIsICdzVEIlNmblJXqDbmbvNEI3KMIlJHqDnmcyFkIbBiOiMHdulGaiACLiM3ajVnQgUWZrVXY3xWaNJCI6ISbhVGdiACLi8mcyVGSgIXZslHViAiOiIXZ3NnbhJye"
+   "secret": "=0nI5VGbu92YtU2ap12L0QTMxAjMvIXZ5FGbw9SbvNmLhJmbuc3d39yL6MHc0RHaiAiOiUGbpZ2byBnIgwSXikXZs52bjBSZrlWbiACLikXZs52bjJyWgojIzRHclN2YhJCIsIiL3wCMyAiOgUmcvN2cgUWbhdEIukyc05WavBHIwUDIgOMIyVXZ19mag4WdgIXdvBHI4UDLygCIlJDIlxGI05WY2VGZg4WavxGIsUmbuVWev1GIhNHIzl2bmBiMsQDI0l2bzBCLpE0UVBCdlt2chJEKgMHdwBSNsQDI6ASZpO8czFGcg42bzlWYzBSYsBSZkBSZu5WZ59WbgE2cgQmblJHcg42bgwibvNXahNHIlRHdlNGIzh2Y0FWbgQDI05WZtVGb1V2cgMWZ2FEIukyc05WavBHIzACoDDCNvQDI052bkByNvYDKgMXZ0Vnbp1GI4EDIuVGIzRnbp9GcgkTMiAiOikHa3JCIs0lIzh2Y0FWbgQDIuVGIzRHcgADLzAiOg42bzlWYzBSZ0RXZjBSZu5WZ59WTiACLiUGdhR3Ug8Wao9EIyFGcgk6wzNXYwBCL3ADMyACdmFmckBSYsBSZkBCep9GajBSZ0ICIsICdzVEIlNmblJXqDbmbvNEI3KMIyVXZuVWTisFI6Iyc05WaoJCIsIycjlGdsV2Qg42b0N3bCJCI6ISbhVGdiACLikXZs52bDBSZrlWTiAiOiIXZ3NnbhJye"
   },
   {
    "cat": "Rookie de la nuit",
