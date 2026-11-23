@@ -1,6 +1,6 @@
 {
- "note": "Liste de départ issue de la saison 2025-26 et des box scores du 12/11/2026. À confirmer lors de la première vérification hebdomadaire (voir TASK.md). Ajout le 13/11 : Rudy Gobert et Moussa Diabaté (oubliés dans la liste de départ).",
- "verified_on": null,
+ "note": "Liste de départ issue de la saison 2025-26 et des box scores du 12/11/2026. À confirmer lors de la première vérification hebdomadaire (voir TASK.md). Ajout le 13/11 : Rudy Gobert et Moussa Diabaté (oubliés dans la liste de départ). Vérification du 23/11/2026 : retrait de Guerschon Yabusele (parti au Panathinaikos, absent de la liste des Français NBA.com 2026-27).",
+ "verified_on": "2026-11-23",
  "players": [
   "Victor Wembanyama",
   "Zaccharie Risacher",
@@ -10,7 +10,6 @@
   "Ousmane Dieng",
   "Noa Essengue",
   "Mohamed Diawara",
-  "Guerschon Yabusele",
   "Tidjane Salaün",
   "Rayan Rupert",
   "Joan Beringer",
