@@ -529,6 +529,15 @@ function pronoStats(p, upTo) {
   });
   return { right, total, pct: total ? Math.round(100 * right / total) : null };
 }
+// Talisman : passe à chaque BINGO prono (grille 100 % juste). En cas de BINGO à plusieurs la même nuit, ils le partagent.
+const isBingo = (p, night) => { const sc = pronoScore(p, night); return !!(sc && sc.played && sc.total && sc.right === sc.total); };
+function talisman(upTo) {
+  let holders = [], since = null;
+  Object.keys(allDays).filter(id => id <= upTo && allDays[id].results && dayRevealed(id)).sort().forEach(id => {
+    const b = PLAYERS.filter(p => isBingo(p, id)); if (b.length) { holders = b; since = id; }
+  });
+  return { holders, since };
+}
 function pronoScore(p, night) {
   const d = allDays[night]; if (!d || !d.results) return null;
   const winners = unhide(d.results); const games = Object.keys(winners);
@@ -559,7 +568,7 @@ function renderPronos() {
       const board2 = PLAYERS.map(p => ({ p, sc: pronoScore(p, latest) })).sort((x, y) => (y.sc.played - x.sc.played) || (y.sc.right - x.sc.right));
       pbox.append(el("table", { class: "ptable" }, el("thead", {}, el("tr", {}, el("th", {}, ""), el("th", {}, "Cette nuit"), el("th", { class: "pts" }, "Bonus"), el("th", { class: "pts", title: "Réussite cumulée depuis le début" }, "% total"))),
         el("tbody", {}, ...board2.map(({ p, sc }) => el("tr", {}, el("td", {}, p === me ? el("b", {}, p) : p),
-          el("td", {}, sc.played ? sc.right + " / " + sc.total : "pas joué"), el("td", { class: "pts" }, sc.bonus ? "+" + sc.bonus : "0"),
+          el("td", {}, sc.played ? sc.right + " / " + sc.total : "pas joué", isBingo(p, latest) ? el("span", { class: "trophy" }, "BINGO 🧿") : null), el("td", { class: "pts" }, sc.bonus ? "+" + sc.bonus : "0"),
           (st => el("td", { class: "pts", title: st.right + " / " + st.total + " matchs" }, st.pct == null ? "—" : st.pct + " %"))(pronoStats(p, latest)))))));
       pbox.append(el("p", { class: "sub2" }, bar + " % total : bons pronos depuis le début, sur les seuls matchs pronostiqués."));
       if (Object.keys(mine).length) {
@@ -623,15 +632,17 @@ function renderBoard() {
     const tot = PLAYERS.map(p => [p, Object.keys(allDays).filter(id => id >= w && id <= addDays(w, 6)).reduce((t, id) => t + dayPoints(p, id).pts, 0)]);
     const best = Math.max(...tot.map(x => x[1])); if (best > 0) tot.filter(x => x[1] === best).forEach(x => trophies[x[0]]++);
   });
+  const tal = talisman(latest);
   const rows = PLAYERS.map(name => ({ name, total: ids.reduce((t, id) => t + dayPoints(name, id).pts, 0), trouvees: ids.reduce((t, id) => t + dayPoints(name, id).found, 0) }))
     .sort((a, b) => b.total - a.total || b.trouvees - a.trouvees);
   document.getElementById("scores").replaceChildren(...rows.map((p, i) =>
-    el("tr", {}, el("td", { class: "rank" }, String(i + 1)), el("td", {}, p.name, trophies[p.name] ? el("span", { class: "trophy" }, "🏆 " + trophies[p.name]) : null),
+    el("tr", {}, el("td", { class: "rank" }, String(i + 1)), el("td", {}, p.name, trophies[p.name] ? el("span", { class: "trophy" }, "🏆 " + trophies[p.name]) : null, tal.holders.includes(p.name) ? el("span", { class: "trophy", title: "Talisman : dernier BINGO prono" }, "🧿") : null),
       el("td", { class: "sub" }, String(p.trouvees)), el("td", { class: "pts" }, String(p.total)))));
   const hidden = !dayRevealed(latest) && (boardTab === "all" || (latest >= ws && latest <= we));
   const fmt = id => { const dt = dParse(id); return dt.getUTCDate() + "/" + (dt.getUTCMonth() + 1); };
   const scope = boardTab === "week" ? "Semaine du " + fmt(ws) + " au " + fmt(we) + ". " : "Depuis le " + fmt(SEASON_START) + ", pronos compris. 🏆 = semaines gagnées. ";
-  document.getElementById("board-note").textContent = scope + (hidden
+  const talTxt = tal.since ? "🧿 = talisman, au dernier BINGO prono (" + fmt(tal.since) + "). " : "🧿 Talisman : le premier BINGO prono (grille 100 % juste) le remporte, puis il change de main à chaque nouveau BINGO. ";
+  document.getElementById("board-note").textContent = scope + talTxt + (hidden
     ? "Points du jour cachés jusqu'à ce que tout le monde ait fini, ou jusqu'à minuit. Ont fini aujourd'hui : " + (PLAYERS.filter(p => finishedDay(p, latest)).join(", ") || "personne") + "."
     : "À jour.");
 }

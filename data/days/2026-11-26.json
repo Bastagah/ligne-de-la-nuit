@@ -386,5 +386,66 @@
    ],
    "secret": "==QfiwGbpJncl1WLtF2cvEDNyAzM2EzLyVWehxGcv02bj5SYi5mL3d3dv8iOzBHd0hmIgojIlxWam9mcwJCIs0lIsxWayJXZtBSbhNnIgwiIsxWayJXZtJyWgojIzRHclN2YhJCIsIiLpQTMSio4gUmc052bjBSMyIJiijCIt8yKgUXYgUWqDfWY0JXYwl6wkBCLzJXZwBXasNEIzVGZgIXZpxWahBib1ByYlZXYgcDLyIJiiDCoDDSqDTXasF2ZJOMIuMXZ0Vnbp1GI0IDIuVGIpMHdwByMgA6wgczLxgCI48iMgA6wgMHdul2bwBSNgoDIpcDLy0CKgUGdpFmZpOMZgUmb1BycuFGZgMXdsBHI19GIzVGd15WatBCMyACoDDycyVXZ19magMXZkBSZy92YzBSZtF2ZgMXYiByc1xGUiAiOikHa3JCIs0lIzh2Y0FWbgITMg4WZgMHdwBCOscDI6AibvNXahNHIlRHdlNGIl5mbll3bNJCIsISZ0FGdTBCahRXVgIXYwBSqDP3chBHIsAjMwIDI0ZWYyRGIhxGIlRGI4l2boNGIlBjNiACLiQ3cFBSZj5WZyl6wm52bDBytCDSZyh6wpJncBJyWgojIzRnbphmIgwiIzJXZpxWY2F2QgQmbhxWZ2VGbDJCI6ISbhVGdiACLiwGbpJncl1EItF2UiAiOiIXZ3NnbhJye"
   }
- ]
+ ],
+ "tonight": {
+  "night": "2026-11-28",
+  "lock": "2026-11-28T00:00:00Z",
+  "games": [
+   {
+    "away": "MIA",
+    "home": "NYK",
+    "start": "2026-11-28T00:00:00Z"
+   },
+   {
+    "away": "MIL",
+    "home": "DET",
+    "start": "2026-11-28T00:30:00Z"
+   },
+   {
+    "away": "PHI",
+    "home": "IND",
+    "start": "2026-11-28T00:30:00Z"
+   },
+   {
+    "away": "BKN",
+    "home": "TOR",
+    "start": "2026-11-28T00:30:00Z"
+   },
+   {
+    "away": "ATL",
+    "home": "BOS",
+    "start": "2026-11-28T01:00:00Z"
+   },
+   {
+    "away": "MEM",
+    "home": "MIN",
+    "start": "2026-11-28T01:30:00Z"
+   },
+   {
+    "away": "DAL",
+    "home": "PHX",
+    "start": "2026-11-28T02:00:00Z"
+   },
+   {
+    "away": "LAL",
+    "home": "SAS",
+    "start": "2026-11-28T02:30:00Z"
+   },
+   {
+    "away": "DEN",
+    "home": "UTA",
+    "start": "2026-11-28T02:30:00Z"
+   },
+   {
+    "away": "NOP",
+    "home": "LAC",
+    "start": "2026-11-28T02:30:00Z"
+   },
+   {
+    "away": "GSW",
+    "home": "POR",
+    "start": "2026-11-28T02:30:00Z"
+   }
+  ]
+ }
 }

@@ -49,6 +49,7 @@ Ordre de sélection : MVP, Frenchie, Rookie, Looser, puis Révélation. Ordre d'
 
 - `winners` : le vainqueur de chaque match de `matchups`, `{"DET-WAS": "DET", ...}` (clé AWAY-HOME, abréviations à 3 lettres). Le script le cache dans `results` : le site n'affiche que les vainqueurs, jamais les scores.
 - `tonight` (pronos) : les matchs de la nuit à venir, c'est-à-dire ceux qui commencent entre 08:00 aujourd'hui et 08:00 demain (heure de Paris), d'après le calendrier officiel NBA.com ou ESPN. Format `{"night": "<date de demain>", "lock": "<1er coup d'envoi en UTC ISO>", "games": [{"away": "MEM", "home": "WAS", "start": "2026-11-17T00:00:00Z"}, ...]}`. `lock` = l'heure de début la plus tôt. Pas de match ce soir : omettre `tonight`.
+- **Matin sans match la veille (pas de devinettes) mais des matchs ce soir** : ne crée pas de journée. Ajoute seulement `tonight` (même format) au fichier de la dernière journée publiée dans `data/days/` (le plus récent), sans rien toucher d'autre, puis commit « Pronos du soir <date> » et push. Sans ça, personne ne peut pronostiquer.
 
 ## 4. Publier
 1. Écrire le fichier brut **hors du dépôt** (`/tmp/brut-<date>.json`, format décrit en tête de `scripts/make_day.py`). Il contient les réponses en clair : ne jamais le commiter.
