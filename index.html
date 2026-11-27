@@ -530,7 +530,8 @@ function pronoStats(p, upTo) {
   return { right, total, pct: total ? Math.round(100 * right / total) : null };
 }
 // Talisman : passe à chaque BINGO prono (grille 100 % juste). En cas de BINGO à plusieurs la même nuit, ils le partagent.
-const isBingo = (p, night) => { const sc = pronoScore(p, night); return !!(sc && sc.played && sc.total && sc.right === sc.total); };
+const BINGO_MIN = 5; // nuits d'au moins 5 matchs seulement
+const isBingo = (p, night) => { const sc = pronoScore(p, night); return !!(sc && sc.played && sc.total >= BINGO_MIN && sc.right === sc.total); };
 function talisman(upTo) {
   let holders = [], since = null;
   Object.keys(allDays).filter(id => id <= upTo && allDays[id].results && dayRevealed(id)).sort().forEach(id => {
@@ -641,7 +642,7 @@ function renderBoard() {
   const hidden = !dayRevealed(latest) && (boardTab === "all" || (latest >= ws && latest <= we));
   const fmt = id => { const dt = dParse(id); return dt.getUTCDate() + "/" + (dt.getUTCMonth() + 1); };
   const scope = boardTab === "week" ? "Semaine du " + fmt(ws) + " au " + fmt(we) + ". " : "Depuis le " + fmt(SEASON_START) + ", pronos compris. 🏆 = semaines gagnées. ";
-  const talTxt = tal.since ? "🧿 = talisman, au dernier BINGO prono (" + fmt(tal.since) + "). " : "🧿 Talisman : le premier BINGO prono (grille 100 % juste) le remporte, puis il change de main à chaque nouveau BINGO. ";
+  const talTxt = tal.since ? "🧿 = talisman, au dernier BINGO prono (5 matchs mini, " + fmt(tal.since) + "). " : "🧿 Talisman : le premier BINGO prono (grille 100 % juste, nuit d'au moins 5 matchs) le remporte, puis il change de main à chaque nouveau BINGO. ";
   document.getElementById("board-note").textContent = scope + talTxt + (hidden
     ? "Points du jour cachés jusqu'à ce que tout le monde ait fini, ou jusqu'à minuit. Ont fini aujourd'hui : " + (PLAYERS.filter(p => finishedDay(p, latest)).join(", ") || "personne") + "."
     : "À jour.");
